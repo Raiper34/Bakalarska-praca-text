@@ -7,16 +7,21 @@ Táto bakalárska práca vznikla z dôvodu neexistenice otvoreného modernej web
 Nasledujúca kapitola sa venuje predstaveniu technológiam, ku ktorým sa dostalo a následne boli využité v rámci vypracovania tejto práce. Ďalšia kapitola sa venuje návrhu celého webového portálu a API. Po návrhu prišla na rad implementácia, o ktorej je písané v rovnako pomenovanej kapitole. A nakoniec celá webová platforma bola zverejnená a testovaná v reálnych podmienkach. O tejto fázi hovorí kapitola testovanie.
 
 \chapter{Použité technológie}
-Pri implementácií platformy bolo nutné si dobre premyslieť čo bude potreba a špecifikovať požiadavky na technológie, ktoré sa budú využívať. Keď sa zhrnuli všetky požiadavky, tak z toho vyšlo, že je potreba nejaký programovací jazyk pre serverovú časť, klientskú časť, jazyk pre API pre vývojárov, databáza a databázový jazyk a jazyk, v ktorej bude napísaná hra demonštrujúca funkcie webovej platformy.
+Pri implementácií platformy bolo nutné si dobre premyslieť čo bude potreba a špecifikovať požiadavky na technológie, ktoré sa budú využívať. Keď sa zhrnuli všetky požiadavky, tak z toho vyšlo, že je potreba programovací jazyk pre serverovú časť, klientskú časť, jazyk pre API pre vývojárov, databázu a databázový jazyk a jazyk, v ktorej bude napísaná hra demonštrujúca funkcie webovej platformy.
 
 \section{Serverová časť}
-Pri výbere jazyka pre serverovú časť sa ponúkalo hneď niekoľko možností. Bolo na výber medzi PHP, Python, Java, Ruby, alebo ASP . NET. Zo všetkých možostí bol nakoniec vybraný skiptovací jazyk PHP, z toho dôvodu, že je to je najviac rozšírený serverový jazyk a väčšina poskitovateľov ponúka hosting práve s nainštalovaným PHP. 
+Pri výbere jazyka pre serverovú časť sa ponúkalo hneď niekoľko možností. Bolo na výber medzi PHP, Python, Java, Ruby, alebo ASP . NET. Zavážili hlavne vlastnosti, ktoré sú spomenuté v nasledujúcej kapitole. 
 
 \subsection{PHP}
-Hypertext Preprocesor je open source skriptovací jazyk, používaný hlavne pre programovanie klient-server aplikácií a pre vývoj dynamických webových stránok.
+Hypertext Preprocessor je široko používaný a univerzálny open source skriptovací jazyk, ktorý sa obzvlášť používa na vývoj webových apolikácií a je možné ho vložiť do HTML súboru. Syntax jazyka je veľmi podobná syntaxe jazyku C, taktiež veľa vlastností prebral zo skriptovacieho jazyka Perl. Od novších vydaní je v PHP taktiež možnosť používania objektov. Tento skripotvací jazyk beží takmer na všetkých operačných systémoch od UNIXu cez Windows až po MAC OS X.
+PHP bol zvolený pre serverovú časť hlavne vďaka tomu, že to je najrozšírenejší serverový jazyk a takmer všetci poskitovatelia hostingu ponúkajú hosting práve s PHP. Okrem toho sa v PHP ľahko pracuje s relačnými databázami, a hlavne s MySQL, ktorému sa venuje kapitola.
+
 
 \subsection{Nette}
-dsfdsfdssdfds
+Už PHP je samo o sebe mocný programovací jazyk, ale ak by bolo zvolené čisté PHP, tak by programátol musel riešiť veľké množstvo vecí, ktoré niekto v minulosti už dávno vyriešil. Okrem toho by si programátor musel dávať veľký pozor a ošetrovať početné množstvo bezpečnostných rizík. Kvôli týmto spomenutým veciam bol pre účel práce vybraný rámec Nette.
+Nette je rámec pre tvorbu webových aplikácií v PHP5, ktorý sa zameriava na elimináciu bezpečnostných rizík, podporuje AJAX a MVC. Z veľkej časti je založený na použití komponentov. Pôvodným autorom je David Grundl, ale v súčasnosti sa o rozvoj rámcu stará Nette Foundation. Je ponúkaný pod licenciou GNU GPL a licenciou Nette (obdoba BSD licencie). Rámec sa teší veľkej obľube a taktiež početnej komnuite v Čechách a na Slovensku.
+Minimálne požiadavky, pre funkčnosť sa vyžaduje PHP verzie 5.3.1 a vyššej a v tomto prípade MySQL verzie 5.6. Tieto požiadavky je možné overiť oficiálnym requirements-checker.php skriptom.
+
 
 \section{Databázová časť}
 
@@ -27,6 +32,8 @@ dsfdsfdssdfds
 \subsection{HTML a CSS}
 
 \subsection{Javascript}
+
+\subsection{JQuery}
 
 \subsection{Bootstrap}
 
