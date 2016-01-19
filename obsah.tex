@@ -2,58 +2,93 @@
 % (c) Michal Bidlo, Bohuslav Křena, 2008
 
 \chapter{Úvod}
-V minulosti v oblasti herného priemyslu existovalo niekoľko poskytovateľov, ktorý sprostredkovali rôzne služby pre vývojárov hier, ako napríklad tabuľky online hráčov, správa odmien, pokročilé štatistiky prístupov, alebo vlastné štatistiky. Tieto služby boli orientované iba na webové flash hry a aj väčšina z tých pomaly zaniká, alebo už zanikla pomaly upadajúcou technológiu flash. Za zmienku stojí napríklad leader sveta flashových hier menom Mochimedia. S rozmachom moderných webových technológií a príchodom HTML5/Javascript hier dlho neexistovala žiadna webová stránka ponúkajúca podobné vyššie zmienené služby. Príchodom webového portálu clay.io v roku 2012 sa vývojárov javascriptových hier usmialo štastie. Clay.io ponúkalo rôzne služby pre herných vývojárov, bez nutnosti mať státisíce prístupov do hry, alebo mať hru špičkovej úrovni. Služby boli dostupné pre všetkých bez rozdielu. Avšak začiatkom roka 2015 sa clay.io začalo orientovať iným smerom a z tejto webovej služby sa stal viac portál pre hráčov ako pre vývojárov. Už viac nebolo možné integrovať API, do hociktorej hry a všetky hry, ktoré chceli byť umiestnené na portáli clay.io a využívať jeho služby boli vyberané podľa kvality. Taktiež hry využívajúce API bolo možné hrať iba na webe clay.io a developer nesmel distribuovať hru na iných webových portáloch. Týmto sa clay.io uzavrelo a zaradilo sa vedľa iných svetových distribútorov HTML5 hier, ako napríklad Boostermedia, Softgames, alebo Spilgames. 
+V minulosti v oblasti herného priemyslu existovalo niekoľko poskytovateľov, ktorý sprostredkovali rôzne služby pre vývojárov hier, ako napríklad tabuľky online hráčov, správa odmien, pokročilé štatistiky prístupov, alebo vlastné štatistiky. Tieto služby boli orientované iba na webové flash hry a aj väčšina z tých pomaly zaniká, alebo už zanikla pomaly upadajúcou technológiu flash. Za zmienku stojí napríklad leader sveta flashových hier menom Mochimedia. S rozmachom moderných webových technológií a príchodom HTML5/Javascript hier dlho neexistovala žiadna webová stránka ponúkajúca podobné vyššie zmienené služby. Príchodom webového portálu clay.io v roku 2012 sa vývojárov javascriptových hier usmialo štastie. Clay.io ponúkalo rôzne služby pre herných vývojárov, bez nutnosti mať státisíce prístupov do hry, alebo mať hru špičkovej úrovni. Služby boli dostupné pre všetkých bez rozdielu. Avšak začiatkom roka 2015 sa clay.io začalo orientovať iným smerom a z tejto webovej služby sa stal viac portál pre hráčov ako pre vývojárov. Už viac nebolo možné integrovať API, do hociktorej hry a všetky hry, ktoré chceli byť umiestnené na portáli clay.io a využívať jeho služby boli vyberané podľa kvality. Taktiež hry využívajúce API bolo možné hrať iba na webe clay.io a developer nesmel distribuovať hru na iných webových portáloch. Týmto sa clay.io uzavrelo a zaradilo sa vedľa iných svetových distribútorov HTML5 hier, ako napríklad Boostermedia, Softgames, alebo Spilgames.
+
 Táto bakalárska práca vznikla z dôvodu neexistenice otvoreného modernej webovej platformy na tvorbu hier pre všetkých bez rozdielu a služby ponúkajúc zadarmo. Táto webová platforma by mala byť orientovaná nielen na vývojárov javascriptových hier, ktorý prostredníctvom API by mali možnosť využívať služby platformy, ale aj na hráčov týchto vytvorených hier. Hráči by mali byť schopný hrať hry na akejkoľvek platforme, či už desktopových osobných počítačoch, alebo moderných chytrých telefónoch. Z toho dôvody by mala minimálne časť webového portálu určená hráčom byť do určitej miery responzivna.
+
 Nasledujúca kapitola sa venuje predstaveniu technológiam, ku ktorým sa dostalo a následne boli využité v rámci vypracovania tejto práce. Ďalšia kapitola sa venuje návrhu celého webového portálu a API. Po návrhu prišla na rad implementácia, o ktorej je písané v rovnako pomenovanej kapitole. A nakoniec celá webová platforma bola zverejnená a testovaná v reálnych podmienkach. O tejto fázi hovorí kapitola testovanie.
 
 \chapter{Použité technológie}
 Pri implementácií platformy bolo nutné si dobre premyslieť čo bude potreba a špecifikovať požiadavky na technológie, ktoré sa budú využívať. Keď sa zhrnuli všetky požiadavky, tak z toho vyšlo, že je potreba programovací jazyk pre serverovú časť, klientskú časť, jazyk pre API pre vývojárov, databázu a databázový jazyk a jazyk, v ktorej bude napísaná hra demonštrujúca funkcie webovej platformy.
 
 \section{Serverová časť}
-Pri výbere jazyka pre serverovú časť sa ponúkalo hneď niekoľko možností. Bolo na výber medzi PHP, Python, Java, Ruby, alebo ASP . NET. Zavážili hlavne vlastnosti, ktoré sú spomenuté v nasledujúcej kapitole. 
+Pod pojmom serverová časť sa myslí všetko to, čo sa vykonáva na servery. Teda v prípade tejto práce to je hlavne generovanie webovej stránky platformy a práca s datami úložených v databázi. Okrem týchto vecí sa používa serverová časť pri práci s API, kedy sa využíva AJAX.
+
+Pri výbere jazyka pre serverovú časť sa ponúkalo hneď niekoľko možností. Bolo na výber medzi PHP, Python, Java, Ruby, alebo ASP . NET. Zavážili hlavne vlastnosti, ktoré sú spomenuté v nasledujúcej kapitole.
+ 
 
 \subsection{PHP}
 Hypertext Preprocessor je široko používaný a univerzálny open source skriptovací jazyk, ktorý sa obzvlášť používa na vývoj webových apolikácií a je možné ho vložiť do HTML súboru. Syntax jazyka je veľmi podobná syntaxe jazyku C, taktiež veľa vlastností prebral zo skriptovacieho jazyka Perl. Od novších vydaní je v PHP taktiež možnosť používania objektov. Tento skripotvací jazyk beží takmer na všetkých operačných systémoch od UNIXu cez Windows až po MAC OS X.
+
 PHP bol zvolený pre serverovú časť hlavne vďaka tomu, že to je najrozšírenejší serverový jazyk a takmer všetci poskitovatelia hostingu ponúkajú hosting práve s PHP. Okrem toho sa v PHP ľahko pracuje s relačnými databázami, a hlavne s MySQL, ktorému sa venuje kapitola.
 
+\subsection{Model Controler View architektúra}
+Základnou myšlienkou architektury MVC je oddelenie 	logiky od výstupu. MVC, jako už názov napovedá pozostáva z 3 typov komponent, z modelu, pohľadu (view) a kontroleru. Model obsahuje všetku logiku aplikácie, môžu sa v ňom nachádzať například výpočty alebo databázové operácie. Komponenta pohľad sa zase stará o zobrazovanie vústupu užívateľovi. Obsahuje minimálne množství logiky, ktorá je pre výpis nutná. Tretí a posledný typ je kontroler, ktorý komunikuje s užívateľom, modelom aj pohľadom a komponenty navzájom prepája. Príklad takéjto architektury a komunikácií medzi jednotlivými komponentami je zobrazený na nasledujúcom obrázku.
+\begin{figure}[htp]
+\centering
+\includegraphics[scale=0.7]{fig/mvc.png}
+\caption{MVC architektúra}
+\label{fig:mvc}
+\end{figure}
 
 \subsection{Nette}
 Už PHP je samo o sebe mocný programovací jazyk, ale ak by bolo zvolené čisté PHP, tak by programátol musel riešiť veľké množstvo vecí, ktoré niekto v minulosti už dávno vyriešil. Okrem toho by si programátor musel dávať veľký pozor a ošetrovať početné množstvo bezpečnostných rizík. Kvôli týmto spomenutým veciam bol pre účel práce vybraný rámec Nette.
+
 Nette je rámec pre tvorbu webových aplikácií v PHP5, ktorý sa zameriava na elimináciu bezpečnostných rizík, podporuje AJAX a MVC. Z veľkej časti je založený na použití komponentov. Pôvodným autorom je David Grundl, ale v súčasnosti sa o rozvoj rámcu stará Nette Foundation. Je ponúkaný pod licenciou GNU GPL a licenciou Nette (obdoba BSD licencie). Rámec sa teší veľkej obľube a taktiež početnej komnuite v Čechách a na Slovensku.
+
 Minimálne požiadavky, pre funkčnosť sa vyžaduje PHP verzie 5.3.1 a vyššej a v tomto prípade MySQL verzie 5.6. Tieto požiadavky je možné overiť oficiálnym requirements-checker.php skriptom.
 
 
 \section{Databázová časť}
+Pre uloženie a uchovávanie dát bola zvolená databáza. Databáza bola zvolená hlavne kvôli vlastnosti ACID a pre prístup pre viacerých užívateľov k databázi súčastne. Na výber boli rôzne alternatívy ako napríklad PL/SQL, T-SQL alebo vybraný MySQL. 
 
 \subsection{MySQL}
+MySQL je otvorený viacužívateľský SQL relačný databázový server, ktorý je implementovaný vo viacerých programovacích a jlavne serverových jhazykoch. Príkladosm je skriptovací jazyk PHP. Je to databázový relačný systém, teda každá databáza v MySQL je tvorená z jendnej alebo viacerých tabuliek, ktoré majú riadky a stĺpce. Riadky udávajú jendotlivé záznamy, stĺpce zase dátový typ jednotlivých záznamov. Práca s takouto databázou je vykonávaná pomocou takzvaných dotazov.
 
 \section{Klientská časť}
+todo
 
 \subsection{HTML a CSS}
+todo
 
 \subsection{Javascript}
+todo
 
 \subsection{JQuery}
+todo
 
 \subsection{Bootstrap}
+todo
+
+\subsection{Chart.js}
+todo
 
 \section{API}
+todo
 
 \subsection{AJAX}
+todo
 
 \subsection{CORS}
+todo
 
 \section{Hra}
+todo
 
 \subsection{Phaser}
+todo
 
 \chapter{Návrh riešenia}
+todo
 
 \chapter{Implementácia}
+todo
 
 \chapter{Testovanie}
+todo
 
 \chapter{Záver}
+todo
 
 
 
