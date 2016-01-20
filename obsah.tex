@@ -24,11 +24,11 @@ PHP bol zvolený pre serverovú časť hlavne vďaka tomu, že to je najrozšír
 
 \subsection{Model Controler View architektúra}
 Základnou myšlienkou architektury MVC je oddelenie 	logiky od výstupu. MVC, jako už názov napovedá pozostáva z 3 typov komponent, z modelu, pohľadu (view) a kontroleru. Model obsahuje všetku logiku aplikácie, môžu sa v ňom nachádzať například výpočty alebo databázové operácie. Komponenta pohľad sa zase stará o zobrazovanie vústupu užívateľovi. Obsahuje minimálne množství logiky, ktorá je pre výpis nutná. Tretí a posledný typ je kontroler, ktorý komunikuje s užívateľom, modelom aj pohľadom a komponenty navzájom prepája. Príklad takéjto architektury a komunikácií medzi jednotlivými komponentami je zobrazený na nasledujúcom obrázku.
-\begin{figure}[htp]
-\centering
-\includegraphics[scale=0.7]{fig/mvc.png}
-\caption{MVC architektúra}
-\label{fig:mvc}
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.35]{fig/mvc.eps}
+  \caption{MVC architektúra}
+  \label{fig:mvc}
 \end{figure}
 
 \subsection{Nette}
@@ -40,7 +40,7 @@ Minimálne požiadavky, pre funkčnosť sa vyžaduje PHP verzie 5.3.1 a vyššej
 
 
 \section{Databázová časť}
-Pre uloženie a uchovávanie dát bola zvolená databáza. Databáza bola zvolená hlavne kvôli vlastnosti ACID a pre prístup pre viacerých užívateľov k databázi súčastne. Na výber boli rôzne alternatívy ako napríklad PL/SQL, T-SQL alebo vybraný MySQL. 
+Pre uloženie a uchovávanie dát bola zvolená relačná databáza. Databáza bola zvolená hlavne kvôli vlastnosti ACID a pre prístup pre viacerých užívateľov k databázi súčastne. Okrem iného databáze šetria pamäťové miesto tým, že pri dobrom návrhu sa v databázi nenachádzajú redundantné dáta. Na výber boli rôzne alternatívy ako napríklad PL/SQL, T-SQL alebo vybraný MySQL.  
 
 \subsection{MySQL}
 MySQL je otvorený viacužívateľský SQL relačný databázový server, ktorý je implementovaný vo viacerých programovacích a jlavne serverových jhazykoch. Príkladosm je skriptovací jazyk PHP. Je to databázový relačný systém, teda každá databáza v MySQL je tvorená z jendnej alebo viacerých tabuliek, ktoré majú riadky a stĺpce. Riadky udávajú jendotlivé záznamy, stĺpce zase dátový typ jednotlivých záznamov. Práca s takouto databázou je vykonávaná pomocou takzvaných dotazov.
