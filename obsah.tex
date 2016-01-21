@@ -24,7 +24,7 @@ PHP bol zvolený pre serverovú časť hlavne vďaka tomu, že to je najrozšír
 
 \subsection{Model Controler View architektúra}
 Základnou myšlienkou architektury MVC je oddelenie 	logiky od výstupu. MVC, jako už názov napovedá pozostáva z 3 typov komponent, z modelu, pohľadu (view) a kontroleru. Model obsahuje všetku logiku aplikácie, môžu sa v ňom nachádzať například výpočty alebo databázové operácie. Komponenta pohľad sa zase stará o zobrazovanie vústupu užívateľovi. Obsahuje minimálne množství logiky, ktorá je pre výpis nutná. Tretí a posledný typ je kontroler, ktorý komunikuje s užívateľom, modelom aj pohľadom a komponenty navzájom prepája. Príklad takéjto architektury a komunikácií medzi jednotlivými komponentami je zobrazený na nasledujúcom obrázku.
-\begin{figure}
+\begin{figure}[h]
   \centering
   \includegraphics[scale=0.35]{fig/mvc.eps}
   \caption{MVC architektúra}
@@ -74,19 +74,27 @@ Bootstrap je frontendový rámec pre rýchle a ľahké vyvíjanie webov. Obsahuj
 Javascriptová knižnica, pomocou ktorej je tvorba grafov z daných dát veľmi jhendoduchá. Na zobrazovanie grafov používa HTML tag <canvas >. Na výber je z 6 najbežnejších typov grafov. Takto vytvorené grafy sú plne responzivne, takže môžu byť správne zobrazené ako na stolných počítačoch s veľkou obrazovkou, tak aj na malých mobilných zariadeniach.
 
 \section{API}
-todo
+API je v tomto prípade myslená, ako knižnica, pomocou ktorej vývojári hier pristupujú k funkciám webovej platformy. Knižnica je implementovaná v Javascripte a k funkciám platformy, ktoré sú na servery sa pristupuje pomocou dotazovaním technológiou AJAX.
 
 \subsection{AJAX}
-todo
+Asynchronous Javascript and XML je súhrné označenie technológie, ktorá umožňuje meniť obsah stránok bez toho, aby bolo nutné ich celé znova načítať zo servera. Hlavná výhoda spočíva v tom, že sa prenáša značne menšie množstvo dát. AJAX nieje samostatný programovací jazyk ani technológia sama o sebe, ako by sa mohlo zdať, je to skôr kombinácia niekoľkých prvkov. Je založený na internetových štandardoch, a používa kombináciu HMLHttpRequest pre získanie dát zo servera a Javascript/DOM pre zobrazenie a použitie dát. Väčšinou sa používa spolu s Javascriptom, ale nie je to podmienka, lebo je podporovaný aj v iných programovacích jazykoch.  
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.35]{fig/ajax.eps}
+  \caption{Neblokujúca komunikácia so serverom pomocou AJAXu}
+  \label{fig:ajax}
+\end{figure}
 
 \subsection{CORS}
-todo
+Klasický javascript je limitovaný tzv. Same origin policy, z toho dôvodu nie je možné prijímať odpoveďe z domény, keď stránka, alebo hra, ktorá požiadavok má inú doménu. 
+
+Tento známy, hore popísaný problém rieši Cross-origin resource sharing. CORS je vlastne mechanizmus, ktorý povoluje zakázané zdroje na webovej stránke aby boli požiadané z inej domény ako z domény z ktorej zdroje pochádzajú. Pre použitie tohto mechanizmu musí nastať zmena pri tvorbe požiadavku na klientovi, a je treba povoliť CORS na servery. Prehliadač musí posielať nastavenie Origin: doména v http hlavičke. Na servery zase musí byť nastavené povolenie Acces-Control-Allow-Origin: * (* znamená že budú povolené všetky domény).
 
 \section{Hra}
-todo
+Pre demonštračnú hru sa ponúkalo buďto použiť klasický Javascript, čo ale nie je príliš rozšírená forma tvorby HTML5 hier, alebo použiť jeden z početného množstva rámcov, ktoré sú určené špeciálne na tvorbu hier. Na výber bol Ease.js, Tree.js, Panda.js, melon.js, Kiwi.js alebo Phaser.js a mnoho ďalších. Výber padol práve na Phaser.js, pretože to je jeden z najpoužívanejších a najbežnejších Javascriptových rámcov, určených pre programovanie hier, o čom svečí hlavne početná komunita okolo tohto rámca a fakt, že aj mnohé firmy z oblasti herného byznisu, ako Boostermedia pracujú práve s týmto rámcom. 
 
 \subsection{Phaser}
-todo
+Phaser je javascriptový rámec určený špeciálne pre tvorbu hier (aj desktopových, aj mobilných), ktorý je založený na renderovacom rámci pixi.js. Phaser je ľahko naučiteľný, rýchly, je ponúkaný zadarmo a má otvorený kód. Podporuje ako canvas, tak aj webgl. Obshauje veľké množstvo predpripravených funkcií a spracovaných tak aby ich použitie bolo jendoduché. Príkladom môže byť stavaný preloader, fyzika, sprity, animácie, častice, rôzne módy prisposobenia veľkosti obrazovky a iné. 
 
 \chapter{Analýza existujúcich riešení}
 todo
