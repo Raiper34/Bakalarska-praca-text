@@ -1,5 +1,5 @@
 %=========================================================================
-% (c) Michal Bidlo, Bohuslav Křena, 2008
+% (c) Filip Gulán, 2016
 
 \chapter{Úvod}
 \label{chap:uvod}
@@ -13,68 +13,63 @@ Nasledujúca kapitola sa venuje predstaveniu technológiám, ktoré boli využit
 
 \chapter{Použité technológie}
 \label{chap:technologie}
-Pri implementácií platformy bolo nutné si dobre premyslieť čo bude potreba a špecifikovať požiadavky na technológie, ktoré sa budú využívať. Keď sa zhrnuli všetky požiadavky, tak z toho vyšlo, že je potreba programovací jazyk pre serverovú časť, klientskú časť, jazyk pre API pre vývojárov, databázu a databázový jazyk a jazyk, v ktorej bude napísaná hra demonštrujúca funkcie webovej platformy.
+Pri implementácií platformy bolo nutné si dobre premyslieť, čoho sa má dosiahnuť a tak špecifikovať požiadavky na technológie, ktoré sa budú využívať. Po zhrnutí požiadaviek sa zistilo, že bude potrebný programovací jazyk pre serverovú časť, programovací a značkovací jazyk pre klientskú časť, jazyk, v ktorom bude implementované API pre vývojárov, databázu a databázový jazyk a napokon jazyk, v ktorom bude implementovaná hra demonštrujúca funkcie webovej platformy.
 
 \section{Serverová časť}
 \label{sec:server}
-Pod pojmom serverová časť sa myslí všetko to, čo sa vykonáva na servery. Teda v prípade tejto práce to je hlavne generovanie webovej stránky platformy a práca s datami úložených v databázi. Okrem týchto vecí sa používa serverová časť pri práci s API, kedy sa využíva AJAX.
+Pod pojmom serverová časť sa myslí všetko to, čo sa vykonáva na servery. Teda v prípade tejto práce to je hlavne generovanie webovej stránky platformy a práca s dátami uloženými v databázy. Okrem týchto vecí sa používa serverová časť pri práci s API\footnote{Application programming interface}, kedy sa využíva AJAX pre dotazovanie sa na server.
 
-Pri výbere jazyka pre serverovú časť sa ponúkalo hneď niekoľko možností. Bolo na výber medzi PHP, Python, Java, Ruby, alebo ASP . NET. Zavážili hlavne vlastnosti, ktoré sú spomenuté v nasledujúcej kapitole.
- 
+Pri výbere jazyka pre serverovú časť sa ponúkalo hneď niekoľko možností. Bolo na výber medzi PHP, Python, Java, Ruby, alebo ASP . NET. Napokon bolo vybrané PHP a zavážili hlavne vlastnosti, ktoré sú spomenuté v nasledujúcej kapitole.
 
 \subsection{PHP}
 \label{sec:php}
-Hypertext Preprocessor je široko používaný a univerzálny open source skriptovací jazyk, ktorý sa obzvlášť používa na vývoj webových apolikácií a je možné ho vložiť do HTML súboru. Syntax jazyka je veľmi podobná syntaxe jazyku C, taktiež veľa vlastností prebral zo skriptovacieho jazyka Perl. Od novších vydaní je v PHP taktiež možnosť používania objektov. Tento skripotvací jazyk beží takmer na všetkých operačných systémoch od UNIXu cez Windows až po MAC OS X.
+Hypertext Preprocessor je široko používaný a univerzálny open source\footnote{otvorený kód} skriptovací jazyk, ktorý sa obzvlášť používa na vývoj webových aplikácií a je možné ho vložiť do HTML súboru. Syntax jazyka je veľmi podobná syntaxi jazyku C. Od novších verzií sa PHP stal objektovo orientovaným a je v ňom možné používať OOP\footnote{objektovo orientované programovanie} postupy. Tento jazyk beží takmer na všetkých operačných systémoch od UNIXu cez Windows až po Mac OS X.
 
-PHP bol zvolený pre serverovú časť hlavne vďaka tomu, že to je najrozšírenejší serverový jazyk a takmer všetci poskitovatelia hostingu ponúkajú hosting práve s PHP. Okrem toho sa v PHP ľahko pracuje s relačnými databázami, a hlavne s MySQL, ktorému sa venuje kapitola.
+PHP bol zvolený pre serverovú časť hlavne kvôli tomu, že to je najrozšírenejší serverový jazyk a takmer všetci poskytovatelia hostingu ponúkajú webhosting práve s PHP a teda nenastáva problém s výberom poskytovateľa. Okrem toho PHP podporuje mnohé databázy ako MySQL, Oracle a PostgreSQL. Práve kombinácia PHP s Apache serverom a MySQL databázou je jedna z najobľúbenejších. 
 
 \subsection{Model Controler View architektúra}
 \label{sec:mvc}
-Základnou myšlienkou architektury MVC je oddelenie 	logiky od výstupu. MVC, jako už názov napovedá pozostáva z 3 typov komponent, z modelu, pohľadu (view) a kontroleru. Model obsahuje všetku logiku aplikácie, môžu sa v ňom nachádzať například výpočty alebo databázové operácie. Komponenta pohľad sa zase stará o zobrazovanie vústupu užívateľovi. Obsahuje minimálne množství logiky, ktorá je pre výpis nutná. Tretí a posledný typ je kontroler, ktorý komunikuje s užívateľom, modelom aj pohľadom a komponenty navzájom prepája. Príklad takéjto architektury a komunikácií medzi jednotlivými komponentami je zobrazený na nasledujúcom obrázku.
+MVC je architektonický vzor, ktorý sa uchytil predovšetkým pri tvorbe webových aplikácií a informačných systémov. Je súčasťou populárnych webových rámcov, ako napríklad Nette, alebo Zend. Základnou myšlienkou je oddelenie logiky od výstupu. MVC pozostáva, ako už názov napovedá, z 3 typov komponentov. Z modelu, pohľadu (view) a kontroléru. Model obsahuje všetku logiku aplikácie. Môžu sa v ňom nachádzať výpočty, alebo databázové operácie. Komponent pohľad sa zase stará o zobrazovanie výstupu užívateľovi. Obsahuje minimálne množstvo logiky, ktorá je pre výpis nutná. Tretí a posledný typ je kontrolér, ktorý komunikuje s užívateľom, modelom aj pohľadom a komponenty navzájom prepája. Príklad takejto architektúry a komunikácie medzi jednotlivými komponentami je zobrazený na nasledujúcom obrázku.
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.35]{fig/mvc.eps}
-  \caption{MVC architektúra}
+  \caption{Príklad MVC}
   \label{fig:mvc}
 \end{figure}
 
 \subsection{Nette}
 \label{sec:nette}
-Už PHP je samo o sebe mocný programovací jazyk, ale ak by bolo zvolené čisté PHP, tak by programátol musel riešiť veľké množstvo vecí, ktoré niekto v minulosti už dávno vyriešil. Okrem toho by si programátor musel dávať veľký pozor a ošetrovať početné množstvo bezpečnostných rizík. Kvôli týmto spomenutým veciam bol pre účel práce vybraný rámec Nette.
+PHP je síce samo o sebe mocný programovací jazyk, ale v prípade zvolenia čistého PHP, by programátor musel riešiť veľké množstvo vecí, ktoré niekto v minulosti už dávno efektívnejšie vyriešil. Okrem toho by si programátor musel dávať veľký pozor a ošetrovať početné množstvo bezpečnostných rizík. Kvôli týmto veciam bol pre účel práce vybraný aplikačný rámec Nette.
 
-Nette je rámec pre tvorbu webových aplikácií v PHP5, ktorý sa zameriava na elimináciu bezpečnostných rizík, podporuje AJAX a MVC. Z veľkej časti je založený na použití komponentov. Pôvodným autorom je David Grundl, ale v súčasnosti sa o rozvoj rámcu stará Nette Foundation. Je ponúkaný pod licenciou GNU GPL a licenciou Nette (obdoba BSD licencie). Rámec sa teší veľkej obľube a taktiež početnej komnuite v Čechách a na Slovensku.
-
-Minimálne požiadavky, pre funkčnosť sa vyžaduje PHP verzie 5.3.1 a vyššej a v tomto prípade MySQL verzie 5.6. Tieto požiadavky je možné overiť oficiálnym requirements-checker.php skriptom.
-
+Nette je rámec napísaný v PHP5, ktorý sa zameriava na pohodlnejšie a rýchlejšie programovanie webových aplikácií a elimináciu bezpečnostných rizík. Podporuje MVC a OOP. Z veľkej časti je založený na vytváraní znovu použiteľných komponentov. K Nette patrí aj šablónovací systém Latte, ktorý zapuzdruje PHP v HTML súboroch do špeciálnych Latte makier a tým eliminuje bezpečnostné riziká. Tracy a Tester zase slúžia na hľadanie a odlaďovanie chýb. Pôvodným autorom je David Grundl, ale v súčasnosti sa o rozvoj rámcu stará Nette Foundation. Je ponúkaný pod licenciou GNU GPL a licenciou Nette (obdoba BSD licencie). Rámec sa teší veľkej obľube a taktiež početnej komunite v Čechách a na Slovensku. Minimálne požiadavky, pre správnu funkčnosť rámca, sa vyžaduje PHP verzie 5.3.1 a vyššej. Všetky požiadavky je možné overiť oficiálnym checker.php skriptom.
 
 \section{Databázová časť}
 \label{sec:databaza}
-Pre uloženie a uchovávanie dát bola zvolená relačná databáza. Databáza bola zvolená hlavne kvôli vlastnosti ACID a pre prístup pre viacerých užívateľov k databázi súčastne. Okrem iného databáze šetria pamäťové miesto tým, že pri dobrom návrhu sa v databázi nenachádzajú redundantné dáta. Na výber boli rôzne alternatívy ako napríklad PL/SQL, T-SQL alebo vybraný MySQL.  
+Databáza, ako prostriedok pre uloženie dát, bola zvolená hlavne kvôli vlastnosti ACID\footnote{atomickosť, konzistencia, izolovanosť a trvácnosť} a pre prístup viacerých užívateľov k databázy súčasne. Okrem iného, databázy šetria pamäťové miesto tým, že pri dobrom návrhu sa v databázy nenachádzajú redundantné dáta. Manipulácia s dátami je pomerne rýchla, pretože sa do medzi pamäte neukladá celá databáza. Nad databázou sa dajú vykonávať zložité dotazy a spájať dáta z viacerých tabuliek.  Na výber boli rôzne alternatívy ako napríklad PL/SQL, T-SQL alebo vybraný MySQL.   
 
 \subsection{MySQL}
 \label{sec:mysql}
-MySQL je otvorený viacužívateľský SQL relačný databázový server, ktorý je implementovaný vo viacerých programovacích a jlavne serverových jhazykoch. Príkladosm je skriptovací jazyk PHP. Je to databázový relačný systém, teda každá databáza v MySQL je tvorená z jendnej alebo viacerých tabuliek, ktoré majú riadky a stĺpce. Riadky udávajú jendotlivé záznamy, stĺpce zase dátový typ jednotlivých záznamov. Práca s takouto databázou je vykonávaná pomocou takzvaných dotazov.
+MySQL je otvorený, viac užívateľský SQL relačný databázový server, ktorý je implementovaný vo viacerých programovacích a hlavne serverových jazykoch, napríklad v skriptovacom jazyku PHP. Je to databázový relačný systém, teda každá databáza v MySQL je tvorená z jednej alebo viacerých tabuliek, ktoré majú riadky a stĺpce. Riadky udávajú jednotlivé záznamy, stĺpce zase dátové typy jednotlivých záznamov. Práca s takouto databázou je vykonávaná pomocou takzvaných dotazov.
 
 \section{Klientská časť}
 \label{sec:klient}
-Klientská časť pokrýva všetko to čo je zobrazené užívateľovi, teda kompletná stránka, ktorej zostavovanie sa dialo z väčšej miery na servery. Aby boli ibnformácie určené pre užívateľa zobrazené v nejakej prijatelnej a užívateľsky prívetivej podobe, tak je dobrým zvykom okrem značkovacieho jazyka HTML použiť aj CSS kaskádové štýly. Keďže moderná prezentácia informácií na webových portáloch vyžaduje aj určitú ľahkosť a dynamiku, tak k tomuto účeľu bol použitý celosvetovo rozšírený programovací jazyk Javascript.
+Klientská časť pokrýva všetko to, čo je zobrazené užívateľovi. Teda v tomto prípade je myslená kompletná stránka, ktorej zostavovanie sa dialo z väčšej miery na servery. Aby boli informácie určené pre užívateľa zobrazené v nejakej prijateľnej a užívateľsky prívetivej podobe, tak sa vyžaduje okrem značkovacieho jazyka HTML použiť aj CSS kaskádové štýly. Keďže moderná prezentácia informácií na webových portáloch vyžaduje aj určitú ľahkosť a dynamiku, tak k tomuto účelu bol použitý celosvetovo rozšírený programovací jazyk Javascript.
 
 \subsection{HTML}
 \label{sec:html}
-Hyper Text Markup Language je značkovací jazyk určený pre popis webových dokumentov, hlavne teda webových stránok. Najskôr bol iba veľmi jendoduchá podmnožina jazyka SGML, ale neskôr sa z neho vyvinul samostatný štandart. HTML dokument sa popisuje pomocou HTML tagov, každý typ HTML tagu popisuje odlišný obsah dokumentu.  
+Hyper Text Markup Language je značkovací jazyk určený pre popis webových dokumentov, hlavne webových stránok. Najprv bol iba veľmi jednoduchá podmnožina jazyka SGML\footnote{Standard Generalized Markup Language}, ale neskôr sa z neho vyvinul samostatný štandard. HTML dokument sa popisuje pomocou HTML tagov. Každý typ HTML tagu slúži na popísanie odlišného typu obsahu dokumentu.  
 
-V minulosti sa HTML používal aj na definovanie štruktúry dokumentu a aj jeho výzoru. V súčastnej dobe je HTML určené iba na zmienenú definíciu dokumentu.
+V minulosti sa HTML používal na definovanie štruktúry dokumentu a aj jeho výzoru. V súčasnej dobe je HTML určené iba na zmienenú definíciu štruktúry.
 
 \subsection{CSS}
 \label{sec:css}
-Kvôli okolnostiam, spomenutých na konci kapitoli, bol vyvynutí Cascading Style Sheets. CSS popisuje ako budú HTML tagy zobrazené na obrazovke, papiery, alebo inom médiu. CSS šetrí veľa času tým, že môže popisovať rozmiestnenie viacerých webových stránok naraz.
+Kvôli tomu, že HTML sa začalo používať iba na definovanie štruktúry dokumentu a nie jeho výzoru, bol vyvinutí Cascading Style Sheets. CSS popisuje ako budú HTML tagy zobrazené na obrazovke, papieri, alebo inom médiu. CSS šetrí veľa času tým, že môže popisovať rozmiestnenie viacerých webových stránok naraz.
 
 \subsection{Javascript}
 \label{sec:javascript}
-Javascript je skriptovací protoypovo založený jazyk, ktorý sa v súčastnosti používa hlavne pri tvorbe webových prezentácií a stránok. Javascript beží na klientskej strane webu, teda je spúštaný väčšinou vo webových prehliadačoch používateľov. V súčastnosti Javascript popdoruje väčšina webových prehliadačov a zároveň je najpoužívanejší skriptovací jazyk používaný na klientskej strane.
+Javascript je skriptovací, prototypovo založený jazyk, ktorý sa v súčasnosti používa hlavne pri tvorbe dynamických webových prezentácií a webových stránok. Javascript beží na klientskej strane webu. Je spúšťaný väčšinou vo webových prehliadačoch. V súčasnosti Javascript podporuje väčšina webových prehliadačov a je najpoužívanejší skriptovací jazyk používaný na klientskej strane.
 
-Bola by chyba myslieť si, že Javascript svoje uplnatnenie pri tvorbe webov má iba na strane klienta. Javascript je naozaj všestranný jazyk a svoje uplatnenie nájde aj na servery v podobe Node.js. Pre účely tejto práce je avšak použitý klasický klientský javascript spúštaný vo webovom prehliadači.
-
+Bola by chyba myslieť si, že Javascript svoje uplatnenie pri tvorbe webov má iba na strane klienta. Javascript je naozaj všestranný jazyk a svoje uplatnenie nájde aj na servery napríklad v podobe Node.js. Pre účely tejto práce je avšak použitý klasický klientský Javascript spúšťaný vo webovom prehliadači.
 
 \subsection{JQuery}
 \label{sec:jquery}
