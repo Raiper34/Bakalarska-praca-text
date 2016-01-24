@@ -32,7 +32,7 @@ PHP bol zvolený pre serverovú časť hlavne kvôli tomu, že to je najrozšír
 MVC je architektonický vzor, ktorý sa uchytil predovšetkým pri tvorbe webových aplikácií a informačných systémov. Je súčasťou populárnych webových rámcov, ako napríklad Nette, alebo Zend. Základnou myšlienkou je oddelenie logiky od výstupu. MVC pozostáva, ako už názov napovedá, z 3 typov komponentov. Z modelu, pohľadu (view) a kontroléru. Model obsahuje všetku logiku aplikácie. Môžu sa v ňom nachádzať výpočty, alebo databázové operácie. Komponent pohľad sa zase stará o zobrazovanie výstupu užívateľovi. Obsahuje minimálne množstvo logiky, ktorá je pre výpis nutná. Tretí a posledný typ je kontrolér, ktorý komunikuje s užívateľom, modelom aj pohľadom a komponenty navzájom prepája. Príklad takejto architektúry a komunikácie medzi jednotlivými komponentami je zobrazený na nasledujúcom obrázku.
 \begin{figure}[h]
   \centering
-  \includegraphics[scale=0.35]{fig/mvc.eps}
+  \includegraphics[scale=0.40]{fig/mvc.eps}
   \caption{Príklad MVC}
   \label{fig:mvc}
 \end{figure}
@@ -73,9 +73,9 @@ Bola by chyba myslieť si, že Javascript svoje uplatnenie pri tvorbe webov má 
 
 \subsection{JQuery}
 \label{sec:jquery}
-JQuery je ľahká a rýchla Javascriptová knižnica, ktorá kladie dôraz na interakciu medzi Javascriptom a HTML. Syntax knižnice je navrhnutá tak, aby bolo používanie Javascriptu na stránke jendoduchšie. Medzi hlavné zjednodušenia oproti čistému Javascriptu patrí: navigácia dokumentu, výber DOM elementov, vytváranie animácií, spracovanie udalostí a veľa iných nie menej podstatných vecí. Knižnica zároveň rieši tzv. cross-browser problémy, kedy jedna věc sa môže v rôznych prehliadačoch správať odlišne.
-JQuery je zároveň najobľúbenejšia a najrozšírenejšia Javascriptová knižnica, o čom svedčí nielen početná komunita, ale aj to, že je využívaná najväčšími firmami jako Google, či Microsoft.
+JQuery je ľahká a rýchla Javascriptová knižnica, ktorej hlavným cieľom je, aby bolo použitie Javascriptu na webových stránkach omnoho jednoduchšie. Taktiež zjednodušuje komplikované veci Javascriptu, ako AJAX volania a manipuláciu s DOM. Okrem toho obsahuje metódy na manipuláciu s CSS, HTML udalosti, efekty a animácie a ďalšie nápomocné programy. Je rozšíriteľná pomocou pluginov a na väčšinu známych vecí už existuje JQuery plugin. Knižnica zároveň rieši tzv. cross-browser problémy, kedy jedna vec sa môže v rôznych prehliadačoch správať odlišne.
 
+Je to najobľúbenejšia a najrozšírenejšia Javascriptová knižnica, čomu dáva za pravdu nielen početná komunita okolo, ale aj to, že je využívaná najväčšími firmami ako Google, či Microsoft.
 
 \subsection{Bootstrap}
 \label{sec:bootstrap}
@@ -91,19 +91,19 @@ API je v tomto prípade myslené, ako knižnica, pomocou ktorej vývojári hier 
 
 \subsection{AJAX}
 \label{sec:ajax}
-Asynchronous Javascript and XML je súhrné označenie technológie, ktorá umožňuje meniť obsah stránok bez toho, aby bolo nutné ich celé znova načítať zo servera. Hlavná výhoda spočíva v tom, že sa prenáša značne menšie množstvo dát. AJAX nieje samostatný programovací jazyk ani technológia sama o sebe, ako by sa mohlo zdať, je to skôr kombinácia niekoľkých prvkov. Je založený na internetových štandardoch, a používa kombináciu HMLHttpRequest pre získanie dát zo servera a Javascript/DOM pre zobrazenie a použitie dát. Väčšinou sa používa spolu s Javascriptom, ale nie je to podmienka, lebo je podporovaný aj v iných programovacích jazykoch.  
+Asynchronous Javascript and XML je súhrnné označenie technológií, ktoré umožňujú meniť obsah webových stránok bez nutnosti znovu načítania celej stránky zo servera. Hlavná výhoda spočíva v tom, že sa prenáša značne menšie množstvo dát. AJAX nie je samostatný programovací jazyk, ani technológia sama o sebe, ako by sa mohlo zdať. Je to skôr kombinácia niekoľkých prvkov. Je založený na internetových štandardoch. Používa kombináciu HMLHttpRequest pre získanie dát zo servera a Javascript/DOM pre zobrazenie a použitie dát.
 \begin{figure}[h]
   \centering
-  \includegraphics[scale=0.35]{fig/ajax.eps}
+  \includegraphics[scale=0.40]{fig/ajax.eps}
   \caption{Neblokujúca komunikácia so serverom pomocou AJAXu}
   \label{fig:ajax}
 \end{figure}
 
 \subsection{CORS}
 \label{sec:cors}
-Klasický javascript je limitovaný tzv. Same origin policy, z toho dôvodu nie je možné prijímať odpoveďe z domény, keď stránka, alebo hra, ktorá požiadavok má inú doménu. 
+Klasický Javascript je limitovaný tzv. Same origin policy. Z toho dôvodu nie je možné prijímať odpovede na dotazy z domény inej, ako je doména z ktorej bola požiadavka vyslaná.
 
-Tento známy, hore popísaný problém rieši Cross-origin resource sharing. CORS je vlastne mechanizmus, ktorý povoluje zakázané zdroje na webovej stránke aby boli požiadané z inej domény ako z domény z ktorej zdroje pochádzajú. Pre použitie tohto mechanizmu musí nastať zmena pri tvorbe požiadavku na klientovi, a je treba povoliť CORS na servery. Prehliadač musí posielať nastavenie Origin: doména v http hlavičke. Na servery zase musí byť nastavené povolenie Acces-Control-Allow-Origin: * (* znamená že budú povolené všetky domény).
+Tento známy, hore popísaný problém rieši Cross-origin resource sharing. CORS je vlastne mechanizmus, ktorý povoľuje zakázané zdroje na webovej stránke, a tak je možné prijímať odpovede na požiadavky z inej domény, ako z domény z ktorej zdroje pochádzajú. Pre použitie tohto mechanizmu musí nastať zmena pri tvorbe požiadavku na klientovi a tiež je treba povoliť CORS na servery. Prehliadač musí posielať nastavenie Origin: doména v HTTP hlavičke. Na servery zase musí byť nastavené povolenie Acces-Control-Allow-Origin: doména, alebo * pre povolenie všetkých domén.
 
 \section{Hra}
 \label{sec:hra}
