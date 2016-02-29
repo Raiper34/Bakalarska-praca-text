@@ -115,24 +115,41 @@ Phaser je Javascriptový aplikačný rámec určený špeciálne pre tvorbu hier
 
 \chapter{Analýza existujúcich riešení}
 \label{chap:analyza}
-todo
+V tejto kapitole budú predstavené konkurenčné, existujúce riešenia určené pre iné platformy, ako je platforma, pre ktorú je riešenie tejto práce určené. 
 
-\section{Herné služby}
-todo
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Google Play Game Services}
-todo
+\section{Steam}
+Steam je herná platforma od spoločnosti Valve Corporation určená predovšetkým k digitálne distribúcií hier a vytvoreniu komunity hráčov daných hier. Steam klient je podporovaný na rôznych platformách. Na počiatku podporoval iba platformu Windows, neskôr svoje pôsobenie rozšíril na platformu Mac a nakoniec na Linuxové distribúcie. Pochopitelne nie všetky hry nachádzajúce sa na steam platforme sú hrateľné vo všetkých operačných systémoch. Moemntálne samotná platforma obsahuje viac ako 3500 hier a teší sa početnej komunite hráčov. 
 
-\subsection{Apple Game Center}
-todo
+Steam pre vývojárov hier, ktoré boli schválené komunitou steam greenlight pre možnosť distribúcie hry na platforme, ponúka svoje Steamworks API. Steamworks API dovoluje vývojárom hier integrovať rôzne funkcie ako štatistiky, odmeny, autentifikácia, tvorba zápasov, peer-to-peer networking, steam cloud úložisko, valve anticheat, hlasový chat a v neposlednej rade aj DRM.
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.27]{fig/steam.png}
+  \caption{Ukážka steam klienta na Windows}
+  \label{fig:steam}
+\end{figure}
 
-\subsection{Mochimedia}
-todo
+\section{Google Play Game Services}
+Po predstavení operačného systému Android vyvinul Google svoj internetový obchod Google play, ktorý ponúka nielen aplikácie a hry pre android, ale po novom aj knihy hudbu a filmy. Vývojári momentálne môžu získať prústup na publikovanie aplikácií  v tomto obchode za 20USD, pričom reálne nie sú limitovaný počtom aplikácií a ani kvalitou.  
 
-\subsection{Clay.io}
-todo
+Okrem toho, Google povoľuje vyvojárom hier integrovať do svojich hier svoje Play Game Services API. Zprvu bolo API limitované iba na Android hry, momentláne avšak podporuje aj webové. Pred samotným použitím API si vývojár musí najprv definovať hru v Google Play Developer Console a poprípade ďalšie doplnkové funkcie. API ponúka možnosťi použitia odmien, score tabuliek, multiplayeru, uloženia dát v cloude, udalosti a úlohy a iné. 
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.32]{fig/google-play.png}
+  \caption{Ukážka Google Play Developer Console  - zoznam existujúcich hier}
+  \label{fig:google-play}
+\end{figure}
 
-\subsection{Steam}
+\section{Apple Game Center}
+Rovnako ako Google má pre Android svoj internetový obchod a aplikáciami, tak aj Apple má svoj App Store. Narozdiel od Google play, vývojár pre prístup do App Store musí platiť ročne buď 99 USD za Apple Developer Program, alebo 299 USD za Apple Developer Enterprise Program. Viac informácií je, ako aj rozdiely v týchto programoch je možné nájsť na ích officialnej stránke. 
+
+Taktiež Apple ponúka svoje Game Center API. API je integrovateľné do iOS hier a taktiež do OS X. Game Center umožnuje integrovať score tabuľky, odmeny, pozývanie priateľov do hry a spúštanie multiplayer hier pomocou systému automatického vytvárania hier.
+
+\section{Clay.io}
+Clay.io je webový projekt zameraný na Javascriptové/HTML5 hry. Vytvoril ho v roku 2012 Austin Hallock. Z prvu bol tento projekt rovnomerne orientovaný na vývojárov hier a aj hráčov týchto hier. Platforma neobsahovala žiadne kvalitatívne obmedzenia čo sa týka uverejnovania hier a jej služby boli zadarmo. Bolo možné do hry integrovať vlastné API, ktoré zprístupňovalo score tabuľky, odmeny, cloud úložisko dát, cross promotion, reklamy tretích strán. Okrem toho na základe už vložených informácií Clay.io dokázalo generovať rôzne konfiguračné súbory pre webové obchody ako Chrome web store alebo Mozzila marketplace a iné. Začiatkom roka 2015 sa avšak situácia zmenila a Clay.io sa uzavrelo. Začalo sa orientovať na vyššiu kvalitu hier a k API už môžu pristuovať iba oprávený schválený vývojári a publikovať tieto hry s integrovaným API je možné iba na webe Clay.io a v špeciálnej Clay.io aplikácií, ktorá je určená pre Android.    
+
+\section{Ostatné}
 todo
 
 \section{Znovupoužiteľné komponenty}
