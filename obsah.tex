@@ -150,7 +150,53 @@ Taktiež Apple ponúka svoje Game Center API. API je integrovateľné do iOS hie
 Clay.io je webový projekt zameraný na Javascriptové/HTML5 hry. Vytvoril ho v roku 2012 Austin Hallock. Z prvu bol tento projekt rovnomerne orientovaný na vývojárov hier a aj hráčov týchto hier. Platforma neobsahovala žiadne kvalitatívne obmedzenia čo sa týka uverejnovania hier a jej služby boli zadarmo. Bolo možné do hry integrovať vlastné API, ktoré zprístupňovalo score tabuľky, odmeny, cloud úložisko dát, cross promotion, reklamy tretích strán. Okrem toho na základe už vložených informácií Clay.io dokázalo generovať rôzne konfiguračné súbory pre webové obchody ako Chrome web store alebo Mozzila marketplace a iné. Začiatkom roka 2015 sa avšak situácia zmenila a Clay.io sa uzavrelo. Začalo sa orientovať na vyššiu kvalitu hier a k API už môžu pristuovať iba oprávený schválený vývojári a publikovať tieto hry s integrovaným API je možné iba na webe Clay.io a v špeciálnej Clay.io aplikácií, ktorá je určená pre Android.    
 
 \section{Ostatné}
-todo
+Pre webové hry postavené na technológií Flash existovalo a stále existuje hneď niekoľko herných portálov určených predovšetkým pre hráčov, ktoré ponúkajú taktiež vývojárom možnosť integrovať rôzne služby webového portálu do hry. Príkladom môže byť zaniknutý Mochimedia, alebo stále existujúce herné webové portále Newgrounds.com, Gamejolt.com, alebo Kongregate.com. Nevýhodou týchto portálov je to, že použitie ich API, je často limitované iba využitie na danom webovom portáli. Všetky zmienené portáli ponúkali, alebo stále ponúkajú obdobné funkcie API, ako tomu bolo v predchádzajúcich kapitolách, teda highscore tabuľky, odmeny, úložisko v cloude, ochrana hry, udalosti a niektoré dokonca reklamy, alebo chatovacie miestnosti.
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.5]{fig/odmeny2.png}
+  \caption{Ukážka odmien na stránke Gamejolt.com}
+  \label{fig:odmeny}
+\end{figure}
+
+\chapter{Návrh riešenia}
+\label{chap:navrh}
+Táto kapitola popisuje návrh riešenia tejto bakalárskej práce. Najprv pojednáva o analýze požiadavkov na komponenty, ktoré sú zahrnuté v API a na celkovú štruktúru webovej platformy. Ďalej popisuje návrh databáze a je predstavený jej konceptuálny model. Ďalšia podkapitola je venovaná návrhu rozhrania webového portálu, jeho časti určenej pre hráčov, časti určenej pre vývojárov a aj časti pre administrátorov. A nakoniec je predstavený návrh jednoduchej HTML5 hry, ktorá má za úlohu demonštrovať funkcie API.  
+
+\section{Analýza požiadavkov na komponenty}
+Požiadavky na komponenty čiastočne vychádzajú z predchádzajúcej kapitoli o Analýze už existuúcich riešení. Boli vybrané komponenty z daných existujúcich riešení také, ktoré sa najviac opakovali v daných službách, a ktoré boli reálne použiteľné na webovej platforme. Okrem toho bol zostavený orientačný doplňujúci dotazník, cielený práve na vývojárov hier a špeciálne na vývojárov webových html5 hier. Dáta boli zberané na fórach, kde sa združujú vývojári takýchto hier a v skupinách sociálnych skupín, ktoré taktiež obsahujú takýchto ľudí. V dotazníku odpovedalo viac ako 100 ľudí a týto ľudia mali vybrať 3 komponenty, ktoré pokľadajú pre seba ako vývojárov za najužitečnejšiu, pritom bolo jendo z akého hladiska, či z toho hladiska toho, že komponenta má obohacovať hru napríklad o tabuľku skóre, či odmeny a tak jej pridávať na atraktivite, alebo naopak má slúžiť vývojárovi ako napríklad štatistiky prístupov, alebo kontrola domény, na ktorej sa daná hra nachádza.   Výsledky môžete vidieť na obrázku. Dáta slúžia iba pre predstavu, čo najviac vývojárom chýba, alebo naopak, ktoré komponenty z vymenúvaných pokľadajú z ích hľadiska za najdôležitejšie, najprínosnejšie.
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.7]{fig/graf-dotazniku.png}
+  \caption{Výsledky dotazníku}
+  \label{fig:dotaznik}
+\end{figure}
+
+Na základe tohto dotazníku, ale predovšetkým na základe analýzy už existujúccih riešení bola vybraná nasledujúca množina komponent.
+\begin{enumerate}
+\item Tabuľky skóre
+\item Odmeny
+\item Kontrola domén
+\item Štatistiky prístupov
+\item Úložisko v cloude
+\end{enumerate}
+Niektoré komponenty neboli vybrané z dôvodu, že neboli pokladané vývojármi za až tak podstatné (napríklad cross-promotion), alebo sa nehodili k danému projektu (napríklad chat, ktorý by v hre na mobilných zariadeniach s nie až tak veľkými obrazovkami, mohol byť viac na obtiaž, než k úžitku). Ďalšia komponenta, s ktorou sa v tomto projekte nepočíta, aj keď v dotazníku bola táto možnosť celkom vyberaná, je integrácia reklám do hry. Takáto komponenta by bola nad rámec tejto práce a muselo by sa okolo nej riešiť niekoľko ďalších vecí, ako získanie inzerentov, správa reklamných kampaní a ďalšie z väčšej miery netechnické veci.
+
+\section{Analýza požiadavkov na portál}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.4]{fig/ucd-neprihlaseny.eps}
+  \caption{Use Case Diagram neprihláseného užívateľa}
+  \label{fig:ucdneprihlaseny}
+\end{figure}
+
+\section{Návrh databáze}
+
+\section{Návrh webovej platformy}
+
+\section{Návrh API}
+
+\section{Návrh Hry}
 
 \section{Znovupoužiteľné komponenty}
 todo
@@ -165,10 +211,6 @@ todo
 todo
 
 \subsection{Úložisko v cloude}
-todo
-
-\chapter{Návrh riešenia}
-\label{chap:navrh}
 todo
 
 \chapter{Implementácia}
