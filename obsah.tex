@@ -181,8 +181,18 @@ Na základe tohto dotazníku, ale predovšetkým na základe analýzy už existu
 \end{enumerate}
 Niektoré komponenty neboli vybrané z dôvodu, že neboli pokladané vývojármi za až tak podstatné (napríklad cross-promotion), alebo sa nehodili k danému projektu (napríklad chat, ktorý by v hre na mobilných zariadeniach s nie až tak veľkými obrazovkami, mohol byť viac na obtiaž, než k úžitku). Ďalšia komponenta, s ktorou sa v tomto projekte nepočíta, aj keď v dotazníku bola táto možnosť celkom vyberaná, je integrácia reklám do hry. Takáto komponenta by bola nad rámec tejto práce a muselo by sa okolo nej riešiť niekoľko ďalších vecí, ako získanie inzerentov, správa reklamných kampaní a ďalšie z väčšej miery netechnické veci.
 
-\section{Analýza požiadavkov na portál}
+\section{Návrh webovej platformy}
+Návrh webovej platformy bol vypracovávaný po analýze existujúcich herných platforiem, klientov a webových portáloch, ktoré sú čiastočne uvedené v kapitole 3. V prvom rade bolo treba premyslieť, k čomu všetkomu daná webová platformu by mala slúžiť, čo všetko by na nej malo byť realizovateľné, aké možnosti by ponúkala pre vývojárov hier a aké možnosti zase pre hráčov týchto hier. 
 
+Tento návrh, toho, čo všetko môže daný užívateľ so svojoou rolou na portáli vykonávať bol spracovaný pomocou Use Case Diagramu (Diagramu prípadov užitia) ďalej iba UCD, ktorý zobrazuje chovanie systému, tak ako ho vidí užívateľ. Účelom tohto diagramu je popísať funkcionalitu systému, teda čo sa od systému očakáva. Diagram hovorí o tom, čo má systém, v tomto prípade naša webová platforma vedieť, ale nehovcorí o tom, ako sa to bude vykonávať. V UCD sa skladá z prípadov užiatia (Use Case), aktérov (Actor) a vzťahov medzi nimi. Prípad užitia je sada niekoľkých akcií, ktoré vedú k dosiahnutiu určitého cieľa. Aktér je roľa, ktorá komunikuje s jednotlivými prípadmi užitia. Zjednodušene povedané UCD je diagram, ktorý zobrazuje to, čo všetko daná užívateľská roľa môže v systéme vykonávať. Na obrázku môžete vidieť naľavo aktéra a napravo prípad užitia. 
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.4]{fig/ucd.eps}
+  \caption{Use Case Diagram, naľavo aktér, napravo prípad užitia}
+  \label{fig:ucd}
+\end{figure}
+
+Prvou roľou, ktorou sa užívateľ stáva po príchode na webovú platfomu je roľa neprihláseného návštevníka. Prirodzene neprihlásený, často ešte nezaregistrovaný návštevník musí mať obmedzenú množinu toho, čo môže na danej stránke vykonávať. V prípade tejto bakalárskej práce môže byť neprihlásený užívateľ napríklad hráč, ktorý sa ešte nezaregistroval, alebo sa z nejakého dôvodu nechce registrovať. Na portál prišiel vyložene !zabiť! čas, highscore tabuľky ho nemotivujú k súťaženiu s ostatnými hráčmi a ani odmeny sa mu nijak zaujímavo nevidia. Keďže platforma by mala byť optimalizovaná pre prenosné zariadenia ako mobily a tablety, tak to môže byť hráč s mobilným zariadením čakajúci napríklad v ordinácií lekára, alebo čakajúci na autobusovej zastávke. Takýto hráč teda potrebuje jediné, zobraziť zoznam hier, aby si vybral hru, tkroú chce hrať, poprípade filtrovať zoznam hier podľa nejakých kategórií, ako napríklad žánru... Po vybraní hry si chce prečítať nejaké základné informácie o hre, inštrukcie ako hru ovládať a v neposlendom rade náhľady,a elbo iné grafické matertiály, pochádzajúce najlepšei priamo z danej hry. Po tom všetkom chce samozrejme daný hráč hrať samotnú hru umiestnenú na portáli. Neprihláseným návštevníkom môže byť avšak aj hráč, ktorý sa chce na daný portál prihlásiť, poprípade sa zaregistrovať a mať tak možnosť využívať všetku funkcionalitu daného portálu  určenú pre roľu prihláseného hráča. Poslendým príkladom, ktorý bude uvedený ako neprihlásený návštevník je napríklad, užívateľ, tkroý che na tomto portáli získať roľu vývojjára hry a mať tak možnosť sa podielať na tvorbe herného obsahu, alebo využívať iné funckie určené vývojárom. Diagram prípadov užitia, ktorý zhrnuje tento odsek je na obrázku.
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.4]{fig/ucd-neprihlaseny.eps}
@@ -190,9 +200,15 @@ Niektoré komponenty neboli vybrané z dôvodu, že neboli pokladané vývojárm
   \label{fig:ucdneprihlaseny}
 \end{figure}
 
-\section{Návrh databáze}
+V poradí druhou roľou kterou sa užívateľ môže stať v rámci systému je roľa prihláseného hráča. Nperihlásený návštevník sa prihláseným hráčom stáva od chvíľe kedy sa prihlási k svoju účtu hráča.  Prihlásený hráč môže vykonávať na portáli všetky akcie, ktoré môže vykonávať roľa neprihláseného návšetvníka, a k tomu ešte môže vykonávať ďalšie akcie, na ktoré je potrebné byť prihlásený. Prihlásený hráč môže hrať hry pod svojim účtom a tým pádom získavať v danej hre odmeny a umiestnovať sa v score tabuľkách najlepších hráčov a tým nepriamo súťažiť s ďalšími prihlásenými hráčmi. Okrem toho prihlásený hráč má možnosť číselne ohodnotiť hru, alebo zdielať svoje pocity z hry s ostatnými publikovaním svojho komentáru na stránke s hrou. Hráč by mal mať možnosť tiež prezerať si svoj hráčský profil a profil ostatných hráčov. Usa case diagram, ktorý popisuje akcie prihláseného hráča môžete vidieť na obrázku.
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.4]{fig/ucd-prihlasenyhrac.eps}
+  \caption{Use Case Diagram neprihláseného užívateľa}
+  \label{fig:ucdprihlasenyhrac}
+\end{figure}
 
-\section{Návrh webovej platformy}
+\section{Návrh databáze}
 
 \section{Návrh API}
 
