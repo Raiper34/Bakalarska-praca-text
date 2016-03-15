@@ -225,40 +225,37 @@ Poslednou, avšak nie nevýznamnou roľou je roľa, ktorá sa v pomyslenom hiera
 \end{figure}
 
 \section{Návrh databáze}
-\begin{figure}[h]
-  \centering
-  \includegraphics[scale=0.6]{fig/games.png}
-  \caption{Use Case Diagram administrátora}
-  \label{fig:ucdadmin}
-\end{figure}
+
 
 \section{Návrh API}
-Test around here
-
+API by malo byť implementované z väčšej časti na serverovej strane, z menšej časti na strane klienta. Malo by fungovať tak, že klient inicializuje spojenie s serverom pomoocu AJAX a CORS a v XHR správe pošle nejaký identifikátor, pravdepoodbne špeciálneho vygenerovaného reťazca tzv. API kľúča. Server by mal následne odpovedať ideálne v nejakom formáte, ktorý server dokáže vygenerovať a klientská strana zase čítať. Na tanto účel bol vybraný JavaScript Object Notation, skrátene JSON, ktorý sa používa pre prenos dát. Výhodou je, že je platformne nezávislý aj napriek tomu, že používa Javascriptovú syntax. Server by teda mal odoslať odpoveď o tom, či spojenie akceptuje a preniesť ďalšie potrebné dáta. Odoslaná JSON správa by mala ideálne vyzerať tak, že by sa tam nachádzala akási položka status, ktorá by vypovedala o tom, ako skončila operácia vykonávaná na serveri, či skončila úspechom, poprípade neúspechom a akým presne.  
 \begin{lstlisting}[caption=JSON]
 {
     status: '0',
     data: 'some data'
 }
 \end{lstlisting}
-Text after here
+Daný neúspech by bol definovaný číslom prislúchaúcim danému neúspechu. V položke dáta by zase boli klientom požiadané dáta v prípade že operácia skončila úspechom a tieto dáta by sa na klientskej srane v danej funkcií spracovali do užívateľsky prijateľnej podoby a následne by boli ďalej predané do aplikácie.
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+Položka status/návratový kód & Význam \\ \hline
+0 & Operácia na servery skončila úspešne \\ \hline
+1 & Operácia na servery skončila neúspešne \\ \hline
+1\textless & Ďalšie špecifickejšie neúspešné skončenie operácie \\ \hline
+\end{tabular}
+\label{navratovekody}
+\caption{Tabuľka návrhov návratových kódov}
+\end{table}
 
 \section{Návrh Hry}
+Pri tvorení návrhu hry bolo brané na vedomie to, že hra by mala byť jednoduchá čo sa týka použitých rogramovacích techník, keďže hra má slúžiť predovšetkým na demonštráciu webovej platformy a jej API a vývojár, ktorý by si chcel eventuálne hru rozobrať nemusel sa snažiť pochopiť príliš zložitý kód. Z toho dôvodu boli hneď vylúčené zložité herné žánre a na výber sa ponúkali skôr klasické hry (rôzne logické stolné hry, ako pexeso, puzzle...), alebo pomerne nové obľúbené a populárne mobilné casual hry (například Flappy Bird, TimberMan, alebo rôzne Match3 klony), ktoré sú v niektorých prípadoch na implementáciu ešte jendoduchšie ako spomínané klasické. Ďalším dôležitý kritériu pri návrhu demonštračnej hry bolo to, aby v hre boli implementovateľné všetky nami navrhnuté funkcie API. Posledným avšak nie až tak dôležitým kritérium bolo, aby celá grafická stránka hry bola ľahko vytvoriteľná aj pre človeka, ktorý nie je primárne grafikom, teda ideálne bez zložitých animácií a ďalších v tomto prípade zbytočných zložitostí. 
 
-\section{Znovupoužiteľné komponenty}
-todo
+Po zhodnotení možností bolo ako demnoštračná hra zvolené pexeso. Dôvodom je to, že pexeso je pomerne ľahko implementovateľné, dajú sa do neho integrovať všetky naše API funkcie a pre tvorbu grafiky nie sú potrebné žiadne pokročilé grafické skúsenosti, nehovoriac o animácicach. Hra by sa mala zkladať z niekoľkých obrazoviek, z hlavného menu, z obrazovky, na ktorej bude zobrazená tabuľka najlepších hráč s ich skóre, obrazovka slúžiaca ako akási sieň trofejí, v ktorej budú zobrazené získané odmeny a obrazovka, na ktorej sa bude odohrávať samotná hra. Na obrazovke hry by bola zobrazená hracia plocha + nejaký základný HUD, informujúci o tom, koľko kariet kariet zostáva otočiť, koľko hráč nahral bodov, a aké je doposiaľ najväčšie nahrané skóre daného hráča. Základný grafický návrh rozloženia hernej obrazovky môžete vidieť na obrázku. 
 
-\subsection{Odmeny}
-todo
+Hráč by mal v tejto hre za úlohu nájsť všetky rovnaké dvojice hracích kariet. Ak by našiel rovnakú dvojicu, tak by získal +10 bodov, ak by otočil dvojicu rozdielnych kariet v jendom kole, tak by stratil -1 bod. Takto by mohol získavať skóre a následne po otočení všetkých rovnakých dvojích by jeho skôre bolo odoslané na server a hráč by bol presmerovaný na obrazovku s tabuľkou najlepších hráčov. Odmeny by mohli byť implementované napríklad tak že ak by hráč otočil 2 rovnaké dvojice 3 krát za sebou, tak by získla odmenu, ak 5 krát, tak by získla ďalšiu domenu, ak by prešiel celú hru na jeden poku, tak zase inú odmenu. Cloudove úložisko by zase mohlo v tejto hre slúžiť ako počítadlo koľko odohraných hier daný hráč má. 
 
-\subsection{Tabuľky najlepších hráčov}
-todo
-
-\subsection{Štatistiky}
-todo
-
-\subsection{Úložisko v cloude}
-todo
 
 \chapter{Implementácia}
 \label{chap:implementacia}
