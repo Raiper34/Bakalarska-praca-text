@@ -209,12 +209,12 @@ V poradí druhou roľou kterou sa užívateľ môže stať v rámci systému je 
 \end{figure}
 
 Treťou a asi aj najvýznamnejšou roľou v rámci tejto práce je roľa vývojára. Užívateľ roľu vývojára nadobudne zaregistrovaním/prihlásením sa do svojho vývojářského účtu. Vývojár má povolené vykonávať to isté, jako 2 predošlé roľe, neprihlásený návštevník a zároveň prihlásený hráč. V pomyslenej hierarchií je táto roľa zase o niečo vyššie jako spomenuté predošlé dve. Roľa vývojára je schopná vytvárať a definovať nové hry, editovať informácie o hre, či už existujúcej, alebo novo vytváranej. Vývojár ďalej musí byť schopný nahrať herné súbory, obrázky k hre, ikony a iné promočné materiály potrebné pre platformu. Musí byť schopný zatiaľ nepublikovanú hru publiukovať/poslať na schválenie a už publikovanú hru odstrániť zo zoznamu hier viditeľných pre neprihláseného návštevníka a prihláseného hráča. Ďalej táto užívateľ, ktorý pracuje pod touto roľou musí byť shcopný zobraziť štatistiky prístupov o hre, poprípade zmeniť typy zobrazovaných štatistických grafov. Jedneou z najvýznamnejších funkcií portálu, ku ktorej má táto roľa prístup je práca s API. Presnejšie sa jedná od definovanie API komponent, ktoré boli popísané v kapitole 3. Táto práca zahrňuje definovanie, vytváranie nových odmien, editovanie už existujúcich a tektiež možnosť ich odstránenia. Umožnuje prácu s tabuľkami score, ich definovanie, vytváranie, editovanie, odstránenie, ich rôzne nastavenia... Tiež umožnuje definovať cloud úložisko, editovať ho, alebo ho kompletne odstrániť. V neposlednom rade by mal byť vývojár schopný definovať na ktorej doméne je možné hru s api spustiť a na ktoréj nie, poprípade túto fuinkcionalitu vypnúť/zapnúť. 
-\begin{figure}[h]
-  \centering
-  \includegraphics[scale=0.4]{fig/ucd-vyvojar.eps}
-  \caption{Use Case Diagram vývojára}
-  \label{fig:ucdvyvojar}
-\end{figure}
+%\begin{figure}[h]
+%  \centering
+%  \includegraphics[scale=0.4]{fig/ucd-vyvojar.eps}
+%  \caption{Use Case Diagram vývojára}
+%  \label{fig:ucdvyvojar}
+%\end{figure}
 
 Poslednou, avšak nie nevýznamnou roľou je roľa, ktorá sa v pomyslenom hierarchickom rebríčku právomocí nachádza úplne najvyššie je roľa administrátora webovej platformy. Bežný užívateľ nemá možnosť stať sa administrátorom žiadnou akciou z jeho strany. Užívateľa môže povýšiť na administrátora iba iný administrátor, alebo správca databáze, ktorý má prístup k tabuľkám užívateľov a ich rolí. Administrátor má všetky práva a môže vykonávať všetky akcie a riadiť všetky udalosti na platforme, ktoré mu grafické užívateľské prostredie dovoľuje vykonávať. Teda užívateľ, ktorý nadobudol roľu administrátora môže vykonávať všetko to čo neprihlásený návštevník, prihlásený hráč a zároveň aj vývojár. Okrem toho takýto užívateľ má na starosti správny chod platformy, teda by mal mať možnosť deaktivácie(ban) a znovu aktivácie užívateľských účtov, v prípade, že by konkrétny užívateľ nejak porušoval pravidlá platformy. Tento užívateľ by mal mať možnosť editácie všetkých hier a všetkých užívateľských profilov, nielen tých, ktoré mu patria. Ďalšou významnou vecou, ktorú má roľa administrátora na starosti je schvaľovanie a odmietanie vývojármi vytvorených a odsolaných hier na schválenie. 
 \begin{figure}[h]
@@ -222,6 +222,29 @@ Poslednou, avšak nie nevýznamnou roľou je roľa, ktorá sa v pomyslenom hiera
   \includegraphics[scale=0.4]{fig/ucd-admin.eps}
   \caption{Use Case Diagram administrátora}
   \label{fig:ucdadmin}
+\end{figure}
+
+Návrh GUI môže byť kľudne rozdelený podľa rolí teda na stránky kam pristupuje administrátor, kam zase developer a kam hráč a návštevník webu a podľa toho ho správne pripraviť a navrhnúť. V prvom rade ale je dobré si uvedomiť, ktoré prvky majú všetki 3 role společné. Určite to bude menu v hlavičke, kterého návrh môžete vidieť na obrázku. Táto hlavička by mala obsahovať nejaké textové, alebo obrázkové logo naľavo a základné menu napravo. Pričom položky v menu napravo by boli podľa toho, v akej roľi užívateľ vystupue, popípade kebyže nie je prihlásený/registrovaný, tak by tam bol formulár na prihlásenie/registrovanie. 
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.6]{fig/gui-hlavicka.png}
+  \caption{Hlavička s logom a menu}
+  \label{fig:guihlavicka}
+\end{figure}
+
+Stránky určené pre hráčov hier by boli, stránka so zoznamom hier, detail hry a poprípade profil hráča. Stránka so zoznamom hier by obsahovala prirodzene jednotlivé hry. Každá hra by tu bola reprezentovaná názvom a svojím náhľadovým obrázkov, nie snímkou z hry, skôr nejakoou graficky práťažlivou upútavkou. Zoznam hier by mal byť filtrovateľný podľa jendotlivých kategórií. Návrh môžete vidieť na obrázu.
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.6]{fig/gui-hry.png}
+  \caption{Stránka s hrami}
+  \label{fig:guihry}
+\end{figure}
+Detail hry by mal obsahovať slide show obrázkov už zo samotnej hry, slideshow by sa mala sama meniť poprípade by mal užívateľ možnosť ručne prechádzať obrázky pomocou šípiek na stranách. Ďalej by tam boli základné informácie o hre ako popis a inštrukcie, ktoré by boli zobrazené kvôli grafickej príťažlivosti v paneloch. V rovnakých paneloch by mali byť zobrazené aj odmeny a tabuľky skóre. Prihlásený hráč by mal tiež vyznačené, ktoré odmeny získla, a ktoré nie, najlepšie riadok so získanou odmenou by bol vyfarbeny na zeleno, z odmenou, ktorú ešte nezískal zase na červeno. Pod tým všetkým by sa malo nachádzať tlačítko „Play“, slúžiace na spustenie hry. A nakoniec pridané komentáre k hre a formulár, kde by samozrejme prihlásený užívateľ mal tiež možnosť komentovať. Celý zjednodušený návh môžete vidieť na obrázku. 
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.6]{fig/gui-detail-hry.png}
+  \caption{Detail hry}
+  \label{fig:guidetailrhy}
 \end{figure}
 
 \section{Návrh databáze}
