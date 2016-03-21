@@ -246,6 +246,20 @@ Detail hry by mal obsahovať slide show obrázkov už zo samotnej hry, slideshow
   \caption{Detail hry}
   \label{fig:guidetailrhy}
 \end{figure}
+Stránky ku ktorým by pristupoval vývojár hry by boli tie isté ako hráč + vývojárska konzola, kde by bol zoznam hier, ktoré daný vývojár vyvíja a detail, alebo lepšie povedané úprava/tvorba existujúce/novej hry. Vývojárka konzola so zoznamom hier by bola takmer totožná z hľadiska GUI ako  už popísaný zoznam hier určený pre hráča, takže to nemá zmysel preberať podrobnejšie. Stránka s detailom vyvíjanej hry bu pozostávala s panelov. Každý panel by mal slúžiť pre iný druh informácií. Jeden by bol pre hlavné informácie o hre, druhý pre grafické meteriály k hre, tretí k odmená, tabuľkám skóre a zobrazenie štatistík. Informácie v každom paneli by boli editovateľné poprípade vytvoriteľné po kliknutí na tlačítko „Edit“, po ktorom by sa vyvolalo modálne okno s príslušným editačným formulárom presne tak, ako je znázornenéna obrázku.
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.6]{fig/gui-detail-vyvojar.png}
+  \caption{Úprava hry v vývojárskej konzoli}
+  \label{fig:guidetailvyvojar}
+\end{figure}
+Admin, by mal samozrejme prístup ku všetkému v rámci stránky, teda by mohol využívať stránky navrhnuté ako pre hráča, tak aj pre vývojára hier. Admin taktiež potrebuje nejakú administrátorskú koznolu, aby mohol spravovoať hry a užívateľov. Mal by v tejto konzole mať možnosť vidieť hry, ích statu, či sú schválené, alebo neschávelné a mať možnosť ich jendoducho schváliť, alebo zamietnuť z publikácie. V zozname užívateľov by mal mať zase možnosť jednotlivý užívateľom odopierať prístup na stránku, poprípade povoľovať. Mockup administrátorskej konzole je možné vidieť na obrázku.
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.6]{fig/gui-admin.png}
+  \caption{Administrátorská konzola}
+  \label{fig:guiadmin}
+\end{figure}
 
 \section{Návrh databáze}
 Návrh databáze vychádza v určitej miere z predchádzajúcej kapitloli o návrhu webvovej platformy, kde boli predstavené a namodelované diagramy prípadov užitia. Tieto 2 kapitoli teda spolu úzko súvisia, keďže užívateľ chce na webovej platforme vykonávať rôzne akcie a častokrát, alebo aj skoro vždy požaduje aby sa informácie niekde uchovali, poprípade aby ich od niekaľ získal. Táto kapitola bude teda do istej miery obsahuje informácie už uvedené v kapitole o návrhu webovcej platformy, iba s tým rozdielom, že informácie sú interpretované tak, aby z nich bolo možné urobiť návrh databáze a je v popise jasne vidieť aké informácie v databázy potrebujeme uchovávať.
