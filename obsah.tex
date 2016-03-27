@@ -113,16 +113,17 @@ Pre demonštračnú hru sa ponúkalo buďto použiť klasický Javascript, čo a
 \label{sec:phaser}
 Phaser je Javascriptový aplikačný rámec určený špeciálne pre tvorbu hier, ako desktopových, tak aj mobilných. Je založený na renderovacom rámci pixi.js. Phaser je ľahko osvojiteľný, rýchly, je ponúkaný zadarmo a má otvorený kód. Podporuje canvas a zároveň aj webgl. Obsahuje veľké množstvo predpripravených funkcií. Tieto funkcie sú spracované tak, aby ich použitie bolo jednoduché. Príkladom môže byť stavaný preloader, fyzika, animácie, častice, rôzne módy prispôsobenia veľkosti obrazovky a iné.  
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Analýza existujúcich riešení}
 \label{chap:analyza}
-V tejto kapitole budú predstavené konkurenčné, existujúce riešenia určené pre iné platformy, ako je platforma, pre ktorú je riešenie tejto práce určené. 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+V tejto kapitole budú predstavené konkurenčné, existujúce a predovšetkým známejšie riešenia určené zväčša pre iné platformy, ako je platforma, pre ktorú je riešenie tejto práce určené. Určite existuje oveľa viac alternatív, ale vymenúvať a rozobrať všetky nie je účelom tejto práce.
 
 \section{Steam}
-Steam je herná platforma od spoločnosti Valve Corporation určená predovšetkým k digitálne distribúcií hier a vytvoreniu komunity hráčov daných hier. Steam klient je podporovaný na rôznych platformách. Na počiatku podporoval iba platformu Windows, neskôr svoje pôsobenie rozšíril na platformu Mac a nakoniec na Linuxové distribúcie. Pochopitelne nie všetky hry nachádzajúce sa na steam platforme sú hrateľné vo všetkých operačných systémoch. Moemntálne samotná platforma obsahuje viac ako 3500 hier a teší sa početnej komunite hráčov. 
+Steam je herná platforma od spoločnosti Valve Corporation určená predovšetkým k digitálnej distribúcií hier a vytvoreniu komunity hráčov týchto hier. Steam klient je podporovaný na rôznych platformách. Na počiatku podporoval iba platformu Windows, neskôr svoje pôsobenie rozšíril na platformu Mac a nakoniec na Linuxové distribúcie. Pochopiteľne nie všetky hry nachádzajúce sa na Steam platforme sú hrateľné vo všetkých operačných systémoch. Momentálne samotná platforma obsahuje viac ako 3500 hier a teší sa početnej komunite hráčov.
 
-Steam pre vývojárov hier, ktoré boli schválené komunitou steam greenlight pre možnosť distribúcie hry na platforme, ponúka svoje Steamworks API. Steamworks API dovoluje vývojárom hier integrovať rôzne funkcie ako štatistiky, odmeny, autentifikácia, tvorba zápasov, peer-to-peer networking, steam cloud úložisko, valve anticheat, hlasový chat a v neposlednej rade aj DRM.
+Pre možnosť distribúcie hry na Steam je vývojár nútený si zakúpiť prístup k službe Steam Greenlight, ktorý stojí v dobe vzniku tejto práce 90 EUR. Poplatok je jednorazový a vývojár nie je obmedzený počtom publikovaných hier v tejto službe. Po publikovaní hry v službe Steam Greenlight sa avšak hra nenachádza ešte na samotnej platforme. Užívatelia vďaka tejto službe môžu hlasovať za hru a hra sa na platformu Steam dostáva až po získaní určitého počtu hlasov. Je teda na samotnom vývojárovi vynaložiť úsilie, aby bola hra čo najlepšie spropagovaná a všimol si ju a samozrejme aj hlasoval čo možno najväčší počet oslovených ľudí. 
+
+Steam pre vývojárov hier, ktorých hry boli schválené komunitou Steam Greenlight pre možnosť distribúcie hry na platforme, ponúka svoje Steamworks API. Steamworks API dovoľuje vývojárom hier integrovať rôzne funkcie ako štatistiky, odmeny, autentifikácia, tvorba zápasov, peer-to-peer networking, Steam cloud úložisko, Valve anticheat\footnote{Software, ktorý slúži ako prevencia proti neférovému získaniu výhody v online hre pomocou softwaru tretích strán}, hlasový chat a v neposlednej rade aj DRM\footnote{Digital rights management - metódy, ktorých účelom je kontrolovať používanie obsahu digitálnych médií}. Všetky tieto funkcie je možné dohľadať na oficiálnej stránke Steamworks API.
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.27]{fig/steam.png}
@@ -131,9 +132,9 @@ Steam pre vývojárov hier, ktoré boli schválené komunitou steam greenlight p
 \end{figure}
 
 \section{Google Play Game Services}
-Po predstavení operačného systému Android vyvinul Google svoj internetový obchod Google play, ktorý ponúka nielen aplikácie a hry pre android, ale po novom aj knihy hudbu a filmy. Vývojári momentálne môžu získať prústup na publikovanie aplikácií  v tomto obchode za 20USD, pričom reálne nie sú limitovaný počtom aplikácií a ani kvalitou.  
+Po predstavení operačného systému Android vyvinul Google svoj internetový obchod Google Play, ktorý ponúka nielen aplikácie a hry pre Android, ale po novom aj knihy hudbu a filmy. Vývojári momentálne môžu získať prístup na publikovanie aplikácií  v tomto obchode za poplatok 20USD, ktorý sa platí jednorazovo, pričom reálne nie sú limitovaný počtom aplikácií a ani kvalitou výslednej publikovanej aplikácie.
 
-Okrem toho, Google povoľuje vyvojárom hier integrovať do svojich hier svoje Play Game Services API. Zprvu bolo API limitované iba na Android hry, momentláne avšak podporuje aj webové. Pred samotným použitím API si vývojár musí najprv definovať hru v Google Play Developer Console a poprípade ďalšie doplnkové funkcie. API ponúka možnosťi použitia odmien, score tabuliek, multiplayeru, uloženia dát v cloude, udalosti a úlohy a iné. 
+Okrem toho, Google dáva možnosť vývojárom hier integrovať do ich diel svoje Play Game Services API. Zprvu bolo API limitované iba na Android hry, v súčasnosti avšak podporuje už aj webové aplikácie. Pred samotným použitím API si vývojár musí najprv definovať hru v Google Play Developer Console a poprípade ďalšie doplnkové funkcie, ktoré chce integrovať a využívať. API ponúka možnosti použitia odmien, skóre tabuliek, multiplayeru, uloženia dát v cloude, udalosti, úlohy a iné. Ďalšie informácie sú k nájdeniu v oficiálnej dokumentácií.   
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.32]{fig/google-play.png}
@@ -209,12 +210,12 @@ V poradí druhou roľou kterou sa užívateľ môže stať v rámci systému je 
 \end{figure}
 
 Treťou a asi aj najvýznamnejšou roľou v rámci tejto práce je roľa vývojára. Užívateľ roľu vývojára nadobudne zaregistrovaním/prihlásením sa do svojho vývojářského účtu. Vývojár má povolené vykonávať to isté, jako 2 predošlé roľe, neprihlásený návštevník a zároveň prihlásený hráč. V pomyslenej hierarchií je táto roľa zase o niečo vyššie jako spomenuté predošlé dve. Roľa vývojára je schopná vytvárať a definovať nové hry, editovať informácie o hre, či už existujúcej, alebo novo vytváranej. Vývojár ďalej musí byť schopný nahrať herné súbory, obrázky k hre, ikony a iné promočné materiály potrebné pre platformu. Musí byť schopný zatiaľ nepublikovanú hru publiukovať/poslať na schválenie a už publikovanú hru odstrániť zo zoznamu hier viditeľných pre neprihláseného návštevníka a prihláseného hráča. Ďalej táto užívateľ, ktorý pracuje pod touto roľou musí byť shcopný zobraziť štatistiky prístupov o hre, poprípade zmeniť typy zobrazovaných štatistických grafov. Jedneou z najvýznamnejších funkcií portálu, ku ktorej má táto roľa prístup je práca s API. Presnejšie sa jedná od definovanie API komponent, ktoré boli popísané v kapitole 3. Táto práca zahrňuje definovanie, vytváranie nových odmien, editovanie už existujúcich a tektiež možnosť ich odstránenia. Umožnuje prácu s tabuľkami score, ich definovanie, vytváranie, editovanie, odstránenie, ich rôzne nastavenia... Tiež umožnuje definovať cloud úložisko, editovať ho, alebo ho kompletne odstrániť. V neposlednom rade by mal byť vývojár schopný definovať na ktorej doméne je možné hru s api spustiť a na ktoréj nie, poprípade túto fuinkcionalitu vypnúť/zapnúť. 
-%\begin{figure}[h]
-%  \centering
-%  \includegraphics[scale=0.4]{fig/ucd-vyvojar.eps}
-%  \caption{Use Case Diagram vývojára}
-%  \label{fig:ucdvyvojar}
-%\end{figure}
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.3]{fig/ucd-vyvojar.eps}
+  \caption{Use Case Diagram vývojára}
+  \label{fig:ucdvyvojar}
+\end{figure}
 
 Poslednou, avšak nie nevýznamnou roľou je roľa, ktorá sa v pomyslenom hierarchickom rebríčku právomocí nachádza úplne najvyššie je roľa administrátora webovej platformy. Bežný užívateľ nemá možnosť stať sa administrátorom žiadnou akciou z jeho strany. Užívateľa môže povýšiť na administrátora iba iný administrátor, alebo správca databáze, ktorý má prístup k tabuľkám užívateľov a ich rolí. Administrátor má všetky práva a môže vykonávať všetky akcie a riadiť všetky udalosti na platforme, ktoré mu grafické užívateľské prostredie dovoľuje vykonávať. Teda užívateľ, ktorý nadobudol roľu administrátora môže vykonávať všetko to čo neprihlásený návštevník, prihlásený hráč a zároveň aj vývojár. Okrem toho takýto užívateľ má na starosti správny chod platformy, teda by mal mať možnosť deaktivácie(ban) a znovu aktivácie užívateľských účtov, v prípade, že by konkrétny užívateľ nejak porušoval pravidlá platformy. Tento užívateľ by mal mať možnosť editácie všetkých hier a všetkých užívateľských profilov, nielen tých, ktoré mu patria. Ďalšou významnou vecou, ktorú má roľa administrátora na starosti je schvaľovanie a odmietanie vývojármi vytvorených a odsolaných hier na schválenie. 
 \begin{figure}[h]
