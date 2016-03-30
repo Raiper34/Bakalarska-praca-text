@@ -143,21 +143,32 @@ Okrem toho, Google dáva možnosť vývojárom hier integrovať do ich diel svoj
 \end{figure}
 
 \section{Apple Game Center}
-Rovnako ako Google má pre Android svoj internetový obchod a aplikáciami, tak aj Apple má svoj App Store. Narozdiel od Google play, vývojár pre prístup do App Store musí platiť ročne buď 99 USD za Apple Developer Program, alebo 299 USD za Apple Developer Enterprise Program. Viac informácií je, ako aj rozdiely v týchto programoch je možné nájsť na ích officialnej stránke. 
+Rovnako ako Google má pre Android svoj internetový obchod s Android aplikáciami, tak aj Apple má svoj App Store. Na rozdiel od Google Play, vývojár pre prístup do App Store musí platiť ročne buď 99 USD za Apple Developer Program, alebo 299 USD za Apple Developer Enterprise Program. Viac informácií, ako aj rozdiely v týchto programoch, je možné nájsť na oficiálnej stránke Apple. 
 
-Taktiež Apple ponúka svoje Game Center API. API je integrovateľné do iOS hier a taktiež do OS X. Game Center umožnuje integrovať score tabuľky, odmeny, pozývanie priateľov do hry a spúštanie multiplayer hier pomocou systému automatického vytvárania hier.
+Apple tiež ponúka svoje Game Center API. API je integrovateľné do iOS hier a taktiež do OS X. Game Center umožňuje integrovať skóre tabuľky, odmeny, pozývanie priateľov do hry a spúšťanie multiplayer hier pomocou systému automatického vytvárania hier\footnote{Matchmaking}.
+
+\section{Facebook Game Services}
+Za zmienku určite stojí aj najväčšia a najpopulárnejšia sociálna sieť Facebook, ktorá od svojho vzniku v roku 2004 pridala nespočetné množstvo vylepšení, medzi ktorými sa objavili aj hry. V tomto momente to už zďaleka nie je len sociálna sieť, ako by sa mohlo na prvý pohľad zdať. Vývojári majú tak možnosť na tejto sociálnej sieti publikovať svoje hry a dokonca integrovať špeciálne funkcie ponúkané vývojárom vďaka Facebook Game Services API. API je integrovateľné do širokého spektra platforiem a enginov od Flash a HTML5 hostovaných na Facebooku, ktoré sú možné nájsť v Facebook App Store, až po mobilné hry platformy Android a iOS. API štandardne ponúka odmeny, skóre tabuľky a štatistiky + ďalšie rozširujúce funkcie sociálnej siete zahrnujúc zdieľanie na nástenke profilu užívateľa, alebo notifikácie. Záznam hry nachádzajúcej sa v Facebook App Store môžete vidieť na obrázku.
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.17]{fig/facebook.png}
+  \caption{Záznam hry v Facebook App Store}
+  \label{fig:facebook}
+\end{figure}
 
 \section{Clay.io}
 Clay.io je webový projekt zameraný na Javascriptové/HTML5 hry. Vytvoril ho v roku 2012 Austin Hallock. Z prvu bol tento projekt rovnomerne orientovaný na vývojárov hier a aj hráčov týchto hier. Platforma neobsahovala žiadne kvalitatívne obmedzenia čo sa týka uverejnovania hier a jej služby boli zadarmo. Bolo možné do hry integrovať vlastné API, ktoré zprístupňovalo score tabuľky, odmeny, cloud úložisko dát, cross promotion, reklamy tretích strán. Okrem toho na základe už vložených informácií Clay.io dokázalo generovať rôzne konfiguračné súbory pre webové obchody ako Chrome web store alebo Mozzila marketplace a iné. Začiatkom roka 2015 sa avšak situácia zmenila a Clay.io sa uzavrelo. Začalo sa orientovať na vyššiu kvalitu hier a k API už môžu pristuovať iba oprávený schválený vývojári a publikovať tieto hry s integrovaným API je možné iba na webe Clay.io a v špeciálnej Clay.io aplikácií, ktorá je určená pre Android.    
 
 \section{Ostatné}
-Pre webové hry postavené na technológií Flash existovalo a stále existuje hneď niekoľko herných portálov určených predovšetkým pre hráčov, ktoré ponúkajú taktiež vývojárom možnosť integrovať rôzne služby webového portálu do hry. Príkladom môže byť zaniknutý Mochimedia, alebo stále existujúce herné webové portále Newgrounds.com, Gamejolt.com, alebo Kongregate.com. Nevýhodou týchto portálov je to, že použitie ich API, je často limitované iba využitie na danom webovom portáli. Všetky zmienené portáli ponúkali, alebo stále ponúkajú obdobné funkcie API, ako tomu bolo v predchádzajúcich kapitolách, teda highscore tabuľky, odmeny, úložisko v cloude, ochrana hry, udalosti a niektoré dokonca reklamy, alebo chatovacie miestnosti.
+Pre webové hry postavené na technológií Flash existovalo a stále ešte existuje hneď niekoľko herných portálov určených predovšetkým pre hráčov, ktoré ale taktiež ponúkajú vývojárom možnosť integrovať rôzne služby konkrétneho webového portálu do hry. Príkladom môže byť zaniknutý Mochimedia, alebo stále existujúce herné webové portály Newgrounds.com, Gamejolt.com, alebo Kongregate.com. Nevýhodou týchto portálov je to, že použitie ich API, je často limitované iba na použitie na danom webovom portáli. Všetky zmienené portáli ponúkali, alebo stále ponúkajú obdobné funkcie API, ako tomu bolo v predchádzajúcich častiach. 
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.5]{fig/odmeny2.png}
   \caption{Ukážka odmien na stránke Gamejolt.com}
   \label{fig:odmeny}
 \end{figure}
+
+Boli vymenované riešenia asi pre takmer všetky webové, desktopové a mobilné platformy. Je ale nutné podotknúť, že herné konzoly tiež nezostávajú pozadu a taktiež obsahujú väčšinu z vymenúvaných komponent, čo je samozrejme prirodzené, keďže tieto komponenty často pridávajú hre na atraktivite. Dobrým zástupcom je Xbox, alebo Playstation. Avšak možnosti stredných, vôbec neuvažujúc malých, herných štúdií a vývojárov, ktorý chcú na týchto platformách publikovať sú dosť obmedzené, keďže sú akceptované poväčšine iba veľké AAA tituly\footnote{V hernom premysle označuje herné tituly, s najväčším rozpočtom, levelom propagácie, alebo s najvyšším hodnotením od kritikov} a keď Indie hry\footnote{Nezávislá hra vyvíjaná bez finančnej podpory vydavateľa}, tak naozaj veľmi kvalitné, alebo populárne.
 
 \chapter{Návrh riešenia}
 \label{chap:navrh}
