@@ -170,20 +170,15 @@ Pre webové hry postavené na technológií Flash existovalo a stále ešte exis
 
 Boli vymenované riešenia asi pre takmer všetky webové, desktopové a mobilné platformy. Je ale nutné podotknúť, že herné konzoly tiež nezostávajú pozadu a taktiež obsahujú väčšinu z vymenúvaných komponent, čo je samozrejme prirodzené, keďže tieto komponenty často pridávajú hre na atraktivite. Dobrým zástupcom je Xbox, alebo Playstation. Avšak možnosti stredných, vôbec neuvažujúc malých, herných štúdií a vývojárov, ktorý chcú na týchto platformách publikovať sú dosť obmedzené, keďže sú akceptované poväčšine iba veľké AAA tituly\footnote{V hernom premysle označuje herné tituly, s najväčším rozpočtom, levelom propagácie, alebo s najvyšším hodnotením od kritikov} a keď Indie hry\footnote{Nezávislá hra vyvíjaná bez finančnej podpory vydavateľa}, tak naozaj veľmi kvalitné, alebo populárne.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Návrh riešenia}
 \label{chap:navrh}
-Táto kapitola popisuje návrh riešenia tejto bakalárskej práce. Najprv pojednáva o analýze požiadavkov na komponenty, ktoré sú zahrnuté v API a na celkovú štruktúru webovej platformy. Ďalej popisuje návrh databáze a je predstavený jej konceptuálny model. Ďalšia podkapitola je venovaná návrhu rozhrania webového portálu, jeho časti určenej pre hráčov, časti určenej pre vývojárov a aj časti pre administrátorov. A nakoniec je predstavený návrh jednoduchej HTML5 hry, ktorá má za úlohu demonštrovať funkcie API.  
+Táto kapitola popisuje návrh riešenia tejto bakalárskej práce. Najprv pojednáva o analýze požiadaviek na komponenty, ktoré sú zahrnuté v API a na celkovú štruktúru webovej platformy. Kapitola ďalej popisuje návrh webovej platformy z hľadiska funkcionality a následne z hľadiska grafického užívateľského rozhrania. Hneď nato nasleduje návrh databáze a je predstavený jej konceptuálny model. Na konci kapitoly je predstavený návrh samotného API a návrh jednoduchej HTML5 hry, ktorá má za úlohu demonštrovať funkcie tohto API.  
 
-\section{Analýza požiadavkov na komponenty}
-Požiadavky na komponenty čiastočne vychádzajú z predchádzajúcej kapitoli o Analýze už existuúcich riešení. Boli vybrané komponenty z daných existujúcich riešení také, ktoré sa najviac opakovali v daných službách, a ktoré boli reálne použiteľné na webovej platforme. Okrem toho bol zostavený orientačný doplňujúci dotazník, cielený práve na vývojárov hier a špeciálne na vývojárov webových html5 hier. Dáta boli zberané na fórach, kde sa združujú vývojári takýchto hier a v skupinách sociálnych skupín, ktoré taktiež obsahujú takýchto ľudí. V dotazníku odpovedalo viac ako 100 ľudí a týto ľudia mali vybrať 3 komponenty, ktoré pokľadajú pre seba ako vývojárov za najužitečnejšiu, pritom bolo jendo z akého hladiska, či z toho hladiska toho, že komponenta má obohacovať hru napríklad o tabuľku skóre, či odmeny a tak jej pridávať na atraktivite, alebo naopak má slúžiť vývojárovi ako napríklad štatistiky prístupov, alebo kontrola domény, na ktorej sa daná hra nachádza.   Výsledky môžete vidieť na obrázku. Dáta slúžia iba pre predstavu, čo najviac vývojárom chýba, alebo naopak, ktoré komponenty z vymenúvaných pokľadajú z ích hľadiska za najdôležitejšie, najprínosnejšie.
-\begin{figure}[h]
-  \centering
-  \includegraphics[scale=0.7]{fig/graf-dotazniku.png}
-  \caption{Výsledky dotazníku}
-  \label{fig:dotaznik}
-\end{figure}
+\section{Analýza požiadaviek na komponenty}
+Požiadavky na komponenty čiastočne vychádzajú z predchádzajúcej kapitoly o Analýze už existujúcich riešení. Boli vybrané komponenty z daných existujúcich riešení také, ktoré sa najviac opakovali v daných službách, teda boli v určitom zmysle žiadané, a ktoré boli reálne použiteľné na tvorenej webovej platforme. Okrem toho bol zostavený orientačný doplňujúci dotazník, cielený práve na vývojárov hier a špeciálne na vývojárov webových html5 hier. Dáta boli zberané na fórach\footnote{http://www.html5gamedevs.com/, https://www.scirra.com/forum/}, kde sa združujú vývojári takýchto hier a v špeciálnych skupinách sociálnych sietí\footnote{HTML5 Mobile Game and App Development a Game Development Community CZ/SK na Facebooku}, ktoré obsahujú takto odborovo orientovaných ľudí. V dotazníku odpovedalo 47 ľudí. Títo ľudia mali vybrať 3 komponenty, ktoré pokladajú pre seba ako vývojárov za najužitočnejšie. Pritom bolo jedno z akého hľadiska, či z hľadiska toho, že komponenta má obohacovať hru napríklad o tabuľku skóre, či odmeny a tak jej pridávať na atraktivite, alebo naopak má slúžiť skôr vývojárovi ako napríklad štatistiky prístupov, alebo kontrola domény, na ktorej sa daná hra nachádza. Výsledky môžete vidieť na obrázku \ref{fig:dotaznik}. Dáta slúžia iba pre predstavu, čo najviac vývojárom chýba, alebo naopak, ktoré komponenty z vymenúvaných pokladajú z ich hľadiska za najdôležitejšie, najprínosnejšie.  
 
-Na základe tohto dotazníku, ale predovšetkým na základe analýzy už existujúccih riešení bola vybraná nasledujúca množina komponent.
+Na základe tohto dotazníku, ale predovšetkým na základe analýzy už existujúcich riešení bola vybraná nasledujúca množina komponent.
 \begin{enumerate}
 \item Tabuľky skóre
 \item Odmeny
@@ -191,7 +186,13 @@ Na základe tohto dotazníku, ale predovšetkým na základe analýzy už existu
 \item Štatistiky prístupov
 \item Úložisko v cloude
 \end{enumerate}
-Niektoré komponenty neboli vybrané z dôvodu, že neboli pokladané vývojármi za až tak podstatné (napríklad cross-promotion), alebo sa nehodili k danému projektu (napríklad chat, ktorý by v hre na mobilných zariadeniach s nie až tak veľkými obrazovkami, mohol byť viac na obtiaž, než k úžitku). Ďalšia komponenta, s ktorou sa v tomto projekte nepočíta, aj keď v dotazníku bola táto možnosť celkom vyberaná, je integrácia reklám do hry. Takáto komponenta by bola nad rámec tejto práce a muselo by sa okolo nej riešiť niekoľko ďalších vecí, ako získanie inzerentov, správa reklamných kampaní a ďalšie z väčšej miery netechnické veci.
+Niektoré komponenty neboli vybrané z dôvodu, že neboli pokladané vývojármi za až tak podstatné (napríklad cross-promotion), alebo sa nehodili k danému projektu (napríklad chat, ktorý by v hre na mobilných zariadeniach s nie až tak veľkými obrazovkami, mohol byť viac na obtiaž, než k úžitku). Ďalšia komponenta, s ktorou sa v tomto projekte nepočíta, aj keď v dotazníku bola táto možnosť pomerne chcená, je integrácia reklám do hry. Takáto komponenta by bola nad rámec tejto práce a muselo by sa okolo nej riešiť niekoľko ďalších vecí, ako je získanie inzerentov, správa reklamných kampaní a ďalšie z väčšej miery netechnické veci.
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.4]{fig/graf-dotazniku.png}
+  \caption{Výsledky dotazníku}
+  \label{fig:dotaznik}
+\end{figure}
 
 \section{Návrh webovej platformy}
 Návrh webovej platformy bol vypracovávaný po analýze existujúcich herných platforiem, klientov a webových portáloch, ktoré sú čiastočne uvedené v kapitole 3. V prvom rade bolo treba premyslieť, k čomu všetkomu daná webová platformu by mala slúžiť, čo všetko by na nej malo byť realizovateľné, aké možnosti by ponúkala pre vývojárov hier a aké možnosti zase pre hráčov týchto hier. 
