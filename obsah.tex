@@ -293,14 +293,14 @@ Najhlavnejšiu úlohu v tomto projekte zastáva hra. Hra je teda v diagrame aká
 \end{figure}
 
 \section{Návrh API}
-API by malo byť implementované z väčšej časti na serverovej strane, z menšej časti na strane klienta. Malo by fungovať tak, že klient inicializuje spojenie s serverom pomoocu AJAX a CORS a v XHR správe pošle nejaký identifikátor, pravdepoodbne špeciálneho vygenerovaného reťazca tzv. API kľúča. Server by mal následne odpovedať ideálne v nejakom formáte, ktorý server dokáže vygenerovať a klientská strana zase čítať. Na tanto účel bol vybraný JavaScript Object Notation, skrátene JSON, ktorý sa používa pre prenos dát. Výhodou je, že je platformne nezávislý aj napriek tomu, že používa Javascriptovú syntax. Server by teda mal odoslať odpoveď o tom, či spojenie akceptuje a preniesť ďalšie potrebné dáta. Odoslaná JSON správa by mala ideálne vyzerať tak, že by sa tam nachádzala akási položka status, ktorá by vypovedala o tom, ako skončila operácia vykonávaná na serveri, či skončila úspechom, poprípade neúspechom a akým presne.  
-\begin{lstlisting}[caption=JSON]
+API by malo byť implementované z väčšej časti na serverovej strane, z menšej časti na strane klienta. Malo by fungovať tak, že klient inicializuje spojenie so serverom pomocou AJAX a CORS. V XHR správe pošle nejaký identifikátor, pravdepodobne špeciálne vygenerovaný reťazec tzv. API kľúč. Server by mal následne odpovedať, ideálne v nejakom formáte, ktorý server dokáže vygenerovať a klientská strana zase čítať. Na tento účel bol vybraný JavaScript Object Notation, skrátene JSON, ktorý sa používa pre takýto typ prenosu dát. Výhodou je, že je platformne nezávislý, a to aj napriek tomu, že používa Javascriptovú syntax. Server by teda mal odoslať odpoveď o tom, či spojenie akceptuje a preniesť ďalšie potrebné dáta. Odoslaná JSON správa by mala vyzerať tak, že by sa tam nachádzala akási položka status, ktorá by vypovedala o tom, ako skončila operácia vykonávaná na serveri, či skončila úspechom, poprípade neúspechom, a akým presne. 
+\begin{lstlisting}[]
 {
     status: '0',
     data: 'some data'
 }
 \end{lstlisting}
-Daný neúspech by bol definovaný číslom prislúchaúcim danému neúspechu. V položke dáta by zase boli klientom požiadané dáta v prípade že operácia skončila úspechom a tieto dáta by sa na klientskej srane v danej funkcií spracovali do užívateľsky prijateľnej podoby a následne by boli ďalej predané do aplikácie.
+Daný neúspech by bol definovaný dopredu určeným číslom. V položke dáta by zase boli klientom požiadané dáta, v prípade že operácia skončila úspechom a tieto dáta by sa na klientskej strane v danej funkcií spracovali do užívateľsky prijateľnej podoby, a následne by boli ďalej predané do aplikácie
 \begin{table}[h]
 \centering
 \begin{tabular}{|l|l|l|}
@@ -308,13 +308,13 @@ Daný neúspech by bol definovaný číslom prislúchaúcim danému neúspechu. 
 Položka status/návratový kód & Význam \\ \hline
 0 & Operácia na servery skončila úspešne \\ \hline
 1 & Operácia na servery skončila neúspešne \\ \hline
-1\textless & Ďalšie špecifickejšie neúspešné skončenie operácie \\ \hline
+1\textless & Ďalšie, špecifickejšie neúspešné skončenie operácie \\ \hline
 \end{tabular}
 \label{navratovekody}
 \caption{Tabuľka návrhov návratových kódov}
 \end{table}
 
-Z vybraných komponent pre použitie v API vyplíva, že by v API mali byť implementované nasledujúce funkcie:
+Z vybraných komponent pre použitie v API vyplýva, že by v API mali byť implementované nasledujúce funkcie:
 \begin{enumerate}
 \item Inicializácia API
 \item Meranie štatistík prístupov
