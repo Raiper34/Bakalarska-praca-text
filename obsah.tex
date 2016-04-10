@@ -328,12 +328,27 @@ Z vybraných komponent pre použitie v API vyplýva, že by v API mali byť impl
 \section{Návrh Hry}
 Pri tvorbe návrhu hry bolo brané na vedomie, že hra má byť jednoduchá, čo sa týka použitých programovacích techník, keďže hra má slúžiť predovšetkým na demonštráciu webovej platformy a jej API. Vývojár, ktorý by si chcel eventuálne hru rozobrať, by sa nemal snažiť pochopiť príliš zložitý kód. Z toho dôvodu, boli hneď vylúčené zložité herné žánre a na výber sa ponúkali skôr klasické hry (rôzne logické stolné hry, ako pexeso, puzzle...), alebo pomerne nové obľúbené a populárne mobilné casual hry\footnote{Herný žáner cielený na občasných hráčov hier, vyznačujúci sa väčšinou predovšetkým veľmi jednoduchými pravidlami} (napríklad Flappy Bird, TimberMan, alebo rôzne Match3 klony), ktoré sú v niektorých prípadoch na implementáciu ešte jednoduchšie, ako spomínané klasické žánre. Ďalším dôležitý kritériom pri návrhu demonštračnej hry bolo, aby v hre boli implementovateľné všetky navrhnuté funkcie API. Posledným, avšak nie až tak dôležitým kritérium bolo, aby celá grafická stránka hry bola ľahko vytvoriteľná aj pre človeka, ktorý nie je primárne grafikom. Ideálne by teda hra mala byť bez zložitých animácií a ďalších v tomto prípade zbytočných zložitostí.  
 
-Po zhodnotení možností, bolo ako demonštračná hra zvolené pexeso. Dôvodom je to, že pexeso je pomerne ľahko implementovateľné. Dajú sa do neho integrovať všetky navrhnuté API funkcie a pre tvorbu grafiky nie sú potrebné žiadne pokročilé grafické skúsenosti, nehovoriac o animáciách. Hra by sa mala skladať z niekoľkých obrazoviek, z hlavného menu, z obrazovky, na ktorej bude zobrazená tabuľka najlepších hráčov s ich skóre, obrazovka slúžiaca ako akási sieň trofejí, v ktorej budú zobrazené získané odmeny a obrazovka, na ktorej sa bude odohrávať samotná hra. Na obrazovke hry by bola zobrazená hracia plocha + nejaký základný HUD\footnote{Head-up display, metóda, ktorá vizuálne odovzdáva informácie hráčovi, ako súčasť užívateľského rozhrania hry}, informujúci o tom, koľko kariet zostáva otočiť, koľko hráč nahral bodov, a aké je doposiaľ najväčšie nahrané skóre daného hráča. Základný grafický návrh rozloženia hernej obrazovky môžete vidieť na obrázku.  
+Po zhodnotení možností, bolo ako demonštračná hra zvolené pexeso. Dôvodom je to, že pexeso je pomerne ľahko implementovateľné. Dajú sa do neho integrovať všetky navrhnuté API funkcie a pre tvorbu grafiky nie sú potrebné žiadne pokročilé grafické skúsenosti, nehovoriac o animáciách. Hra by sa mala skladať z niekoľkých obrazoviek, z hlavného menu, z obrazovky, na ktorej bude zobrazená tabuľka najlepších hráčov s ich skóre, obrazovka slúžiaca ako akási sieň trofejí, v ktorej budú zobrazené získané odmeny a obrazovka, na ktorej sa bude odohrávať samotná hra. Na obrazovke hry by bola zobrazená hracia plocha + nejaký základný HUD\footnote{Head-up display, metóda, ktorá vizuálne odovzdáva informácie hráčovi, ako súčasť užívateľského rozhrania hry}, informujúci o tom, koľko kariet zostáva otočiť, koľko hráč nahral bodov, a aké je doposiaľ najväčšie nahrané skóre daného hráča. Základný grafický návrh rozloženia hernej obrazovky môžete vidieť na obrázku.
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.5]{fig/gui-hra.eps}
+  \caption{Návrh prostredia hry}
+  \label{fig:guihra}
+\end{figure}
 
 Hráč má v tejto hre za úlohu nájsť všetky rovnaké dvojice hracích kariet. Ak by našiel rovnakú dvojicu, tak by získal +10 bodov.  Ak by otočil dvojicu rozdielnych kariet v jednom kole, tak by stratil -1 bod. Takto by mohol získavať skóre a následne po otočení všetkých rovnakých dvojíc by jeho skóre bolo odoslané na server a hráč by bol presmerovaný na obrazovku s tabuľkou najlepších hráčov. Odmeny by mohli byť implementované napríklad tak, že ak by hráč otočil 2 rovnaké dvojice 3 krát za sebou, tak by získal odmenu, ak 5 krát, tak by získal ďalšiu odmenu, ak by prešiel celú hru na jeden pokus, tak zase inú odmenu, a tak podobne. Cloudove úložisko by zase mohlo v tejto hre slúžiť, ako počítadlo, koľko hier daný hráč odohral. 
 
 \chapter{Implementácia}
 \label{chap:implementacia}
+Tak ako kapitola venujúca sa návrhu rešenia bola rozdeleá do logických častí, tak aj táto kapitola pojednávajúca o konkrétnej implementácií je rozdelená do obdobných logických častí. Kapitola začína popisom implementácie wbvovej platformy, pokračuje implementáciou API a končí implementáciou hry.  Každá táto časť popisuje podrobnejšie významné implementačné detaily, ktoré boli navrhnuté v kapitole o návrhu riešenia. 
+
+\section{Implementácia webovej platformy}
+todo
+
+\section{Implementácia API}
+todo
+
+\section{Implementácia demonštračnej hry}
 todo
 
 \chapter{Testovanie}
