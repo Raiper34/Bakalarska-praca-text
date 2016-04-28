@@ -367,7 +367,7 @@ Stránky určené určené pre vývojárov sú o niečo bohatšie na implementa�
 todo
 
 \section{Implementácia demonštračnej hry}
-todo
+Hra je implementovaná za pomoci rámca Phaser, ktorý bol rpedstavený v kapitole venovanej použitým technológiám. Celá hra je rozdelená do niekoľkých Javascriptových súborov. Javascriptové súbory v zložke js/rooms, obsahujú prototypy jednotlivých objektov herných obrazoviek, teda hlavné menu, obrazovka so skóre tabuľkami, obrazovka s odmenami a samotný level.  V týchto obrazovkách sa vykreslujú jendotlivé grafické prvy, ako je text, obrázky a iné. V zložke  js/objects sa zase nachádzajú súbory obsahujúce prototypy dôležitejších herných objektov, v prípade tejto práce je to predovšetkým objektu pexeso karty a objekt pexeso hracej plochy. Ostatné súbory, ktoré sa nachádzajú mimo týchto zložiek slúžia na všeobecnejie účely. Za zmiienku stojí Javascriptový súbor boot.js, ktorého jediná úloha je prychystanie hry pred samotným načítaním herných zdrojov (napríklad nastavenie módu zobrazenia, zarovnania...). Súbor loader.js slúži na načítanie vetkých herných zdrojov, teda obrázkov, prípade existujpúcich zvukov aj ich. Celá hra sa spúšta z index.html súboru. V tomto html súbore sa nachádzajú iba definície nevyhnutných css štýlov, inkludovanie Javascriptových súborov, základné html tagy (napríklad pre nastavenie titulku hry, ikony...) a spúštanie boot.js súboru, ktorý sa stará už o všetko ostatné spojené s hrou.
 
 \chapter{Testovanie}
 \label{chap:testovanie}
