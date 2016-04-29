@@ -13,6 +13,104 @@ Adresárová štruktúra CD
 \end{itemize}
 
 \chapter{Dokumentácia k API}
+\section{Funkcie}
+\begin{itemize}
+\item \textbf{initialize(key[, callback[, context]]) –} funkcia slúžiaca na inicializáciu API na strane servera. 
+\begin{itemize}
+\item \textbf{Parametre funkcie:} API kľúč získaný z vývojárskej konzole z detailu hry, callback, ktorý je vykonaný po získaní odpovede, referencia na objekt, ktorý chceme v callbacku využívať. 
+\item \textbf{Vracia:} data['status'] je 0 v prípade úspechu, 1 v prípade, že doména nie je povolená a 2 v prípade že hra neexistuje.
+\end{itemize}
+
+\item \textbf{login(username, password[, callback[, context]]) –} funkcia slúžiaca na prihlásenie hráča.
+\begin{itemize}
+\item \textbf{Parametre funkcie:} meno a heslo prihlasovaného hráča, callback, ktorý je vykonaný po získaní odpovede, referencia na objekt, ktorý chceme v callbacku využívať. 
+\item \textbf{Vracia:} data['status'] je 0 v prípade úspechu, 1 v prípade, že je zadané nesprávne meno, alebo heslo a 2 v prípade, že užívateľ je už prihlásený. data['result'] vracia v prípade úspechu prezývku hráča.
+\end{itemize}
+
+\item \textbf{logout([callback[, context]]) –} funkcia slúžiaca na odhlásenie hráča.
+\begin{itemize}
+\item \textbf{Parametre funkcie:} callback, ktorý je vykonaný po získaní odpovede, referencia na objekt, ktorý chceme v callbacku využívať. 
+\item \textbf{Vracia:} data['status'] je 0 v prípade úspechu, 1 v prípade, že užívateľ nie je prihlásený.
+\end{itemize}
+
+\item \textbf{isLogged([callback[, context]]) –} funkcia na zistenie, či je hráč prihlásený.
+\begin{itemize}
+\item \textbf{Parametre funkcie:} callback, ktorý je vykonaný po získaní odpovede, referencia na objekt, ktorý chceme v callbacku využívať. 
+\item \textbf{Vracia:} data['status'] je 0 v prípade, že užívateľ je prihlásený, 1 v prípade, že užívateľ nie je prihlásený. data['result'] v prípade že je užívateľ prihlásený obsahuje jeho prezývku.
+\end{itemize}
+
+\item \textbf{postScore(table, value) –} funkcia na vloženie hodnoty skóre do tabuľky.
+\begin{itemize}
+\item \textbf{Parametre funkcie:} id tabuľky, do ktorej chceme vkladať skóre a hodnota skóre. 
+\item \textbf{Vracia:} 
+\end{itemize}
+
+\item \textbf{getUserBestScore(table[, callback[, context]]) –} funkcia na získanie najvyššieho skóre daného prihláseného hráča.
+\begin{itemize}
+\item \textbf{Parametre funkcie:} id tabuľky, z ktorej chceme skóre získať, callback, ktorý je vykonaný po získaní odpovede, referencia na objekt, ktorý chceme v callbacku využívať. 
+\item \textbf{Vracia:} data['status'] je 0 v prípade úspechu, 1 v prípade, že tabuľka neexistuje, 98 v prípade, že užívateľ nieje prihlásený. data['result'] v prípade úspechu obsahuje najvyššiu skóre hodnotu užívateľa z danej tabuľky.
+\end{itemize}
+
+\item \textbf{getScores(table, count[, callback[, context]]) –} funkcia na získanie prvých X miest zo skóre tabuľky.
+\begin{itemize}
+\item \textbf{Parametre funkcie:} id tabuľky, z ktorej chceme skóre získať, počet hodnôt, ktoré chceme získať, callback, ktorý je vykonaný po získaní odpovede, referencia na objekt, ktorý chceme v callbacku využívať. 
+\item \textbf{Vracia:} data['status'] je 0 v prípade úspechu, 1 v prípade,m že tabuľka neexistuje. data['result'] v prípade úspechu obsahuje pole s užívateľmi a ich skóre.
+\end{itemize}
+
+\item \textbf{getAchievements([callback[, context]]) –} funkcia na získanie odmien a informácie o tom, či dané odmeny vlastní, alebo nevlastní aktuálne prihlásený hráč.
+\begin{itemize}
+\item \textbf{Parametre funkcie:} callback, ktorý je vykonaný po získaní odpovede, referencia na objekt, ktorý chceme v callbacku využívať. 
+\item \textbf{Vracia:} data['result'] obsahuje odmeny.
+\end{itemize}
+
+\item \textbf{unlockAchievement(achievement[, callback[, context]]) –} funkcia na získanie/odblokovanie odmeny.
+\begin{itemize}
+\item \textbf{Parametre funkcie:} id odmeny, ktorú chceme, získať callback, ktorý je vykonaný po získaní odpovede, referencia na objekt, ktorý chceme v callbacku využívať. 
+\item \textbf{Vracia:} data['status'] je 0 v prípade úspechu, 1 v prípade, že odmena neexistuje, 2 v prípade, že užívateľ už odmenu vlastní, 98 v prípade, že užívateľ nieje prihlásený. data['result'] v prípade úspechu obsahuje danú získanú odmenu.
+\end{itemize}
+
+\item \textbf{store(storage, value) –} funkcia na uloženie hodnoty do definovaného úložiska.
+dané odmeny vlastní, alebo nevlastní aktuálne prihlásený hráč.
+\begin{itemize}
+\item \textbf{Parametre funkcie:} id úložiska, do ktorého chceme ukladať hodnotu a samotná hodnota 
+\item \textbf{Vracia:}
+\end{itemize}
+
+\item \textbf{load(storage[, callback[, context]]) –} funkcia na získanie odmeny z definovaného úložiska.
+\begin{itemize}
+\item \textbf{Parametre funkcie:} id úložiska, callback, ktorý je vykonaný po získaní odpovede, referencia na objekt, ktorý chceme v callbacku využívať. 
+\item \textbf{Vracia:} data['status'] je 0 v prípade úspechu, 1 v prípade, že úložisko neexistuje, 2 v prípade, že hodnota v úložisku neexistuje, 98 v prípade, že užívateľ nieje prihlásený. data['result'] v prípade úspechu obsahuje užívateľovu hodnotu z úložiska.
+\end{itemize}
+
+\section{Príklad}
+\end{itemize}
+\begin{lstlisting}[]
+this.game.api.load(1, function(data, room){
+    if(data['result'] == null)
+    {
+        //Store to storage
+        room.game.api.store(1, 1);
+    }
+    else
+    {
+        //Store to storage
+        room.game.api.store(1, parseInt(data['result']) + 1);
+    }
+}, this);
+\end{lstlisting}
+
+\begin{lstlisting}[]
+this.game.api.getAchievements(function(data, room) {
+    stringToWrite = "";
+    for(var index in data['result'])
+    {
+        stringToWrite += data['result'][index]['name'] + " | " + ((data['result'][index]['own'] == 0)? "Achieved" : "Not achieved") + "\n";
+    }
+    room.scoreAchievement = room.game.add.text(room.game.width/2, 100, stringToWrite, { font: '32px Arial', fill: "#ffffff", align: "center" });
+    room.scoreAchievement.anchor.setTo(0.5, 0);
+}, this);
+\end{lstlisting}
+
 
 \chapter{Ukážky z implementácie}
 \begin{figure}[h]
@@ -84,6 +182,7 @@ Adresárová štruktúra CD
   \caption{Ukážka hernej obrazovky s odmenami. Obsahuje meno domény a informáciu o tom, či ju aktuálne prihlásený užívateľ získal.}
   \label{fig:ukazka-hraodmen}
 \end{figure}
+
 
 
 

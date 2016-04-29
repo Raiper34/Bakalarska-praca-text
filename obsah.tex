@@ -11,108 +11,6 @@ Táto bakalárska práca vznikla z dôvodu neexistencie otvorenej, modernej webo
 
 Nasledujúca kapitola sa venuje predstaveniu technológiám, ktoré boli využité v rámci realizácie tejto práce. Po nej nasleduje kapitola, ktorá zhrňuje už existujúce konkurenčné riešenia pre iné platformy. Návrh a implementácia sú popísané v rovnako pomenovaných kapitolách. A nakoniec priebeh a následné výsledky sú z hrnuté v kapitole Testovanie.
 
-\chapter{Použité technológie}
-\label{chap:technologie}
-Pri implementácií platformy bolo nutné si dobre premyslieť, čoho sa má dosiahnuť a tak špecifikovať požiadavky na technológie, ktoré sa budú využívať. Po zhrnutí požiadaviek sa zistilo, že bude potrebný programovací jazyk pre serverovú časť, programovací a značkovací jazyk pre klientskú časť, jazyk, v ktorom bude implementované API pre vývojárov, databázu a databázový jazyk a napokon jazyk, v ktorom bude implementovaná hra demonštrujúca funkcie webovej platformy.
-
-\section{Serverová časť}
-\label{sec:server}
-Pod pojmom serverová časť sa myslí všetko to, čo sa vykonáva na servery. Teda v prípade tejto práce to je hlavne generovanie webovej stránky platformy a práca s dátami uloženými v databázy. Okrem týchto vecí sa používa serverová časť pri práci s API\footnote{Application programming interface}, kedy sa využíva AJAX pre dotazovanie sa na server.
-
-Pri výbere jazyka pre serverovú časť sa ponúkalo hneď niekoľko možností. Bolo na výber medzi PHP, Python, Java, Ruby, alebo ASP . NET. Napokon bolo vybrané PHP a zavážili hlavne vlastnosti, ktoré sú spomenuté v nasledujúcej kapitole.
-
-\subsection{PHP}
-\label{sec:php}
-Hypertext Preprocessor je široko používaný a univerzálny open source\footnote{otvorený kód} skriptovací jazyk, ktorý sa obzvlášť používa na vývoj webových aplikácií a je možné ho vložiť do HTML súboru. Syntax jazyka je veľmi podobná syntaxi jazyku C. Od novších verzií sa PHP stal objektovo orientovaným a je v ňom možné používať OOP\footnote{objektovo orientované programovanie} postupy. Tento jazyk beží takmer na všetkých operačných systémoch od UNIXu cez Windows až po Mac OS X.
-
-PHP bol zvolený pre serverovú časť hlavne kvôli tomu, že to je najrozšírenejší serverový jazyk a takmer všetci poskytovatelia hostingu ponúkajú webhosting práve s PHP a teda nenastáva problém s výberom poskytovateľa. Okrem toho PHP podporuje mnohé databázy ako MySQL, Oracle a PostgreSQL. Práve kombinácia PHP s Apache serverom a MySQL databázou je jedna z najobľúbenejších. 
-
-\subsection{Model Controler View architektúra}
-\label{sec:mvc}
-MVC je architektonický vzor, ktorý sa uchytil predovšetkým pri tvorbe webových aplikácií a informačných systémov. Je súčasťou populárnych webových rámcov, ako napríklad Nette, alebo Zend. Základnou myšlienkou je oddelenie logiky od výstupu. MVC pozostáva, ako už názov napovedá, z 3 typov komponentov. Z modelu, pohľadu (view) a kontroléru. Model obsahuje všetku logiku aplikácie. Môžu sa v ňom nachádzať výpočty, alebo databázové operácie. Komponent pohľad sa zase stará o zobrazovanie výstupu užívateľovi. Obsahuje minimálne množstvo logiky, ktorá je pre výpis nutná. Tretí a posledný typ je kontrolér, ktorý komunikuje s užívateľom, modelom aj pohľadom a komponenty navzájom prepája. Príklad takejto architektúry a komunikácie medzi jednotlivými komponentami je zobrazený na nasledujúcom obrázku.
-\begin{figure}[h]
-  \centering
-  \includegraphics[scale=0.40]{fig/mvc.eps}
-  \caption{Príklad MVC}
-  \label{fig:mvc}
-\end{figure}
-
-\subsection{Nette}
-\label{sec:nette}
-PHP je síce samo o sebe mocný programovací jazyk, ale v prípade zvolenia čistého PHP, by programátor musel riešiť veľké množstvo vecí, ktoré niekto v minulosti už dávno efektívnejšie vyriešil. Okrem toho by si programátor musel dávať veľký pozor a ošetrovať početné množstvo bezpečnostných rizík. Kvôli týmto veciam bol pre účel práce vybraný aplikačný rámec Nette.
-
-Nette je rámec napísaný v PHP5, ktorý sa zameriava na pohodlnejšie a rýchlejšie programovanie webových aplikácií a elimináciu bezpečnostných rizík. Podporuje MVC a OOP. Z veľkej časti je založený na vytváraní znovu použiteľných komponentov. K Nette patrí aj šablónovací systém Latte, ktorý zapuzdruje PHP v HTML súboroch do špeciálnych Latte makier a tým eliminuje bezpečnostné riziká. Tracy a Tester zase slúžia na hľadanie a odlaďovanie chýb. Pôvodným autorom je David Grundl, ale v súčasnosti sa o rozvoj rámcu stará Nette Foundation. Je ponúkaný pod licenciou GNU GPL a licenciou Nette (obdoba BSD licencie). Rámec sa teší veľkej obľube a taktiež početnej komunite v Čechách a na Slovensku. Minimálne požiadavky, pre správnu funkčnosť rámca, sa vyžaduje PHP verzie 5.3.1 a vyššej. Všetky požiadavky je možné overiť oficiálnym checker.php skriptom.
-
-\section{Databázová časť}
-\label{sec:databaza}
-Databáza, ako prostriedok pre uloženie dát, bola zvolená hlavne kvôli vlastnosti ACID\footnote{atomickosť, konzistencia, izolovanosť a trvácnosť} a pre prístup viacerých užívateľov k databázy súčasne. Okrem iného, databázy šetria pamäťové miesto tým, že pri dobrom návrhu sa v databázy nenachádzajú redundantné dáta. Manipulácia s dátami je pomerne rýchla, pretože sa do medzi pamäte neukladá celá databáza. Nad databázou sa dajú vykonávať zložité dotazy a spájať dáta z viacerých tabuliek.  Na výber boli rôzne alternatívy ako napríklad PL/SQL, T-SQL alebo vybraný MySQL.   
-
-\subsection{MySQL}
-\label{sec:mysql}
-MySQL je otvorený, viac užívateľský SQL relačný databázový server, ktorý je implementovaný vo viacerých programovacích a hlavne serverových jazykoch, napríklad v skriptovacom jazyku PHP. Je to databázový relačný systém, teda každá databáza v MySQL je tvorená z jednej alebo viacerých tabuliek, ktoré majú riadky a stĺpce. Riadky udávajú jednotlivé záznamy, stĺpce zase dátové typy jednotlivých záznamov. Práca s takouto databázou je vykonávaná pomocou takzvaných dotazov.
-
-\section{Klientská časť}
-\label{sec:klient}
-Klientská časť pokrýva všetko to, čo je zobrazené užívateľovi. Teda v tomto prípade je myslená kompletná stránka, ktorej zostavovanie sa dialo z väčšej miery na servery. Aby boli informácie určené pre užívateľa zobrazené v nejakej prijateľnej a užívateľsky prívetivej podobe, tak sa vyžaduje okrem značkovacieho jazyka HTML použiť aj CSS kaskádové štýly. Keďže moderná prezentácia informácií na webových portáloch vyžaduje aj určitú ľahkosť a dynamiku, tak k tomuto účelu bol použitý celosvetovo rozšírený programovací jazyk Javascript.
-
-\subsection{HTML}
-\label{sec:html}
-Hyper Text Markup Language je značkovací jazyk určený pre popis webových dokumentov, hlavne webových stránok. Najprv bol iba veľmi jednoduchá podmnožina jazyka SGML\footnote{Standard Generalized Markup Language}, ale neskôr sa z neho vyvinul samostatný štandard. HTML dokument sa popisuje pomocou HTML tagov. Každý typ HTML tagu slúži na popísanie odlišného typu obsahu dokumentu.  
-
-V minulosti sa HTML používal na definovanie štruktúry dokumentu a aj jeho výzoru. V súčasnej dobe je HTML určené iba na zmienenú definíciu štruktúry.
-
-\subsection{CSS}
-\label{sec:css}
-Kvôli tomu, že HTML sa začalo používať iba na definovanie štruktúry dokumentu a nie jeho výzoru, bol vyvinutí Cascading Style Sheets. CSS popisuje ako budú HTML tagy zobrazené na obrazovke, papieri, alebo inom médiu. CSS šetrí veľa času tým, že môže popisovať rozmiestnenie viacerých webových stránok naraz.
-
-\subsection{Javascript}
-\label{sec:javascript}
-Javascript je skriptovací, prototypovo založený jazyk, ktorý sa v súčasnosti používa hlavne pri tvorbe dynamických webových prezentácií a webových stránok. Javascript beží na klientskej strane webu. Je spúšťaný väčšinou vo webových prehliadačoch. V súčasnosti Javascript podporuje väčšina webových prehliadačov a je najpoužívanejší skriptovací jazyk používaný na klientskej strane.
-
-Bola by chyba myslieť si, že Javascript svoje uplatnenie pri tvorbe webov má iba na strane klienta. Javascript je naozaj všestranný jazyk a svoje uplatnenie nájde aj na servery napríklad v podobe Node.js. Pre účely tejto práce je avšak použitý klasický klientský Javascript spúšťaný vo webovom prehliadači.
-
-\subsection{JQuery}
-\label{sec:jquery}
-JQuery je ľahká a rýchla Javascriptová knižnica, ktorej hlavným cieľom je, aby bolo použitie Javascriptu na webových stránkach omnoho jednoduchšie. Taktiež zjednodušuje komplikované veci Javascriptu, ako AJAX volania a manipuláciu s DOM. Okrem toho obsahuje metódy na manipuláciu s CSS, HTML udalosti, efekty a animácie a ďalšie nápomocné programy. Je rozšíriteľná pomocou pluginov a na väčšinu známych vecí už existuje JQuery plugin. Knižnica zároveň rieši tzv. cross-browser problémy, kedy jedna vec sa môže v rôznych prehliadačoch správať odlišne.
-
-Je to najobľúbenejšia a najrozšírenejšia Javascriptová knižnica, čomu dáva za pravdu nielen početná komunita okolo, ale aj to, že je využívaná najväčšími firmami ako Google, či Microsoft.
-
-\subsection{Bootstrap}
-\label{sec:bootstrap}
-Bootstrap je frontendový aplikačný rámec pre rýchle a ľahké vyvíjanie responzívnych webových stránok. Obsahuje predpripravené dizajnérske typografické šablóny založené na HTML a CSS. Hodí sa predovšetkým na prototypovanie, hlavne kvôli značnej neoriginalite vytvorených stránok, keďže väčšina stránok založená na tomto rámci vypadá veľmi podobne. Na druhú stranu, jednoduchými modifikáciami si môže skúsený dizajnér upraviť Bootstrap k svojmu obrazu.   
-
-\subsection{Chart.js}
-\label{sec:chartjs}
-Chart.js je ľahká Javascriptová knižnica, pomocou ktorej je tvorba grafov z daných dát veľmi jednoduchá. Na zobrazovanie grafov používa HTML tag <canvas > do ktorého sa grafy vykresľujú. Na výber je z 6 najbežnejších typov grafov. Takto vytvorené grafy sú plne responzívne, takže môžu byť správne zobrazené, ako na stolných počítačoch s veľkou obrazovkou, tak aj na malých mobilných zariadeniach.
-
-\section{API}
-\label{sec:api}
-API je v tomto prípade myslené, ako knižnica, pomocou ktorej vývojári hier pristupujú k funkciám webovej platformy. Knižnica je implementovaná v Javascripte a k funkciám platformy, ktoré sú implementované na servery sa pristupuje pomocou dotazovaním technológiou AJAX.
-
-\subsection{AJAX}
-\label{sec:ajax}
-Asynchronous Javascript and XML je súhrnné označenie technológií, ktoré umožňujú meniť obsah webových stránok bez nutnosti znovu načítania celej stránky zo servera. Hlavná výhoda spočíva v tom, že sa prenáša značne menšie množstvo dát. AJAX nie je samostatný programovací jazyk, ani technológia sama o sebe, ako by sa mohlo zdať. Je to skôr kombinácia niekoľkých prvkov. Je založený na internetových štandardoch. Používa kombináciu HMLHttpRequest pre získanie dát zo servera a Javascript/DOM pre zobrazenie a použitie dát.
-\begin{figure}[h]
-  \centering
-  \includegraphics[scale=0.40]{fig/ajax.eps}
-  \caption{Neblokujúca komunikácia so serverom pomocou AJAXu}
-  \label{fig:ajax}
-\end{figure}
-
-\subsection{CORS}
-\label{sec:cors}
-Klasický Javascript je limitovaný tzv. Same origin policy. Z toho dôvodu nie je možné prijímať odpovede na dotazy z domény inej, ako je doména z ktorej bola požiadavka vyslaná.
-
-Tento známy, hore popísaný problém rieši Cross-origin resource sharing. CORS je vlastne mechanizmus, ktorý povoľuje zakázané zdroje na webovej stránke, a tak je možné prijímať odpovede na požiadavky z inej domény, ako z domény z ktorej zdroje pochádzajú. Pre použitie tohto mechanizmu musí nastať zmena pri tvorbe požiadavku na klientovi a tiež je treba povoliť CORS na servery. Prehliadač musí posielať nastavenie Origin: doména v HTTP hlavičke. Na servery zase musí byť nastavené povolenie Acces-Control-Allow-Origin: doména, alebo * pre povolenie všetkých domén.
-
-\section{Hra}
-\label{sec:hra}
-Pre demonštračnú hru sa ponúkalo buďto použiť klasický Javascript, čo ale nie je príliš rozšírená forma tvorby Javascript/HTML5 hier, alebo použiť jeden z početného množstva aplikačných rámcov, ktoré sú určené špeciálne na tvorbu hier. Na výber bol Ease.js, Tree.js, Panda.js, melon.js, Kiwi.js, alebo Phaser.js a mnoho ďalších. Bol vybraný Phaser.js, pretože to je jeden z najpoužívanejších a najbežnejších Javascriptových rámcov určených pre programovanie hier, o čom svedčí hlavne početná komunita okolo tohto rámca a fakt, že aj mnohé firmy z oblasti herného biznisu, ako Boostermedia, pracujú práve s týmto rámcom. 
-
-\subsection{Phaser}
-\label{sec:phaser}
-Phaser je Javascriptový aplikačný rámec určený špeciálne pre tvorbu hier, ako desktopových, tak aj mobilných. Je založený na renderovacom rámci pixi.js. Phaser je ľahko osvojiteľný, rýchly, je ponúkaný zadarmo a má otvorený kód. Podporuje canvas a zároveň aj webgl. Obsahuje veľké množstvo predpripravených funkcií. Tieto funkcie sú spracované tak, aby ich použitie bolo jednoduché. Príkladom môže byť stavaný preloader, fyzika, animácie, častice, rôzne módy prispôsobenia veľkosti obrazovky a iné.  
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Analýza existujúcich riešení}
 \label{chap:analyza}
@@ -338,6 +236,112 @@ Po zhodnotení možností, bolo ako demonštračná hra zvolené pexeso. Dôvodo
 
 Hráč má v tejto hre za úlohu nájsť všetky rovnaké dvojice hracích kariet. Ak by našiel rovnakú dvojicu, tak by získal +10 bodov.  Ak by otočil dvojicu rozdielnych kariet v jednom kole, tak by stratil -1 bod. Takto by mohol získavať skóre a následne po otočení všetkých rovnakých dvojíc by jeho skóre bolo odoslané na server a hráč by bol presmerovaný na obrazovku s tabuľkou najlepších hráčov. Odmeny by mohli byť implementované napríklad tak, že ak by hráč otočil 2 rovnaké dvojice 3 krát za sebou, tak by získal odmenu, ak 5 krát, tak by získal ďalšiu odmenu, ak by prešiel celú hru na jeden pokus, tak zase inú odmenu, a tak podobne. Cloudove úložisko by zase mohlo v tejto hre slúžiť, ako počítadlo, koľko hier daný hráč odohral. 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Použité technológie}
+\label{chap:technologie}
+Pri implementácií platformy bolo nutné si dobre premyslieť, čoho sa má dosiahnuť a tak špecifikovať požiadavky na technológie, ktoré sa budú využívať. Po zhrnutí požiadaviek sa zistilo, že bude potrebný programovací jazyk pre serverovú časť, programovací a značkovací jazyk pre klientskú časť, jazyk, v ktorom bude implementované API pre vývojárov, databázu a databázový jazyk a napokon jazyk, v ktorom bude implementovaná hra demonštrujúca funkcie webovej platformy.
+
+\section{Serverová časť}
+\label{sec:server}
+Pod pojmom serverová časť sa myslí všetko to, čo sa vykonáva na servery. Teda v prípade tejto práce to je hlavne generovanie webovej stránky platformy a práca s dátami uloženými v databázy. Okrem týchto vecí sa používa serverová časť pri práci s API\footnote{Application programming interface}, kedy sa využíva AJAX pre dotazovanie sa na server.
+
+Pri výbere jazyka pre serverovú časť sa ponúkalo hneď niekoľko možností. Bolo na výber medzi PHP, Python, Java, Ruby, alebo ASP . NET. Napokon bolo vybrané PHP a zavážili hlavne vlastnosti, ktoré sú spomenuté v nasledujúcej kapitole.
+
+\subsection{PHP}
+\label{sec:php}
+Hypertext Preprocessor je široko používaný a univerzálny open source\footnote{otvorený kód} skriptovací jazyk, ktorý sa obzvlášť používa na vývoj webových aplikácií a je možné ho vložiť do HTML súboru. Syntax jazyka je veľmi podobná syntaxi jazyku C. Od novších verzií sa PHP stal objektovo orientovaným a je v ňom možné používať OOP\footnote{objektovo orientované programovanie} postupy. Tento jazyk beží takmer na všetkých operačných systémoch od UNIXu cez Windows až po Mac OS X.
+
+PHP bol zvolený pre serverovú časť hlavne kvôli tomu, že to je najrozšírenejší serverový jazyk a takmer všetci poskytovatelia hostingu ponúkajú webhosting práve s PHP a teda nenastáva problém s výberom poskytovateľa. Okrem toho PHP podporuje mnohé databázy ako MySQL, Oracle a PostgreSQL. Práve kombinácia PHP s Apache serverom a MySQL databázou je jedna z najobľúbenejších. 
+
+\subsection{Model Controler View architektúra}
+\label{sec:mvc}
+MVC je architektonický vzor, ktorý sa uchytil predovšetkým pri tvorbe webových aplikácií a informačných systémov. Je súčasťou populárnych webových rámcov, ako napríklad Nette, alebo Zend. Základnou myšlienkou je oddelenie logiky od výstupu. MVC pozostáva, ako už názov napovedá, z 3 typov komponentov. Z modelu, pohľadu (view) a kontroléru. Model obsahuje všetku logiku aplikácie. Môžu sa v ňom nachádzať výpočty, alebo databázové operácie. Komponent pohľad sa zase stará o zobrazovanie výstupu užívateľovi. Obsahuje minimálne množstvo logiky, ktorá je pre výpis nutná. Tretí a posledný typ je kontrolér, ktorý komunikuje s užívateľom, modelom aj pohľadom a komponenty navzájom prepája. Príklad takejto architektúry a komunikácie medzi jednotlivými komponentami je zobrazený na nasledujúcom obrázku.
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.40]{fig/mvc.eps}
+  \caption{Príklad MVC}
+  \label{fig:mvc}
+\end{figure}
+
+\subsection{Nette}
+\label{sec:nette}
+PHP je síce samo o sebe mocný programovací jazyk, ale v prípade zvolenia čistého PHP, by programátor musel riešiť veľké množstvo vecí, ktoré niekto v minulosti už dávno efektívnejšie vyriešil. Okrem toho by si programátor musel dávať veľký pozor a ošetrovať početné množstvo bezpečnostných rizík. Kvôli týmto veciam bol pre účel práce vybraný aplikačný rámec Nette.
+
+Nette je rámec napísaný v PHP5, ktorý sa zameriava na pohodlnejšie a rýchlejšie programovanie webových aplikácií a elimináciu bezpečnostných rizík. Podporuje MVC a OOP. Z veľkej časti je založený na vytváraní znovu použiteľných komponentov. K Nette patrí aj šablónovací systém Latte, ktorý zapuzdruje PHP v HTML súboroch do špeciálnych Latte makier a tým eliminuje bezpečnostné riziká. Tracy a Tester zase slúžia na hľadanie a odlaďovanie chýb. Pôvodným autorom je David Grundl, ale v súčasnosti sa o rozvoj rámcu stará Nette Foundation. Je ponúkaný pod licenciou GNU GPL a licenciou Nette (obdoba BSD licencie). Rámec sa teší veľkej obľube a taktiež početnej komunite v Čechách a na Slovensku. Minimálne požiadavky, pre správnu funkčnosť rámca, sa vyžaduje PHP verzie 5.3.1 a vyššej. Všetky požiadavky je možné overiť oficiálnym checker.php skriptom.
+
+\section{Databázová časť}
+\label{sec:databaza}
+Databáza, ako prostriedok pre uloženie dát, bola zvolená hlavne kvôli vlastnosti ACID\footnote{atomickosť, konzistencia, izolovanosť a trvácnosť} a pre prístup viacerých užívateľov k databázy súčasne. Okrem iného, databázy šetria pamäťové miesto tým, že pri dobrom návrhu sa v databázy nenachádzajú redundantné dáta. Manipulácia s dátami je pomerne rýchla, pretože sa do medzi pamäte neukladá celá databáza. Nad databázou sa dajú vykonávať zložité dotazy a spájať dáta z viacerých tabuliek.  Na výber boli rôzne alternatívy ako napríklad PL/SQL, T-SQL alebo vybraný MySQL.   
+
+\subsection{MySQL}
+\label{sec:mysql}
+MySQL je otvorený, viac užívateľský SQL relačný databázový server, ktorý je implementovaný vo viacerých programovacích a hlavne serverových jazykoch, napríklad v skriptovacom jazyku PHP. Je to databázový relačný systém, teda každá databáza v MySQL je tvorená z jednej alebo viacerých tabuliek, ktoré majú riadky a stĺpce. Riadky udávajú jednotlivé záznamy, stĺpce zase dátové typy jednotlivých záznamov. Práca s takouto databázou je vykonávaná pomocou takzvaných dotazov.
+
+\section{Klientská časť}
+\label{sec:klient}
+Klientská časť pokrýva všetko to, čo je zobrazené užívateľovi. Teda v tomto prípade je myslená kompletná stránka, ktorej zostavovanie sa dialo z väčšej miery na servery. Aby boli informácie určené pre užívateľa zobrazené v nejakej prijateľnej a užívateľsky prívetivej podobe, tak sa vyžaduje okrem značkovacieho jazyka HTML použiť aj CSS kaskádové štýly. Keďže moderná prezentácia informácií na webových portáloch vyžaduje aj určitú ľahkosť a dynamiku, tak k tomuto účelu bol použitý celosvetovo rozšírený programovací jazyk Javascript.
+
+\subsection{HTML}
+\label{sec:html}
+Hyper Text Markup Language je značkovací jazyk určený pre popis webových dokumentov, hlavne webových stránok. Najprv bol iba veľmi jednoduchá podmnožina jazyka SGML\footnote{Standard Generalized Markup Language}, ale neskôr sa z neho vyvinul samostatný štandard. HTML dokument sa popisuje pomocou HTML tagov. Každý typ HTML tagu slúži na popísanie odlišného typu obsahu dokumentu.  
+
+V minulosti sa HTML používal na definovanie štruktúry dokumentu a aj jeho výzoru. V súčasnej dobe je HTML určené iba na zmienenú definíciu štruktúry.
+
+\subsection{CSS}
+\label{sec:css}
+Kvôli tomu, že HTML sa začalo používať iba na definovanie štruktúry dokumentu a nie jeho výzoru, bol vyvinutí Cascading Style Sheets. CSS popisuje ako budú HTML tagy zobrazené na obrazovke, papieri, alebo inom médiu. CSS šetrí veľa času tým, že môže popisovať rozmiestnenie viacerých webových stránok naraz.
+
+\subsection{Javascript}
+\label{sec:javascript}
+Javascript je skriptovací, prototypovo založený jazyk, ktorý sa v súčasnosti používa hlavne pri tvorbe dynamických webových prezentácií a webových stránok. Javascript beží na klientskej strane webu. Je spúšťaný väčšinou vo webových prehliadačoch. V súčasnosti Javascript podporuje väčšina webových prehliadačov a je najpoužívanejší skriptovací jazyk používaný na klientskej strane.
+
+Bola by chyba myslieť si, že Javascript svoje uplatnenie pri tvorbe webov má iba na strane klienta. Javascript je naozaj všestranný jazyk a svoje uplatnenie nájde aj na servery napríklad v podobe Node.js. Pre účely tejto práce je avšak použitý klasický klientský Javascript spúšťaný vo webovom prehliadači.
+
+\subsection{JQuery}
+\label{sec:jquery}
+JQuery je ľahká a rýchla Javascriptová knižnica, ktorej hlavným cieľom je, aby bolo použitie Javascriptu na webových stránkach omnoho jednoduchšie. Taktiež zjednodušuje komplikované veci Javascriptu, ako AJAX volania a manipuláciu s DOM. Okrem toho obsahuje metódy na manipuláciu s CSS, HTML udalosti, efekty a animácie a ďalšie nápomocné programy. Je rozšíriteľná pomocou pluginov a na väčšinu známych vecí už existuje JQuery plugin. Knižnica zároveň rieši tzv. cross-browser problémy, kedy jedna vec sa môže v rôznych prehliadačoch správať odlišne.
+
+Je to najobľúbenejšia a najrozšírenejšia Javascriptová knižnica, čomu dáva za pravdu nielen početná komunita okolo, ale aj to, že je využívaná najväčšími firmami ako Google, či Microsoft.
+
+\subsection{Bootstrap}
+\label{sec:bootstrap}
+Bootstrap je frontendový aplikačný rámec pre rýchle a ľahké vyvíjanie responzívnych webových stránok. Obsahuje predpripravené dizajnérske typografické šablóny založené na HTML a CSS. Hodí sa predovšetkým na prototypovanie, hlavne kvôli značnej neoriginalite vytvorených stránok, keďže väčšina stránok založená na tomto rámci vypadá veľmi podobne. Na druhú stranu, jednoduchými modifikáciami si môže skúsený dizajnér upraviť Bootstrap k svojmu obrazu.   
+
+\subsection{Chart.js}
+\label{sec:chartjs}
+Chart.js je ľahká Javascriptová knižnica, pomocou ktorej je tvorba grafov z daných dát veľmi jednoduchá. Na zobrazovanie grafov používa HTML tag <canvas > do ktorého sa grafy vykresľujú. Na výber je z 6 najbežnejších typov grafov. Takto vytvorené grafy sú plne responzívne, takže môžu byť správne zobrazené, ako na stolných počítačoch s veľkou obrazovkou, tak aj na malých mobilných zariadeniach.
+
+\section{API}
+\label{sec:api}
+API je v tomto prípade myslené, ako knižnica, pomocou ktorej vývojári hier pristupujú k funkciám webovej platformy. Knižnica je implementovaná v Javascripte a k funkciám platformy, ktoré sú implementované na servery sa pristupuje pomocou dotazovaním technológiou AJAX.
+
+\subsection{AJAX}
+\label{sec:ajax}
+Asynchronous Javascript and XML je súhrnné označenie technológií, ktoré umožňujú meniť obsah webových stránok bez nutnosti znovu načítania celej stránky zo servera. Hlavná výhoda spočíva v tom, že sa prenáša značne menšie množstvo dát. AJAX nie je samostatný programovací jazyk, ani technológia sama o sebe, ako by sa mohlo zdať. Je to skôr kombinácia niekoľkých prvkov. Je založený na internetových štandardoch. Používa kombináciu HMLHttpRequest pre získanie dát zo servera a Javascript/DOM pre zobrazenie a použitie dát.
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.40]{fig/ajax.eps}
+  \caption{Neblokujúca komunikácia so serverom pomocou AJAXu}
+  \label{fig:ajax}
+\end{figure}
+
+\subsection{CORS}
+\label{sec:cors}
+Klasický Javascript je limitovaný tzv. Same origin policy. Z toho dôvodu nie je možné prijímať odpovede na dotazy z domény inej, ako je doména z ktorej bola požiadavka vyslaná.
+
+Tento známy, hore popísaný problém rieši Cross-origin resource sharing. CORS je vlastne mechanizmus, ktorý povoľuje zakázané zdroje na webovej stránke, a tak je možné prijímať odpovede na požiadavky z inej domény, ako z domény z ktorej zdroje pochádzajú. Pre použitie tohto mechanizmu musí nastať zmena pri tvorbe požiadavku na klientovi a tiež je treba povoliť CORS na servery. Prehliadač musí posielať nastavenie Origin: doména v HTTP hlavičke. Na servery zase musí byť nastavené povolenie Acces-Control-Allow-Origin: doména, alebo * pre povolenie všetkých domén.
+
+\section{Hra}
+\label{sec:hra}
+Pre demonštračnú hru sa ponúkalo buďto použiť klasický Javascript, čo ale nie je príliš rozšírená forma tvorby Javascript/HTML5 hier, alebo použiť jeden z početného množstva aplikačných rámcov, ktoré sú určené špeciálne na tvorbu hier. Na výber bol Ease.js, Tree.js, Panda.js, melon.js, Kiwi.js, alebo Phaser.js a mnoho ďalších. Bol vybraný Phaser.js, pretože to je jeden z najpoužívanejších a najbežnejších Javascriptových rámcov určených pre programovanie hier, o čom svedčí hlavne početná komunita okolo tohto rámca a fakt, že aj mnohé firmy z oblasti herného biznisu, ako Boostermedia, pracujú práve s týmto rámcom. 
+
+\subsection{Phaser}
+\label{sec:phaser}
+Phaser je Javascriptový aplikačný rámec určený špeciálne pre tvorbu hier, ako desktopových, tak aj mobilných. Je založený na renderovacom rámci pixi.js. Phaser je ľahko osvojiteľný, rýchly, je ponúkaný zadarmo a má otvorený kód. Podporuje canvas a zároveň aj webgl. Obsahuje veľké množstvo predpripravených funkcií. Tieto funkcie sú spracované tak, aby ich použitie bolo jednoduché. Príkladom môže byť stavaný preloader, fyzika, animácie, častice, rôzne módy prispôsobenia veľkosti obrazovky a iné.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \chapter{Implementácia}
 \label{chap:implementacia}
 Tak ako kapitola venujúca sa návrhu rešenia bola rozdeleá do logických častí, tak aj táto kapitola pojednávajúca o konkrétnej implementácií je rozdelená do obdobných logických častí. Kapitola začína popisom implementácie wbvovej platformy, pokračuje implementáciou API a končí implementáciou hry.  Každá táto časť popisuje podrobnejšie významné implementačné detaily, ktoré boli navrhnuté v kapitole o návrhu riešenia. 
@@ -364,7 +368,33 @@ Stránky určené určené pre vývojárov sú o niečo bohatšie na implementa�
 \end{itemize} 
 
 \section{Implementácia API}
-todo
+API je implementované ako Javascriptová knižnica, pre použitie na klientskej strane ale taktiež hlavne na strane serveru. Na strane serveru teda prebieha všetka komunikácia s databázou, ukladanie hodnôt do databáze, ich získanie z databázy, priuhlasovanie a odhlasovanie užívateľa (implementované pomocou session) a celkovo všetka práca s API. API na servery je implementované za pomoci PHP a pomocou a je využitý rámec Nette, keďže je Nette použitý aj pre implementáciu portálu a samotné Nette postačuje na tvorbu tohto API, nebolo potrebné rozmýšlať nad alternatývnym rámcom, alebo čistým PHP. Odoslanie odpovede sa deje za pomocou funkcie JsonResponse, ktorá je súčasťou rámca. Táto funkcia teda odošle odpoveď v JSON formáte, preto, aby odpoveď bola čitateľná pre klientskú stranu.  V spomenutej Javascriptovej knižnici, sa nachádza iba samotné vytváranie požiadavku, ktorý sa odosiela na server a taktiež spracovanie hodôt, ktoré prídu v odpovedi od serveru. Požiadavok obsahuje API kľúč zadaný užívateľom, parametre, podľa typu a charakteru volanej funkcie API a token, ktorý bol vytvorený pri inicializácií na servery a následne predaný na klientskú stranu. Tieto dáta sa prenášajú v tele POST požiadavku a na servery je teda možné k ním pristúpiť aj pomocou \$\_POST[“menoParametru”]. 
+
+Činnosť API prebieha nasledovne. V prvom rade je potrebné si vytvoriť na klientskej strane objekt API. Následne na to, je možné zavolať inicializaqčnú funkciu, ktorá ako parameter na svoj vstup bere API kľúč získaný z vývojárskej konzoly. Tento Api kľúč je odoslaný na server a tam je zisťované, či existuje hra s takým api kľúčom a či táto hra má povolené požiadavky z adresy, z akej požiadavka prišla. Ak všetko prebehne v poriadku, teda hra existuje a doména je povolená, tak sa vygeneruje token, ktorý sa uloží do session, ktorá je pomenovaná podľa API kľúča a následne sa token pošle naspať do klientskej časti. Ostatné požiadavky, už samotné API funkcie, sú potom tvorené nielen z parametrov konkrétnych funkcií, ale aj tohto tokenu a API kľúča. Získanie informácií pre štatistiky sa tiež deje počas inicializácie. Po inicializácií, je nasledovne už možné využívať funkcionalitu API.
+
+Všetetky funkcie vracajú pole, kde na indexe status sa nachádza kód, ktorý značí ako operácia na servery skončila, presne tak, ako boo navrhnuté a popísané v kapotole o návrhu riešenia. Okrem toho, v prípade že sa očakávajú dáta, tak na indexe data sa budú tieto dáta nachádzať ak skončila operácia úspechom. K tomuto poľu je možné pristúpiť v predanému callbacku API funkcie. Okrem toho do tohto callbacku je možné predať tzv. kontext, alebo referenciu na objekt, ktorý chceme v callbacku využávať. 
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.45]{fig/implementacia-komunikacia.eps}
+  \caption{Príklad komunikácie častí API.}
+  \label{fig:implementaciakomunikacia}
+\end{figure}
+
+V API sú implementované nasledujúce funkcie (podrobnú dokumentáciu je možné nájsť v prílohe):
+\begin{enumerate}
+\item \textbf{initialize() –} funkcia slúžiaca na inicializovanie API na strane servera.
+\item \textbf{login() –} funkcia slúžiaca na prihlásenie hráča.
+\item \textbf{logout() –} funkcia slúžiaca na odhlásenie hráča.
+\item \textbf{isLogged() –} funkcia na zistenie, či je hráč prihlásený.
+\item \textbf{postScore() –} funkcia na vloženie hodnoty skóre do tabuľky.
+\item \textbf{getUserBestScore() –} funkcia na získanie najvyššieho skóre daného prihláseného hráča.
+\item \textbf{getScores() –} funkcia na získanie prvých X miest zo skóre tabuľky.
+\item \textbf{getAchievements() –} funkcia na získanie odmien a informácie o tom, či dané odmeny vlastné, alebo nevlastní aktuálne prihlásený hráč.
+\item \textbf{unlockAchievement() –} funkcia na získanie odmeny.
+\item \textbf{store() –} funkcia na uloženie hodnoty do definovaného úložiska.
+\item \textbf{load() –} funkcia na získanie odmeny z definovaného úložiska.
+\end{enumerate}
 
 \section{Implementácia demonštračnej hry}
 Hra je implementovaná za pomoci rámca Phaser, ktorý bol rpedstavený v kapitole venovanej použitým technológiám. Celá hra je rozdelená do niekoľkých Javascriptových súborov. Javascriptové súbory v zložke js/rooms, obsahujú prototypy jednotlivých objektov herných obrazoviek, teda hlavné menu, obrazovka so skóre tabuľkami, obrazovka s odmenami a samotný level.  V týchto obrazovkách sa vykreslujú jendotlivé grafické prvy, ako je text, obrázky a iné. V zložke  js/objects sa zase nachádzajú súbory obsahujúce prototypy dôležitejších herných objektov, v prípade tejto práce je to predovšetkým objektu pexeso karty a objekt pexeso hracej plochy. Ostatné súbory, ktoré sa nachádzajú mimo týchto zložiek slúžia na všeobecnejie účely. Za zmiienku stojí Javascriptový súbor boot.js, ktorého jediná úloha je prychystanie hry pred samotným načítaním herných zdrojov (napríklad nastavenie módu zobrazenia, zarovnania...). Súbor loader.js slúži na načítanie vetkých herných zdrojov, teda obrázkov, prípade existujpúcich zvukov aj ich. Celá hra sa spúšta z index.html súboru. V tomto html súbore sa nachádzajú iba definície nevyhnutných css štýlov, inkludovanie Javascriptových súborov, základné html tagy (napríklad pre nastavenie titulku hry, ikony...) a spúštanie boot.js súboru, ktorý sa stará už o všetko ostatné spojené s hrou.
