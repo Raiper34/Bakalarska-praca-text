@@ -414,19 +414,29 @@ Pri návrhu riešenia bolo nutné si dopredu rozmyslieť, aké aspekty a časti 
 \end{itemize}
 Keďže práca nie je zameraná primárne na hráčov, a aj keď ich požiadavky do istej miery rieši, tak testovanie užívateľského rozhrania hráčmi bolo úplne vynechané. Testovanie užívateľského rozhrania administrácie bolo vynechané kvôli takmer totožným dôvodom, ako to bolo pri hráčoch. Testovanie užívateľského rozhrania vývojármi a testovanie, toho, či je API ľahko pochopiteľné a ľahko integrovateľné do hry bol prvým veľmi dobrým kandidátom pre výber formy testovania. Bohužiaľ ako sa ukázalo, tak proces tvorby hry je natoľko zložitý a komplexný, že testovacie vzorky, v podobe vývojárov hier, bolo nemožné nájsť. HTML5 hry sa tvoria, aj keď sa tak zdať nemusí, z drvivej väčšiny na komerčné účely. Autor hry, vývojár, vyvíja hru s cieľom predať jej exkluzívnu, alebo neexkluzívnu licenciu väčšej spoločnosti, ktorá si do hry integruje svoje vlastné API sama, alebo s pomocou vývojára a ďalej hru distribuuje na svojich distribučných kanáloch. Z toho dôvodu nebolo reálne si myslieť, že sa nájdu vhodný kandidáti na toto testovanie, keďže aj samotný vývojár hry často stráca licenčné práva k hre. Kvôli tomu, autor tejto bakalárskej práce vytvoril svoju vlastnú testovaciu hru, ktorej návrh a implementácia ale bola už popísaná v predchádzajúcich kapitolách.  Keďže, táto testovacia hra ale nepokrýva funkcionalitu API na 100\%, a okrem toho samotné testovnaie API iba pomocou hry by bolo až priveľmi zdĺhavé, bol vytvorený špeciálny Javascriptový test. 
 Testovacie súbory pozostávajú z html súboru, ktorý slúži na vizualizáciu Testovacie súbory pozostávajú z html súboru, ktorý slúži na vizualizáciu prebiehajúcich výsledkov a navrhnutej Javascriptovej testovacej knižnice. Táto knižnica obsahuje volania jednotlivých API funkcií a pokrýva všetku testovateľnú funkcionalitu. Po načítaní html súboru v prehliadači sa spustí funkcia runTests(), ktorá zavolá inicializačnú funkciu API. Funkcia vo svojom callbacku vráti hodnotu zo servera, status položka, ktorá predstavuje návratový kód operácie a práve táto hodnota je porovnávaná s očakávanou hodnotou. Podľa toho, sa vypíše pomocou Javasciptu do html súboru stav testu a aj čas, ktorý bol potrebný na túto operáciu (rozoberať nejako tento čas nemá zmysel, keďže je to hlavne v réžií servera) a následné zavolá ďalšiu funkciu API. Takto sa otestujú všetky funkcie API, presnejšie všetky možné návratové kódy. Testuje sa napríklad inicializácia s nesprávnym API kľúčom, inicializácia so správnym api kľúčom, prihlásenie neexistujúceho užívateľa... Testovací skript je súčasťou priloženého CD/DVD nosiča. 
+
+\section{Priebeh a výsledky testovania}
+Na základe navrhnutých testov bolo následne vykonané testovanie. Testovalo sa v prvom rade pomoocu testovacieho skriptu. Testy prebiehali najprv na localhoste, kedy hra s Javascriptovou API knižnicou a aj implementovaný portál s serverovou časťou API sa nachádzali na localhoste. Keď testy na localhoste skončili úspechom, tak sa bol webový server presunutý na webový hosting pod určitou doménou ale testovací skript zostal na localhoste. Keď skončil aj tento test úspechom, tak sa presunul aj testovací skript na tú istú doménu. Takto sa otestovalo API v rôznych podmienkach. Všetky testy skončili úspechom. Obrázok náhľadu na testovací skript je možné vidieť na obrázku.
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.45]{fig/tests.png}
   \caption{Ukážka testovacieho skriptu a jeho vyhodnocovania}
   \label{fig:test}
 \end{figure}
-
-\section{Priebeh a výsledky testovania}
-
+Po úspešných testoch pomocou testovacieho skriptu bola vytvorená demnoštračná hra a API sa testovalo už pomoocu nej. Najprv sa testovalo podobne ako s testovacím skriptom, kedy hra bola uložené spolu s webovým serverom na localhoste, potom sa webový server presunul na hosting a následne v poslednom teste bola aj hra presunutá na hosting s doménou. Po skončení týchto testov, ktoré skončili úspechom bolo API považované za overené. 
 
 \chapter{Záver}
 \label{chap:zaver}
-todo
+Cieľom tejto bakalárskej práce bol návrh a realizácia modernej webovej platformy pre tvorbu hier spolu s návrhom a implementáciou API, ktoré sprístupňuje funkcie webovej platformy vývojárom hier. Webová platforma je na serverovej strane implementovaná skriptovacím jazykom PHP za pomoci rámca Nette. Na klientskej strane je využité HTML, CSS, Javascript a pre účely responzivity je použitý rámec Bootstrap. Súčasťou práce je taktiež jednoduchá Pexeso hra, ktorá demonštruje funkcionalitu API a je implementovaná v Javascripte pomocou rámca Phaser. 
+
+Webová platforma je plne použiteľná pre hráčov hier, ktorý si prišli na platformu zahrať nejakú hru a súťažiť s inými hráčmi v najvyššom skóre, alebo získavať odmeny hraním hier, ale taktiež hlavne pre vývojárov týchto hier, ktorý vďaka API, majú možnosť využívať funkcie a komponenty webovej platformy. Vývojár hry má na platforme možnosť definovať nové hry, definovať rôzne komponenty, ako sú skóre tabuľky, odmeny, cloudové úložiská, má možnosť kontrolovať domény, na ktorých sa hra môže nachádzať, má možnosť prehliadať štatistiky prístupov k hre, vytvárať a editovať informácie o hre, jej popis, spravovať grafické materiály a samotné herné súbory na platforme.  Administrátor platformy má potom možnosť schvaľovať vývojármi odoslané hry, a spravovať hráčov. 
+
+Testovanie riešenia prebiehalo za pomoci testovacích nástrojov, vytvorených v rámci tejto práce. Testovalo sa hlavne API funkcionalita pomocou špeciálne navrhnutého Javascriptového testovacieho skriptu a po úspešnom vyhodnotení boli vykonané testy aj za pomoci demonštračnej hry. Všetky testy skončili úspechom. 
+
+Platforma má určite veľký potenciál. Môže byť jednak využitá ako multifunkčný herný portál určený aj pre hráčov, aj pre vývojárov, alebo ako osobné portfólio vývojára s možnosťou správy spomínaných funkcií a komponentov. Platforma je ľahko rozšíriteľná a v budúcnosti sa dá ľahko rozširovať o ďalšie komponenty v rámci API, alebo ďalšiu funkcionalitu v rámci platformy. Do budúcna je možné implementovať rôzne chatovacie miestnosti, systém automatického vytvárania zápasov, správu herných reklamných kampaní a mnoho iných. 
+
+
+
 
 
 
