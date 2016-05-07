@@ -12,6 +12,8 @@ Adresárová štruktúra CD
 \item Text
 \end{itemize}
 
+\chapter{Návod na inštaláciu}
+
 \chapter{Dokumentácia k API}
 \section{Funkcie}
 \begin{itemize}
@@ -42,7 +44,7 @@ Adresárová štruktúra CD
 \item \textbf{postScore(table, value) –} funkcia na vloženie hodnoty skóre do tabuľky.
 \begin{itemize}
 \item \textbf{Parametre funkcie:} id tabuľky, do ktorej chceme vkladať skóre a hodnota skóre. 
-\item \textbf{Vracia:} 
+\item \textbf{Vracia:} data['status'] je 0 v prípade úspechu, 1 v prípade, že tabuľka neexistuje, 98 v prípade, že užívateľ nieje prihlásený.
 \end{itemize}
 
 \item \textbf{getUserBestScore(table[, callback[, context]]) –} funkcia na získanie najvyššieho skóre daného prihláseného hráča.
@@ -73,7 +75,7 @@ Adresárová štruktúra CD
 dané odmeny vlastní, alebo nevlastní aktuálne prihlásený hráč.
 \begin{itemize}
 \item \textbf{Parametre funkcie:} id úložiska, do ktorého chceme ukladať hodnotu a samotná hodnota 
-\item \textbf{Vracia:}
+\item \textbf{Vracia:} data['status'] je 0 v prípade úspechu, 1 v prípade, že úložisko neexistuje, 98 v prípade, že užívateľ nieje prihlásený.
 \end{itemize}
 
 \item \textbf{load(storage[, callback[, context]]) –} funkcia na získanie odmeny z definovaného úložiska.
@@ -82,7 +84,7 @@ dané odmeny vlastní, alebo nevlastní aktuálne prihlásený hráč.
 \item \textbf{Vracia:} data['status'] je 0 v prípade úspechu, 1 v prípade, že úložisko neexistuje, 2 v prípade, že hodnota v úložisku neexistuje, 98 v prípade, že užívateľ nieje prihlásený. data['result'] v prípade úspechu obsahuje užívateľovu hodnotu z úložiska.
 \end{itemize}
 
-\section{Príklad}
+\section{Príklady}
 \end{itemize}
 \begin{lstlisting}[]
 this.game.api.load(1, function(data, room){

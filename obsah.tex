@@ -382,7 +382,7 @@ Všetetky funkcie vracajú pole, kde na indexe status sa nachádza kód, ktorý 
 \end{figure}
 
 V API sú implementované nasledujúce funkcie (podrobnú dokumentáciu je možné nájsť v prílohe):
-\begin{enumerate}
+\begin{itemize}
 \item \textbf{initialize() –} funkcia slúžiaca na inicializovanie API na strane servera.
 \item \textbf{login() –} funkcia slúžiaca na prihlásenie hráča.
 \item \textbf{logout() –} funkcia slúžiaca na odhlásenie hráča.
@@ -394,14 +394,35 @@ V API sú implementované nasledujúce funkcie (podrobnú dokumentáciu je možn
 \item \textbf{unlockAchievement() –} funkcia na získanie odmeny.
 \item \textbf{store() –} funkcia na uloženie hodnoty do definovaného úložiska.
 \item \textbf{load() –} funkcia na získanie odmeny z definovaného úložiska.
-\end{enumerate}
+\end{itemize}
 
 \section{Implementácia demonštračnej hry}
 Hra je implementovaná za pomoci rámca Phaser, ktorý bol rpedstavený v kapitole venovanej použitým technológiám. Celá hra je rozdelená do niekoľkých Javascriptových súborov. Javascriptové súbory v zložke js/rooms, obsahujú prototypy jednotlivých objektov herných obrazoviek, teda hlavné menu, obrazovka so skóre tabuľkami, obrazovka s odmenami a samotný level.  V týchto obrazovkách sa vykreslujú jendotlivé grafické prvy, ako je text, obrázky a iné. V zložke  js/objects sa zase nachádzajú súbory obsahujúce prototypy dôležitejších herných objektov, v prípade tejto práce je to predovšetkým objektu pexeso karty a objekt pexeso hracej plochy. Ostatné súbory, ktoré sa nachádzajú mimo týchto zložiek slúžia na všeobecnejie účely. Za zmiienku stojí Javascriptový súbor boot.js, ktorého jediná úloha je prychystanie hry pred samotným načítaním herných zdrojov (napríklad nastavenie módu zobrazenia, zarovnania...). Súbor loader.js slúži na načítanie vetkých herných zdrojov, teda obrázkov, prípade existujpúcich zvukov aj ich. Celá hra sa spúšta z index.html súboru. V tomto html súbore sa nachádzajú iba definície nevyhnutných css štýlov, inkludovanie Javascriptových súborov, základné html tagy (napríklad pre nastavenie titulku hry, ikony...) a spúštanie boot.js súboru, ktorý sa stará už o všetko ostatné spojené s hrou.
 
 \chapter{Testovanie}
 \label{chap:testovanie}
-todo
+Táto kapitola sa venuje testovaniu výsledného riešenia, predovšetkým testovania výslednej API knižnice. V prvom rade sa pojednáva o návrhu testovania, kde sú zhrnuté dôvody, prečo bol daný druh testov zvolený.
+
+\section{Návrh testovania}
+Pri návrhu riešenia bolo nutné si dopredu rozmyslieť, aké aspekty a časti tejto bakalárskej práce sú testovateľné, do akej miery sú testovateľné a či vybraná časť na testovanie je vhodná vzhľadom na charakter práce. Po premyslení boli brané do úvahy tieto typy testovania: 
+\begin{itemize}
+\item Testovanie užívateľského rozhrania hráčmi
+\item Testovanie užívateľského rozhrania vývojármi hier
+\item Testovanie užívateľského rozhrania administrácie
+\item Testovanie pochopenia API vývojármi hier (či je API pochopiteľné a ľahko integrovateľné do hry)
+\item Testovanie funkcionality API
+\end{itemize}
+Keďže práca nie je zameraná primárne na hráčov, a aj keď ich požiadavky do istej miery rieši, tak testovanie užívateľského rozhrania hráčmi bolo úplne vynechané. Testovanie užívateľského rozhrania administrácie bolo vynechané kvôli takmer totožným dôvodom, ako to bolo pri hráčoch. Testovanie užívateľského rozhrania vývojármi a testovanie, toho, či je API ľahko pochopiteľné a ľahko integrovateľné do hry bol prvým veľmi dobrým kandidátom pre výber formy testovania. Bohužiaľ ako sa ukázalo, tak proces tvorby hry je natoľko zložitý a komplexný, že testovacie vzorky, v podobe vývojárov hier, bolo nemožné nájsť. HTML5 hry sa tvoria, aj keď sa tak zdať nemusí, z drvivej väčšiny na komerčné účely. Autor hry, vývojár, vyvíja hru s cieľom predať jej exkluzívnu, alebo neexkluzívnu licenciu väčšej spoločnosti, ktorá si do hry integruje svoje vlastné API sama, alebo s pomocou vývojára a ďalej hru distribuuje na svojich distribučných kanáloch. Z toho dôvodu nebolo reálne si myslieť, že sa nájdu vhodný kandidáti na toto testovanie, keďže aj samotný vývojár hry často stráca licenčné práva k hre. Kvôli tomu, autor tejto bakalárskej práce vytvoril svoju vlastnú testovaciu hru, ktorej návrh a implementácia ale bola už popísaná v predchádzajúcich kapitolách.  Keďže, táto testovacia hra ale nepokrýva funkcionalitu API na 100\%, a okrem toho samotné testovnaie API iba pomocou hry by bolo až priveľmi zdĺhavé, bol vytvorený špeciálny Javascriptový test. 
+Testovacie súbory pozostávajú z html súboru, ktorý slúži na vizualizáciu Testovacie súbory pozostávajú z html súboru, ktorý slúži na vizualizáciu prebiehajúcich výsledkov a navrhnutej Javascriptovej testovacej knižnice. Táto knižnica obsahuje volania jednotlivých API funkcií a pokrýva všetku testovateľnú funkcionalitu. Po načítaní html súboru v prehliadači sa spustí funkcia runTests(), ktorá zavolá inicializačnú funkciu API. Funkcia vo svojom callbacku vráti hodnotu zo servera, status položka, ktorá predstavuje návratový kód operácie a práve táto hodnota je porovnávaná s očakávanou hodnotou. Podľa toho, sa vypíše pomocou Javasciptu do html súboru stav testu a aj čas, ktorý bol potrebný na túto operáciu (rozoberať nejako tento čas nemá zmysel, keďže je to hlavne v réžií servera) a následné zavolá ďalšiu funkciu API. Takto sa otestujú všetky funkcie API, presnejšie všetky možné návratové kódy. Testuje sa napríklad inicializácia s nesprávnym API kľúčom, inicializácia so správnym api kľúčom, prihlásenie neexistujúceho užívateľa... Testovací skript je súčasťou priloženého CD/DVD nosiča. 
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.45]{fig/tests.png}
+  \caption{Ukážka testovacieho skriptu a jeho vyhodnocovania}
+  \label{fig:test}
+\end{figure}
+
+\section{Priebeh a výsledky testovania}
+
 
 \chapter{Záver}
 \label{chap:zaver}
