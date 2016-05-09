@@ -1,18 +1,26 @@
 \chapter{Obsah CD}
 Adresárová štruktúra CD
 \begin{itemize}
-\item Zdrojové súbory
+\item \textit{src} - Zdrojové súbory
     \begin{itemize}
-    \item Webový portál
-    \item Javascriptové API
-    \item Hra
-    \item Databázový skript
+    \item \textit{web} - Webový portál
+    \item \textit{api} - Javascriptové API
+    \item \textit{game} - Hra
+    \item \textit{test} - Testovací skript
+    \item \textit{database} - Databázový skript
+    \item \textit{demo} - Demo aplikácia s už prichystanými nastaveniami, obsahujúca hru, jej materiály a funkčné API. (pre ľahšiu inštaláciu a demonštráciu)
     \end{itemize}
-\item Grafika
-\item Text
+\item \textit{text} - Text práce
 \end{itemize}
 
 \chapter{Návod na inštaláciu}
+Keďže aplikácia využíva rámec Nette a ten má isté požiadavky, tak server, na ktorom sa bude aplikácia nachádzať musí tieto ožiadavky splňovať. Tieto požiadavky je možné overiť Requirements-Checker skriptom, viac infomrácií na stránke s oficiálnou dokumentáciou \footnote{https://doc.nette.org/cs/2.3/requirements}. Ďalej je nutné mať povolený Javascript pre správny chod platformy a vôbec pre spustenie HTML5 hier. Demonštračná hra vyžaduje taktiež splnené určité požiadavky, v prvom rade je to existencia canvas tagu, znova viac informácií v repozitáry rámca\footnote{https://github.com/photonstorm/phaser\#requirements}.
+\section{Inštalácia}
+\begin{enumerate}
+\item V prvom rade je nutné v phpMyAdmin, alebo inom, spustiť skript databa.sql, ktorý sa nachádza na priloženom CD v priečinku database. Tento skript vytvorí potrebné tabuľky a naplní ich dátami ukážkovými dátami. 
+\item Ďalej je nutné nahrať obsah priečinku demo (obsahuje demo aplikáciu už s hrou, re ľahkú demonštráciu) na server a upraviť súbor v app/config/config.local.neon s prístupovými údajmi k databáze. 
+\item Pre správne fungovanie Aplikačného rámca je nutné ďalej nastaviť adresu, na ktorú sa bude API dotazovať. Ak je napríklad domovská stránka webu načítaná po zadaní adresy www.example.com, tak práve túto adresu treba nastaviť do API súboru, riadok 8/9 premenná server v súbore api/api.js. Okrem toho, je to potrebné nastaviť ešte v totožnom súbore nachádzajúci sa v upload/games/1/js/api.js pre správne fungovanie demonštračnej hry.
+\end{enumerate}
 
 \chapter{Dokumentácia k API}
 \section{Funkcie}
