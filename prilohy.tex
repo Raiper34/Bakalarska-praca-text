@@ -1,4 +1,5 @@
 \chapter{Obsah CD}
+\label{pr:cd}
 Adresárová štruktúra CD
 \begin{itemize}
 \item \textit{src} - Zdrojové súbory
@@ -14,6 +15,7 @@ Adresárová štruktúra CD
 \end{itemize}
 
 \chapter{Návod na inštaláciu}
+\label{instalacia}
 Keďže aplikácia využíva rámec Nette a ten má isté požiadavky, tak server, na ktorom sa bude aplikácia nachádzať musí tieto ožiadavky splňovať. Tieto požiadavky je možné overiť Requirements-Checker skriptom, viac infomrácií na stránke s oficiálnou dokumentáciou \footnote{https://doc.nette.org/cs/2.3/requirements}. Ďalej je nutné mať povolený Javascript pre správny chod platformy a vôbec pre spustenie HTML5 hier. Demonštračná hra vyžaduje taktiež splnené určité požiadavky, v prvom rade je to existencia canvas tagu, znova viac informácií v repozitáry rámca\footnote{https://github.com/photonstorm/phaser\#requirements}.
 \section{Inštalácia}
 \begin{enumerate}
@@ -23,6 +25,7 @@ Keďže aplikácia využíva rámec Nette a ten má isté požiadavky, tak serve
 \end{enumerate}
 
 \chapter{Dokumentácia k API}
+\label{pr:dokumentacia}
 \section{Funkcie}
 \begin{itemize}
 \item \textbf{initialize(key[, callback[, context]]) –} funkcia slúžiaca na inicializáciu API na strane servera. 
@@ -123,6 +126,7 @@ this.game.api.getAchievements(function(data, room) {
 
 
 \chapter{Ukážky z implementácie}
+\label{pr:implementacia}
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.35]{fig/ukazka-zoznam-hier.png}
