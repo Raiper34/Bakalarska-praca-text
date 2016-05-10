@@ -3,33 +3,44 @@
 % (c) 2008 Michal Bidlo
 % E-mail: bidlom AT fit vutbr cz
 %============================================================================
-% kodovaní: iso-8859-2 (zmena prikazem iconv, recode nebo cstocs)
+% kodovaní: UTF-8 (zmena prikazem iconv, recode nebo cstocs)
 %----------------------------------------------------------------------------
 % zpracování: make, make pdf, make desky, make clean
-% připomínky posílejte na e-mail: bidlom AT fit.vutbr.cz
-% vim: set syntax=tex encoding=latin2:
 %============================================================================
-\documentclass[cover]{fitthesis} % odevzdani do wisu - odkazy, na ktere se da klikat
-%\documentclass[cover,print]{fitthesis} % pro tisk - na odkazy se neda klikat
-%\documentclass[english,print]{fitthesis} % pro tisk - na odkazy se neda klikat
-%      \documentclass[english]{fitthesis}
+% Šablonu upravil: Ing. Jaroslav Dytrych, idytrych@fit.vutbr.cz
+%============================================================================
+\documentclass[slovak]{fitthesis} % bez zadání - pro začátek práce, aby nebyl problém s překladem
+%\documentclass[zadani]{fitthesis} % odevzdani do wisu - odkazy jsou barevné
+%\documentclass[zadani,print]{fitthesis} % pro tisk - odkazy jsou černé
+%\documentclass[english,print]{fitthesis} % pro tisk - odkazy jsou černé
 % * Je-li prace psana v anglickem jazyce, je zapotrebi u tridy pouzit 
 %   parametr english nasledovne:
 %      \documentclass[english]{fitthesis}
-% * Neprejete-li si vysazet na prvni strane dokumentu desky, zruste 
-%   parametr cover
+% * Je-li prace psana ve slovenskem jazyce, je zapotrebi u tridy pouzit 
+%   parametr slovak nasledovne:
+%      \documentclass[slovak]{fitthesis}
 
-% zde zvolime kodovani, ve kterem je napsan text prace
-% "latin2" pro iso8859-2 nebo "cp1250" pro windows-1250, "utf8" pro "utf-8"
-%\usepackage{ucs}
-\usepackage[utf8]{inputenc}
-\usepackage[T1, IL2]{fontenc}
+\usepackage[czech,slovak,english]{babel}
+\usepackage[utf8]{inputenc} %kodovani
+\usepackage[T1]{fontenc}
+\usepackage{cmap}
 \usepackage{url}
 \DeclareUrlCommand\url{\def\UrlLeft{<}\def\UrlRight{>} \urlstyle{tt}}
 
 %zde muzeme vlozit vlastni balicky
 \usepackage{listings}
 \usepackage{multirow}
+\usepackage[toc,page,header]{appendix}
+\RequirePackage{titletoc}
+\ifczech
+  \usepackage{ae}
+\fi
+
+\input{pisma.tex}
+
+% vypne funkci nové šablony, která automaticky nahrazuje uvozovky,
+% aby nebyly prováděny nevhodné náhrady v popisech API apod.
+\csdoublequotesoff
 
 % =======================================================================
 % balíček "hyperref" vytváří klikací odkazy v pdf, pokud tedy použijeme pdflatex
@@ -47,6 +58,18 @@
   \def\pdfBorderAttrs{/Border [0 0 0] }  % bez okrajů kolem odkazů
   \pdfcompresslevel=9
 \fi
+\else % pro tisk budou odkazy, na které se dá klikat, černé
+\ifx\pdfoutput\undefined % nejedeme pod pdflatexem
+\else
+  \usepackage{color}
+  \usepackage[unicode,colorlinks,hyperindex,plainpages=false,pdftex,urlcolor=black,linkcolor=black,citecolor=black]{hyperref}
+  \definecolor{links}{rgb}{0,0,0}
+  \definecolor{anchors}{rgb}{0,0,0}
+  \def\AnchorColor{anchors}
+  \def\LinkColor{links}
+  \def\pdfBorderAttrs{/Border [0 0 0] } % bez okrajů kolem odkazů
+  \pdfcompresslevel=9
+\fi
 \fi
 
 %Informace o praci/projektu
@@ -57,49 +80,50 @@
   year=2016,             %rok
   date=\today,           %datum odevzdani
   %Nazev prace
-  title.cs={Webová platforma pro tvorbu her},  %nazev prace v cestine
+  title.cs={Webová platforma pro tvorbu her},  %nazev prace v cestine ci slovenstine
   title.en={Web Platform for Game Development}, %nazev prace v anglictine
   %Autor
-  author={Filip Gulán},   %jmeno prijmeni autora
+  author={Filip Gulán},   %cele jmeno a prijmeni autora
+  author.name={Filip},   %jmeno autora (pro citaci)
+  author.surname={Gulán},   %prijmeni autora (pro citaci)
   %author.title.p=Bc., %titul pred jmenem (nepovinne)
   %author.title.a=PhD, %titul za jmenem (nepovinne)
   %Ustav
-  department=UIFS, % doplnte prislusnou zkratku: UPSY/UIFS/UITS/UPGM
+  department=UIFS, % doplnte prislusnou zkratku dle ustavu na zadani: UPSY/UIFS/UITS/UPGM
   %Skolitel
-  supervisor= Radek Burget, %jmeno prijmeni skolitele
+  supervisor=Radek Burget, %cele jmeno a prijmeni skolitele
+  supervisor.name={Radek},   %jmeno skolitele (pro citaci)
+  supervisor.surname={Burget},   %prijmeni skolitele (pro citaci)
   supervisor.title.p=Ing.,   %titul pred jmenem (nepovinne)
   supervisor.title.a={Ph.D.},    %titul za jmenem (nepovinne)
   %Klicova slova, abstrakty, prohlaseni a podekovani je mozne definovat 
   %bud pomoci nasledujicich parametru nebo pomoci vyhrazenych maker (viz dale)
   %===========================================================================
   %Klicova slova
-  keywords.cs={webova platforma, API, HTML5 hra, Nette, Bootstrap, Phaser}, %klicova slova v ceskem jazyce
-  keywords.en={web platform, API, HTML5 game, Nette, Bootstrap, Phaser}, %klicova slova v anglickem jazyce
+  %keywords.cs={Klíčová slova v českém jazyce.}, %klicova slova v ceskem ci slovenskem jazyce
+  %keywords.en={Klíčová slova v anglickém jazyce.}, %klicova slova v anglickem jazyce
   %Abstract
-  abstract.cs={Cílem této práce je návrh a realizace moderní webové platformy pro tvorbu her. Webová platforma je určená, jak pro vývojáře HTML5/Javascript her, tak i pro hráče těchto her. Součástí práce je také webový portál a API, které zpřístupňuje služby webového portálu vývojářům her. Táto platforma je na serverové straně postavená na skriptovacím jazyku PHP za použití rámce Nette. Na klientské straně je využito HTML, CSS, Javascript a pro účely responzivniho dizajnu je využíván frontendový rámec Bootstrap. Hra, která demonstruje API je napsaná v jazyku Javascript s využitím rámce Phaser. }, % abstrakt v ceskem jazyce
-  abstract.en={\colorbox{red}{TODO}}, % abstrakt v anglickem jazyce
+  %abstract.cs={Výtah (abstrakt) práce v českém jazyce.}, % abstrakt v ceskem ci slovenskem jazyce
+  %abstract.en={Výtah (abstrakt) práce v anglickém jazyce.}, % abstrakt v anglickem jazyce
   %Prohlaseni
-  declaration={Prohlašuji, že jsem tuto bakalářskou práci vypracoval samostatně pod vedením pana Ing. Radka Burgeta, Ph.D. Uvedl jsem všechny literární prameny a publikace, ze kterých jsem čerpal.},
+  %declaration={Prohlašuji, že jsem tuto bakalářskou práci vypracoval samostatně pod vedením pana ...},
   %Podekovani (nepovinne)
-  acknowledgment={Tímto bych chtěl poděkovat vedoucímu práce panu Ing. Radku Burgetovi, Ph.D za odborné vedení a cenné rady, které mi pomohly pri tvorbě této práce. } % nepovinne
+  %acknowledgment={Zde je možné uvést poděkování vedoucímu práce a těm, kteří poskytli odbornou pomoc.} % nepovinne
 }
 
-%Abstrakt (cesky, anglicky)
-%\abstract[cs]{Do tohoto odstavce bude zapsán výtah (abstrakt) práce v českém jazyce.}
-%\abstract[en]{Do tohoto odstavce bude zapsán výtah (abstrakt) práce v anglickém jazyce.}
+%Abstrakt (cesky, slovensky ci anglicky)
+\abstract[cs]{Cílem této práce je návrh a realizace moderní webové platformy pro tvorbu her. Webová platforma je určená, jak pro vývojáře HTML5/Javascript her, tak i pro hráče těchto her. Součástí práce je také webový portál a API, které zpřístupňuje služby webového portálu vývojářům her. Táto platforma je na serverové straně postavená na skriptovacím jazyku PHP za použití rámce Nette. Na klientské straně je využito HTML, CSS, Javascript a pro účely responzivniho dizajnu je využíván frontendový rámec Bootstrap. Hra, která demonstruje API je napsaná v jazyku Javascript s využitím rámce Phaser. }
+\abstract[en]{Cílem této práce je návrh a realizace moderní webové platformy pro tvorbu her. Webová platforma je určená, jak pro vývojáře HTML5/Javascript her, tak i pro hráče těchto her. Součástí práce je také webový portál a API, které zpřístupňuje služby webového portálu vývojářům her. Táto platforma je na serverové straně postavená na skriptovacím jazyku PHP za použití rámce Nette. Na klientské straně je využito HTML, CSS, Javascript a pro účely responzivniho dizajnu je využíván frontendový rámec Bootstrap. Hra, která demonstruje API je napsaná v jazyku Javascript s využitím rámce Phaser. }
 
-%Klicova slova (cesky, anglicky)
-%\keywords[cs]{Sem budou zapsána jednotlivá klíčová slova v českém jazyce, oddělená čárkami.}
-%\keywords[en]{Sem budou zapsána jednotlivá klíčová slova v anglickém jazyce, oddělená čárkami.}
+%Klicova slova (cesky, slovensky ci anglicky)
+\keywords[cs]{webova platforma, API, HTML5 hra, Nette, Bootstrap, Phaser}
+\keywords[en]{web platform, API, HTML5 game, Nette, Bootstrap, Phaser}
 
-%Prohlaseni
-%\declaration{Prohlašuji, že jsem tuto bakalářskou práci vypracoval samostatně pod vedením pana X...
-%Další informace mi poskytli...
-%Uvedl jsem všechny literární prameny a publikace, ze kterých jsem čerpal.}
+%Prohlaseni (u anglicky psane prace anglicky, u slovensky psane prace slovensky)
+\declaration{Prohlašuji, že jsem tuto bakalářskou práci vypracoval samostatně pod vedením pana Ing. Radka Burgeta, Ph.D. Uvedl jsem všechny literární prameny a publikace, ze kterých jsem čerpal.}
 
-%Podekovani (nepovinne)
-%\acknowledgment{V této sekci je možno uvést poděkování vedoucímu práce a těm, kteří poskytli odbornou pomoc
-%(externí zadavatel, konzultant, apod.).}
+%Podekovani (nepovinne, nejlepe v jazyce prace)
+\acknowledgment{Tímto bych chtěl poděkovat vedoucímu práce panu Ing. Radku Burgetovi, Ph.D za odborné vedení a cenné rady, které mi pomohly pri tvorbě této práce. }
 
 \begin{document}
   % Vysazeni titulnich stran
@@ -110,33 +134,87 @@
   \tableofcontents
   
   % Seznam obrazku a tabulek (pokud prace obsahuje velke mnozstvi obrazku, tak se to hodi)
-  %\listoffigures
-  % \listoftables 
+\ifczech
+  \renewcommand\listfigurename{Seznam obrázků}
+\fi
+\ifslovak
+  \renewcommand\listfigurename{Zoznam obrázkov}
+\fi
 
-  % Text prace
-  % ----------------------------------------------
-  
-  \definecolor{lightgray}{rgb}{.9,.9,.9}
+  % \listoffigures
+\ifczech
+  \renewcommand\listtablename{Seznam tabulek}
+\fi
+\ifslovak
+  \renewcommand\listtablename{Zoznam tabuliek}
+\fi
+
+\definecolor{lightgray}{rgb}{.9,.9,.9}
 \definecolor{darkgray}{rgb}{.4,.4,.4}
 \definecolor{purple}{rgb}{0.65, 0.12, 0.82}
 \lstdefinelanguage{JavaScript}{keywords={break, case, catch, continue, debugger, default, delete, do, else, false, finally, for, function, if, in, instanceof, new, null, return, switch, this, throw, true, try, typeof, var, void, while, with},morecomment=[l]{//},morecomment=[s]{/*}{*/},morestring=[b]',morestring=[b]",ndkeywords={class, export, boolean, throw, implements, import, this},keywordstyle=\color{blue}\bfseries,ndkeywordstyle=\color{darkgray}\bfseries,identifierstyle=\color{black},commentstyle=\color{purple}\ttfamily,stringstyle=\color{red}\ttfamily,sensitive=true}
 \lstset{language=JavaScript,xleftmargin=0.5cm, backgroundcolor=\color{lightgray},extendedchars=true,basicstyle=\footnotesize\ttfamily,showstringspaces=false,showspaces=false,numbers=left,numberstyle=\footnotesize,numbersep=9pt,tabsize=2,breaklines=true,showtabs=false,captionpos=b}
 \renewcommand{\lstlistingname}{Zdrojový kód}
-  
+
+  % \listoftables 
+
+  % Text prace
+  % ----------------------------------------------
   \input{obsah} % viz. obsah.tex
 
   % Pouzita literatura
   % ----------------------------------------------
-\ifczech
+\ifslovak
+  \makeatletter
+  \def\@openbib@code{\addcontentsline{toc}{chapter}{Literatúra}}
+  \makeatother
   \bibliographystyle{czechiso}
-\else 
-  \bibliographystyle{plain}
-%  \bibliographystyle{alpha}
+\else
+  \ifczech
+    \makeatletter
+    \def\@openbib@code{\addcontentsline{toc}{chapter}{Literatura}}
+    \makeatother
+    \bibliographystyle{czechiso}
+  \else 
+    \makeatletter
+    \def\@openbib@code{\addcontentsline{toc}{chapter}{Bibliography}}
+    \makeatother
+    \bibliographystyle{plain}
+  %  \bibliographystyle{alpha}
+  \fi
 \fi
   \begin{flushleft}
   \bibliography{literatura} % viz. literatura.bib
   \end{flushleft}
+
+  % Prilohy
+  % ---------------------------------------------
   \appendix
-  
+\ifczech
+  \renewcommand{\appendixpagename}{Přílohy}
+  \renewcommand{\appendixtocname}{Přílohy}
+  \renewcommand{\appendixname}{Příloha}
+\fi
+\ifslovak
+  \renewcommand{\appendixpagename}{Prílohy}
+  \renewcommand{\appendixtocname}{Prílohy}
+  \renewcommand{\appendixname}{Príloha}
+\fi
+  \appendixpage
+
+\ifslovak
+  \section*{Zoznam príloh}
+  \addcontentsline{toc}{section}{Zoznam príloh}
+\else
+  \ifczech
+    \section*{Seznam příloh}
+    \addcontentsline{toc}{section}{Seznam příloh}
+  \else
+    \section*{List of Appendices}
+    \addcontentsline{toc}{section}{List of Appendices}
+  \fi
+\fi
+  \startcontents[chapters]
+  \printcontents[chapters]{l}{0}{\setcounter{tocdepth}{2}}
   \input{prilohy} % viz. prilohy.tex
 \end{document}
