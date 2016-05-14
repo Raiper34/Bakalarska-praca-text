@@ -98,13 +98,14 @@ dané odmeny vlastní, alebo nevlastní aktuálne prihlásený hráč.
 \section{Príklady}
 \end{itemize}
 \begin{lstlisting}[]
+//Load value from storage
 this.game.api.load(1, function(data, room){
-    if(data['result'] == null)
+    if(data['status'] == 2) //value does not exist
     {
         //Store to storage
         room.game.api.store(1, 1);
     }
-    else
+    else //value exist
     {
         //Store to storage
         room.game.api.store(1, parseInt(data['result']) + 1);
@@ -113,17 +114,26 @@ this.game.api.load(1, function(data, room){
 \end{lstlisting}
 
 \begin{lstlisting}[]
-this.game.api.getAchievements(function(data, room) {
-    stringToWrite = "";
-    for(var index in data['result'])
-    {
-        stringToWrite += data['result'][index]['name'] + " | " + ((data['result'][index]['own'] == 0)? "Achieved" : "Not achieved") + "\n";
-    }
-    room.scoreAchievement = room.game.add.text(room.game.width/2, 100, stringToWrite, { font: '32px Arial', fill: "#ffffff", align: "center" });
-    room.scoreAchievement.anchor.setTo(0.5, 0);
-}, this);
+//Get user best score from score table
+room.game.api.getUserBestScore(1, function(data, room) {
+    room.game.playerBestScore = data['result']; //value from server
+    room.hudBestScore = room.game.add.text(room.game.width*(3/4) + 100, room.game.height, "Best Score: " + data['result'], { font: '20px Arial', fontWeight: 'bold', fill: "#000000", align: "center" });
+    room.hudBestScore.anchor.setTo(0.5,1);
+}, room);
 \end{lstlisting}
 
+\begin{lstlisting}[]
+//Unlock achievement
+this.game.api.unlockAchievement(2, function(data, game) {
+    if(data['status'] == 0) //achievement unlocked with success
+    {
+        achievement = game.add.text(game.width/2, game.height/2 - 100, data['result']['name'] + "\n Unlocked", { fontWeight: 'bold',font: '30px Arial', fill: "#000000", align: "center" });
+        achievement.anchor.setTo(0.5);
+        var fade = game.add.tween(achievement);
+        fade.to( { alpha: 0 }, 4000, "Linear", true);
+    }
+}, this.game);
+\end{lstlisting}
 
 \chapter{Ukážky z implementácie}
 \label{pr:implementacia}
