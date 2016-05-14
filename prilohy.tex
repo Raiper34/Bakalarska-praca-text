@@ -6,7 +6,7 @@ Adresárová štruktúra CD
     \begin{itemize}
     \item \textit{web} - Webový portál
     \item \textit{api} - Javascriptové API
-    \item \textit{game} - Hra
+    \item \textit{game} - Demonštračná hra
     \item \textit{test} - Testovací skript
     \item \textit{database} - Databázový skript
     \item \textit{demo} - Demo aplikácia s už prichystanými nastaveniami, obsahujúca hru, jej materiály a funkčné API. (pre ľahšiu inštaláciu a demonštráciu)
@@ -19,9 +19,9 @@ Adresárová štruktúra CD
 Keďže aplikácia využíva rámec Nette a ten má isté požiadavky, tak server, na ktorom sa bude aplikácia nachádzať musí tieto požiadavky splňovať. Tieto požiadavky je možné overiť Requirements-Checker skriptom, viac informácií na stránke s oficiálnou dokumentáciou\footnote{https://doc.nette.org/cs/2.3/requirements}. Ďalej je nutné mať v internetovom prehliadači povolený Javascript pre správny chod platformy a vôbec pre spustenie HTML5 hier. Demonštračná hra vyžaduje taktiež splnené určité požiadavky, v prvom rade je to existencia canvas tagu, znova viac informácií v repozitáry rámca\footnote{https://github.com/photonstorm/phaser\#requirements}.
 \section{Inštalácia}
 \begin{enumerate}
-\item V prvom rade je nutné v phpMyAdmin, alebo inom, spustiť skript databa.sql, ktorý sa nachádza na priloženom CD v priečinku database. Tento skript vytvorí potrebné tabuľky a naplní ich dátami ukážkovými dátami. 
-\item Ďalej je nutné nahrať obsah priečinku demo (obsahuje demo aplikáciu už s hrou, pre ľahkú demonštráciu) na server a upraviť súbor v app/config/config.local.neon s prístupovými údajmi k databáze. 
-\item Pre správne fungovanie Aplikačného rámca je nutné ďalej nastaviť adresu, na ktorú sa bude API dotazovať. Ak je napríklad domovská stránka webu načítaná po zadaní adresy www.example.com, tak práve túto adresu treba nastaviť do API súboru, riadok 8/9 premenná server v súbore api/api.js. Okrem toho, je to potrebné nastaviť ešte v totožnom súbore nachádzajúci sa v upload/games/1/js/api.js pre správne fungovanie demonštračnej hry.
+\item V prvom rade je nutné v phpMyAdmin, alebo inom, spustiť skript databaza.sql, ktorý sa nachádza na priloženom CD v priečinku database. Tento skript vytvorí potrebné tabuľky a naplní ich ukážkovými dátami. 
+\item Ďalej je nutné nahrať obsah priečinku demo (obsahuje demo aplikáciu s hrou a API, pre ľahkú demonštráciu) na server a upraviť súbor v app/config/config.local.neon s prístupovými údajmi k databáze. 
+\item Pre správne fungovanie vyvinutého aplikačného rámca je nutné ďalej nastaviť adresu, na ktorú sa bude API dotazovať. Ak je napríklad domovská stránka webu načítaná po zadaní adresy www.example.com, tak práve túto adresu treba nastaviť do API súboru, riadok 8 premenná server v súbore api/api.js. Okrem toho, je to potrebné nastaviť ešte v totožnom súbore nachádzajúci sa v upload/games/1/js/api.js pre správne fungovanie demonštračnej hry.
 \end{enumerate}
 
 \chapter{Dokumentácia k API}
@@ -30,7 +30,7 @@ Keďže aplikácia využíva rámec Nette a ten má isté požiadavky, tak serve
 \begin{itemize}
 \item \textbf{initialize(key[, callback[, context]]) –} funkcia slúžiaca na inicializáciu API na strane servera. 
 \begin{itemize}
-\item \textbf{Parametre funkcie:} API kľúč získaný z vývojárskej konzole z detailu hry, callback, ktorý je vykonaný po získaní odpovede, referencia na objekt, ktorý chceme v callbacku využívať. 
+\item \textbf{Parametre funkcie:} API kľúč získaný z vývojárskej konzole (z detailu hry), callback, ktorý je vykonaný po získaní odpovede, referencia na objekt, ktorý chceme v callbacku využívať. 
 \item \textbf{Vracia:} data['status'] je 0 v prípade úspechu, 1 v prípade, že doména nie je povolená a 2 v prípade že hra neexistuje.
 \end{itemize}
 
@@ -67,7 +67,7 @@ Keďže aplikácia využíva rámec Nette a ten má isté požiadavky, tak serve
 \item \textbf{getScores(table, count[, callback[, context]]) –} funkcia na získanie prvých X miest zo skóre tabuľky.
 \begin{itemize}
 \item \textbf{Parametre funkcie:} id tabuľky, z ktorej chceme skóre získať, počet hodnôt, ktoré chceme získať, callback, ktorý je vykonaný po získaní odpovede, referencia na objekt, ktorý chceme v callbacku využívať. 
-\item \textbf{Vracia:} data['status'] je 0 v prípade úspechu, 1 v prípade,m že tabuľka neexistuje. data['result'] v prípade úspechu obsahuje pole s užívateľmi a ich skóre.
+\item \textbf{Vracia:} data['status'] je 0 v prípade úspechu, 1 v prípade, že tabuľka neexistuje. data['result'] v prípade úspechu obsahuje pole s užívateľmi a ich skóre.
 \end{itemize}
 
 \item \textbf{getAchievements([callback[, context]]) –} funkcia na získanie odmien a informácie o tom, či dané odmeny vlastní, alebo nevlastní aktuálne prihlásený hráč.
@@ -78,18 +78,17 @@ Keďže aplikácia využíva rámec Nette a ten má isté požiadavky, tak serve
 
 \item \textbf{unlockAchievement(achievement[, callback[, context]]) –} funkcia na získanie/odblokovanie odmeny.
 \begin{itemize}
-\item \textbf{Parametre funkcie:} id odmeny, ktorú chceme, získať callback, ktorý je vykonaný po získaní odpovede, referencia na objekt, ktorý chceme v callbacku využívať. 
+\item \textbf{Parametre funkcie:} id odmeny, ktorú chceme získať, callback, ktorý je vykonaný po získaní odpovede, referencia na objekt, ktorý chceme v callbacku využívať. 
 \item \textbf{Vracia:} data['status'] je 0 v prípade úspechu, 1 v prípade, že odmena neexistuje, 2 v prípade, že užívateľ už odmenu vlastní, 98 v prípade, že užívateľ nieje prihlásený. data['result'] v prípade úspechu obsahuje danú získanú odmenu.
 \end{itemize}
 
 \item \textbf{store(storage, value) –} funkcia na uloženie hodnoty do definovaného úložiska.
-dané odmeny vlastní, alebo nevlastní aktuálne prihlásený hráč.
 \begin{itemize}
 \item \textbf{Parametre funkcie:} id úložiska, do ktorého chceme ukladať hodnotu a samotná hodnota 
 \item \textbf{Vracia:} data['status'] je 0 v prípade úspechu, 1 v prípade, že úložisko neexistuje, 98 v prípade, že užívateľ nieje prihlásený.
 \end{itemize}
 
-\item \textbf{load(storage[, callback[, context]]) –} funkcia na získanie odmeny z definovaného úložiska.
+\item \textbf{load(storage[, callback[, context]]) –} funkcia na získanie hodnoty z definovaného úložiska.
 \begin{itemize}
 \item \textbf{Parametre funkcie:} id úložiska, callback, ktorý je vykonaný po získaní odpovede, referencia na objekt, ktorý chceme v callbacku využívať. 
 \item \textbf{Vracia:} data['status'] je 0 v prípade úspechu, 1 v prípade, že úložisko neexistuje, 2 v prípade, že hodnota v úložisku neexistuje, 98 v prípade, že užívateľ nieje prihlásený. data['result'] v prípade úspechu obsahuje užívateľovu hodnotu z úložiska.
@@ -168,14 +167,14 @@ this.game.api.unlockAchievement(2, function(data, game) {
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.35]{fig/ukazka-modalne-okno.png}
-  \caption{Ukážka úpravy informácií v detailu hry vo vývojárskej konzoly pomocou modálneho okna.}
+  \caption{Ukážka úpravy informácií v detailu hry vo vývojárskej konzole pomocou modálneho okna.}
   \label{fig:ukazka-modalneokno}
 \end{figure}
 
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.35]{fig/ukazka-detail-vyvojar.png}
-  \caption{Ukážka detailu hry vo vývojárskej konzoly. Je možné vidieť jednotlivé panely, ktoré logicky oddeľujú jednotlivé informačné a editačné sekcie.}
+  \caption{Ukážka detailu hry vo vývojárskej konzole. Je možné vidieť jednotlivé panely, ktoré logicky oddeľujú jednotlivé informačné a editačné sekcie.}
   \label{fig:ukazka-detialvyvojar}
 \end{figure}
 
@@ -189,7 +188,7 @@ this.game.api.unlockAchievement(2, function(data, game) {
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.35]{fig/ukazka-admin.png}
-  \caption{Ukážka administrátorskej konzoly. Je možné vidieť farebne odlíšené hry v jednotlivých štádiách publikácie a užívateľov, taktiež farebne odlíšených, podľa toho, či sú povolený, alebo zakázaný.}
+  \caption{Ukážka administrátorskej konzole. Je možné vidieť farebne odlíšené hry v jednotlivých štádiách publikácie a užívateľov, taktiež farebne odlíšených, podľa toho, či majú prístup povolený, alebo zakázaný.}
   \label{fig:ukazka-admin}
 \end{figure}
 
@@ -203,7 +202,7 @@ this.game.api.unlockAchievement(2, function(data, game) {
 \begin{figure}[h]
   \centering
   \includegraphics[scale=0.45]{fig/ukazka-hra-odmeny.png}
-  \caption{Ukážka hernej obrazovky s odmenami. Obsahuje meno domény a informáciu o tom, či ju aktuálne prihlásený užívateľ získal.}
+  \caption{Ukážka hernej obrazovky s odmenami. Obsahuje meno odmeny a informáciu o tom, či ju aktuálne prihlásený užívateľ získal.}
   \label{fig:ukazka-hraodmen}
 \end{figure}
 
